@@ -5,19 +5,9 @@
       <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Email address" %>
     </div>
 
-<<<<<<< HEAD
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-=======
     <div class="field">
       <%= f.password_field :password, autocomplete: "current-password",:class => "form-control", :placeholder => "Password" %>
     </div>
->>>>>>> a7d91d1ca306e8b9dc80270ae6e1444760d3f5fe
 
     <% if devise_mapping.rememberable? -%>
       <div class="checkbox mb-3 float-left">
