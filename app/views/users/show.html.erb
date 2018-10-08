@@ -1,0 +1,11 @@
+<%= link_to "Edit profile", edit_user_registration_path %>
+<p>Username: <%= @user.name %></p>
+<p>Gender: <% if @user.gender == 0 %>
+Male
+<% else %>
+Female
+<% end %>
+</p>
+<p>Email: <%= @user.email %></p>
+<p>Company: <%= @user.company %></p>
+<p>Schoolyear: <%= @user.school_year %></p>
