@@ -7,4 +7,5 @@ class User < ApplicationRecord
   validates_presence_of :gender, :name, :school
   validates :school_year, inclusion: {in: 1..5}
 
+  mount_uploader :picture, ImageUploader
 end
