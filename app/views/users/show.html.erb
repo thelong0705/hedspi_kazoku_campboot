@@ -1,11 +1,52 @@
-<%= link_to "Edit profile", edit_user_registration_path %>
-<p>Username: <%= @user.name %></p>
-<p>Gender: <% if @user.gender == 0 %>
-Male
-<% else %>
-Female
-<% end %>
-</p>
-<p>Email: <%= @user.email %></p>
-<p>Company: <%= @user.company %></p>
-<p>Schoolyear: <%= @user.school_year %></p>
+
+<div class="container" style="padding-top:50px">
+    <div class="card">
+        <div class="card-header">
+            <h3>Your profile</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                        class="rounded-circle mx-auto d-block" alt="image" width="150px" height="150px">
+                </div>
+                <div class="col-9">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Email:</td>
+                                <td><%= @user.email %></td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td><%= @user.name %></td>
+                            </tr>
+                            <tr>
+                                <td>School</td>
+                                <td><%= @user.company %></td>
+                            </tr>
+
+                            <tr>
+                                <td>School Year</td>
+                                <td> <%= @user.school_year %></td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td>
+                                <% if @user.gender == 0 %>
+                                    Male
+                                <% else %>
+                                    Female
+                                <% end %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-light float-right" href="/users/edit"><i class="fa fa-edit fa-1x"></i></a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
