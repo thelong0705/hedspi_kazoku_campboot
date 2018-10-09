@@ -1,12 +1,17 @@
 <main role="main" class ="text-center">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-signin'}) do |f| %>
+    <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+    <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+    <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <div class="field">
+    <div class="field" >
       <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Email address" %>
+      <p id="check_email"></p>
     </div>
 
     <div class="field">
       <%= f.password_field :password, autocomplete: "current-password",:class => "form-control", :placeholder => "Password" %>
+      <p id="check_pw"></p>
     </div>
 
     <% if devise_mapping.rememberable? -%>

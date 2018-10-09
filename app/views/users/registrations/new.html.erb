@@ -31,14 +31,15 @@
 
       <div class="form-group col-md-4">
         <label for="user_school_year">Year</label>
-        <select id="user_school_year" name="user[school_year]" class="form-control">
-            <option selected>Choose...</option>
+        <select id="user_school_year" name="user[school_year]" class="form-control" onchange="check_validation()">
+            <option value="0" selected>Choose...</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
             <option>5</option>
         </select>
+        <p id="error"></p>
       </div>
     </div>
     
@@ -60,3 +61,17 @@
   <% end %>
 </main>
 
+<script>
+function validation()
+{
+    var school_year = document.getElementById('user_school_year').value;
+    if(school_year == 0) document.getElementById('error').innerHTML = "please select !";
+}
+validation();
+function check_validation()
+{
+    var school_year = document.getElementById('user_school_year').value;
+    if(school_year != 0) document.getElementById('error').innerHTML = "";
+    else document.getElementById('error').innerHTML = "please select !";
+}
+</script>
