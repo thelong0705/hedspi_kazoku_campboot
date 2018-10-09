@@ -47,7 +47,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a class="btn btn-light float-right" href="/users/edit"><i class="fa fa-edit fa-1x"></i></a>
+                    
+                    <%= button_to edit_user_path, class: "btn btn-light float-right", method: :get do%>
+                        <i class="fa fa-edit fa-1x"></i>
+                    <% end %>
                 </div>
 
             </div>
