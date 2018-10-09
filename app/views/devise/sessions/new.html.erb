@@ -8,7 +8,15 @@
     <div class="field">
       <%= f.password_field :password, autocomplete: "current-password",:class => "form-control", :placeholder => "Password" %>
     </div>
+    <% if flash[:notice].present? %>
+      <div class = "float-left "><%= flash[:notice] %></div>
+     <% end %>
 
+    <% if flash[:alert].present? %>
+      <div class = "float-left text-danger" style = "padding-bottom:5px"><%= flash[:alert] %></div>
+    <% end %>
+    
+    
     <% if devise_mapping.rememberable? -%>
       <div class="checkbox mb-3 float-left">
         <%= f.check_box :remember_me %>

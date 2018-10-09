@@ -45,15 +45,6 @@
     </header>
 
     <%= yield %>
-
-   <% if flash[:notice].present? %>
-    <p><%= flash[:notice] %></p>
-  <% end %>
-
-  <% if flash[:alert].present? %>
-    <p><%= flash[:alert] %></p>
-  <% end %>
-
     <footer class="footer">
         <div class="container">
           <p class="float-right">

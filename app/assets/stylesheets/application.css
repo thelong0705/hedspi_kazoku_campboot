@@ -2,19 +2,14 @@ html {
     position: relative;
     min-height: 100%;
   }
-  body {
-    margin-bottom: 60px; /* Margin bottom by footer height */
-  }
+  
   
 
   footer {
     padding-top: 3rem;
-    padding-bottom: 3rem;
   }
   
-  footer p {
-    margin-bottom: .25rem;
-  }
+  
   
   #logo { 
     height: 200px; 
@@ -39,16 +34,13 @@ html {
   .form-signup {
     width: 100%;
     max-width: 550px;
-    height: 500px;
     padding: 15px;
     padding-top: 50px;
     margin: auto;
   }
 
 
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
+  
   .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
