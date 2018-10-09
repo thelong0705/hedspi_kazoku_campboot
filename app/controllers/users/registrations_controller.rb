@@ -2,6 +2,10 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
 
+  def new
+    super
+  end
+
   def create
     super
     resource.save
@@ -11,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation,
-                                 :gender, :company, :school_year)
+                                 :gender, :school, :school_year)
   end
 
 end
