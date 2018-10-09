@@ -34,6 +34,15 @@ html {
   .form-signup {
     width: 100%;
     max-width: 550px;
+    min-height: 500px;
+    padding: 15px;
+    padding-top: 50px;
+    margin: auto;
+  }
+
+  .edit_user {
+    width: 100%;
+    max-width: 550px;
     padding: 15px;
     padding-top: 50px;
     margin: auto;
