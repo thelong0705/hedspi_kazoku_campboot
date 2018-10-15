@@ -1,0 +1,4 @@
+<% if @company.errors.any? %>
+  $('.company-form-errors')
+    .html('<%= j render "shared/error_messages", object: @company %>');
+<% end %>

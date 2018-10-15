@@ -10,7 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_085420) do
+ActiveRecord::Schema.define(version: 2018_10_15_135533) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.string "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "representative_name"
+    t.string "representative_role"
+    t.datetime "foundation"
+    t.boolean "vietnam_representative"
+    t.text "business_content"
+    t.string "code_language"
+    t.integer "work_time"
+    t.integer "work_hour"
+    t.string "appeal"
+    t.text "other"
+    t.string "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "compensations", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "insurance"
+    t.string "holiday"
+    t.integer "paid_holidays"
+    t.integer "holidays_no"
+    t.integer "annual_salary"
+    t.integer "month_salary"
+    t.integer "bonus"
+    t.integer "pay_rise"
+    t.string "housing_allowance"
+    t.string "commuting_allowance"
+    t.text "other_allowance"
+    t.string "retirement"
+    t.text "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruits", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "work_type"
+    t.integer "employee_no"
+    t.text "work_place"
+    t.boolean "gender"
+    t.text "applicable_student"
+    t.string "japanese_level"
+    t.string "english_level"
+    t.text "job_description"
+    t.string "personality_desired"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

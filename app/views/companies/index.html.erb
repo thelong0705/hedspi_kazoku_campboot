@@ -1,0 +1,33 @@
+<div class="index-company">
+	<% if user_signed_in? && current_user.is_admin? %>
+	  <%= link_to :action=>"new", :controller=>"companies" do %>
+	    <span>
+	      <div>New</div>
+	    </span>
+	  <% end %>
+	<% end %>		
+	<% unless @companies.empty? %>
+      <% @companies.each do |company| %>
+        <div class="index-company">
+          <div class="images">
+            <span><b><%= link_to company.name,  company_path(company) %></b>
+            </span>
+            <% if user_signed_in? && current_user.is_admin? %>
+              <%= link_to company_path(company), method: :delete,
+                data: {confirm: "You sure delete ?"} do %>
+                <span>
+                  <div>Delete</div>
+                </span>
+              <% end %>
+
+              <%= link_to edit_company_path(company) do %>
+                <span>
+                  <div>Update</div>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+</div>

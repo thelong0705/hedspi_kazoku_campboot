@@ -1,0 +1,51 @@
+<div class="new-company">
+  <%= form_for @company, remote: true do |f| %>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="company-form-errors">
+        <% if @company.errors.any? %>
+          <%= render "shared/error_messages", object: @company %>
+        <% end %>
+      </div>
+
+      <div class="form-company">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :address, "Address" %>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :representative_name, "representative_name" %>
+        <%= f.text_field :representative_name, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :representative_role, "representative_role" %>
+        <%= f.text_field :representative_role, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :foundation, "foundation" %>
+        <%= f.text_field :foundation, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :business_content, "business_content" %>
+        <%= f.text_field :business_content, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :code_language, "code_language" %>
+        <%= f.text_field :code_language, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :work_time, "work_time" %>
+        <%= f.text_field :work_time, class: "form-control" %>
+      </div>
+      <div class="form-company">
+        <%= f.label :work_hour, "work_hour" %>
+        <%= f.text_field :work_hour, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Create", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

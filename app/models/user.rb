@@ -8,4 +8,8 @@ class User < ApplicationRecord
   validates :school_year, inclusion: {in: 1..5}
 
   mount_uploader :picture, ImageUploader
+
+  def is_admin?
+  	return true
+  end
 end
