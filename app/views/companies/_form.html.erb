@@ -1,82 +1,92 @@
-<%= form_with(model: company, local: true) do |form| %>
-  <% if company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+<main role="main">
+  <%= form_with(model: company, local: true,:html => {:class => 'form-signup'}) do |form| %>
+    <h1 class="h3 mb-3 font-weight-normal" style="padding-bottom:10px;"><%= @string %></h1>
+    <% if company.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-      <ul>
-      <% company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% company.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= form.label :name %>
+        <%= form.text_field :name, :class => "form-control" %>
+      </div>
+      <div class="field form-group col-md-6">
+        <%= form.label :address %>
+        <%= form.text_field :address, :class => "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= form.label :representative_name %>
+        <%= form.text_field :representative_name, :class => "form-control"  %>
+      </div>
+      <div class="field form-group col-md-6">
+        <%= form.label :representative_role %>
+        <%= form.text_field :representative_role, :class => "form-control"  %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= form.label :foundation %>
+        <%= form.text_field :foundation, :class => "form-control" %>
+      </div>
+
+      <div class="field form-group col-md-6">
+        <%= form.label :vietnam_representative %>
+        <%= form.text_field :vietnam_representative, :class => "form-control" %>
+      </div>   
+    </div>
+
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= form.label :business_content %>
+        <%= form.text_field :business_content, :class => "form-control" %>
+      </div>
+      <div class="field form-group col-md-6">
+        <%= form.label :code_language %>
+        <%= form.text_field :code_language, :class => "form-control" %>
+      </div>
+    </div>  
+
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= form.label :work_time %>
+        <%= form.text_field :work_time, :class => "form-control" %>
+      </div>
+
+      <div class="field form-group col-md-6">
+        <%= form.label :work_hour %>
+        <%= form.text_field :work_hour, :class => "form-control" %>
+      </div>
+    </div> 
+
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= form.label :appeal %>
+        <%= form.text_field :appeal, :class => "form-control" %>
+      </div>
+
+      <div class="field form-group col-md-6">
+        <%= form.label :other %>
+        <%= form.text_field :other, :class => "form-control" %>
+      </div>
+    </div>    
+    <div class="form-row"> 
+      <div class="field form-group col-md-6">
+        <%= form.label :picture %>
+        <%= form.file_field :picture %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit :class => "col-md-12 btn btn-lg btn-primary btn-block"  %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :representative_name %>
-    <%= form.text_field :representative_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :representative_role %>
-    <%= form.text_field :representative_role %>
-  </div>
-
-  <div class="field">
-    <%= form.label :foundation %>
-    <%= form.text_field :foundation %>
-  </div>
-
-  <div class="field">
-    <%= form.label :vietnam_representative %>
-    <%= form.text_field :vietnam_representative %>
-  </div>
-
-  <div class="field">
-    <%= form.label :business_content %>
-    <%= form.text_field :business_content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :code_language %>
-    <%= form.text_field :code_language %>
-  </div>
-
-  <div class="field">
-    <%= form.label :work_time %>
-    <%= form.text_field :work_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :work_hour %>
-    <%= form.text_field :work_hour %>
-  </div>
-
-  <div class="field">
-    <%= form.label :appeal %>
-    <%= form.text_field :appeal %>
-  </div>
-
-  <div class="field">
-    <%= form.label :other %>
-    <%= form.text_field :other %>
-  </div>
-
-  <div class="field">
-    <%= form.label :picture %>
-    <%= form.file_field :picture %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</main>
