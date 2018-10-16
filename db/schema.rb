@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_085420) do
+ActiveRecord::Schema.define(version: 2018_10_16_045226) do
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "representative_name"
+    t.string "representative_role"
+    t.string "foundation"
+    t.string "vietnam_representative"
+    t.string "business_content"
+    t.string "code_language"
+    t.string "work_time"
+    t.string "work_hour"
+    t.string "appeal"
+    t.string "other"
+    t.string "picture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
