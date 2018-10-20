@@ -1,0 +1,8 @@
+<%if current_user.liked? @company %>
+$('#like_prompt').html("Unlike");
+<% else %>
+
+$('#like_prompt').html("Like");
+
+<%end %>
+$('.like-count').html("<%=@company.get_upvotes.size %>")

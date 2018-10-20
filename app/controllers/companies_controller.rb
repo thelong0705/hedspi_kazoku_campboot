@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[show edit update destroy]
-
+  before_action :set_company, only: %i[show edit update destroy like]
+  respond_to :js, :json, :html
   # GET /companies
   # GET /companies.json
   def index
@@ -10,6 +10,15 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @comments = @company.comments
+  end
+
+  def like
+    if !current_user.liked? @company
+      @company.liked_by current_user
+    elsif current_user.liked? @company
+      @company.unliked_by current_user
+    end
   end
 
   # GET /companies/new

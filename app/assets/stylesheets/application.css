@@ -162,3 +162,10 @@ html {
 .img-thumbnail {
     border: 0 none !important;
 }
+
+
+li {
+    list-style-type: none;
+}
+
+

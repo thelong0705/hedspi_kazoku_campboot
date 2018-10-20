@@ -1,16 +1,21 @@
 Rails.application.routes.draw do
-  resources :companies
+  resources :companies do
+    member do
+      put 'like' => 'companies#like'
+    end
+    resources :comments
+  end
   root 'static_pages#home'
 
   devise_for :users,
-             :skip => [:registrations]
+             skip: [:registrations]
 
   devise_scope :user do
-    get "users/sign_up", to: "users/registrations#new", as: :new_user_registration
-    post "users/sign_up", to: "users/registrations#create", as: :user_registration
-    get "users/edit", to: "users/registrations#edit", as: :edit_user
-    put "users/sign_up", to: "users/registrations#update"
+    get 'users/sign_up', to: 'users/registrations#new', as: :new_user_registration
+    post 'users/sign_up', to: 'users/registrations#create', as: :user_registration
+    get 'users/edit', to: 'users/registrations#edit', as: :edit_user
+    put 'users/sign_up', to: 'users/registrations#update'
   end
   
-  resources :users, :only => [:show]
+  resources :users, only: [:show]
 end
