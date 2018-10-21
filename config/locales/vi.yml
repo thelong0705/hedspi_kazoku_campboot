@@ -1,0 +1,7 @@
+vi:
+  hello: "Hello world" 
+  create_account: "Tạo tài khoản" 
+  log_in: "Xin mời đăng nhập"
+  h_login: "Đăng nhập"
+  h_signup: "Đăng ký"
+  remember_me: "Lưu đăng nhập"

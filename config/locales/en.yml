@@ -30,4 +30,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: "Hello world" 
+  create_account: "Create an account" 
+  log_in: "Please login"
+  h_login: "Login"
+  h_signup: "Signup"
+  remember_me: "remember me"
