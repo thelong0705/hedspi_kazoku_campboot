@@ -1,22 +1,30 @@
 <main role="main">
-<div class="container" style="padding-top:50px; padding-bottom:50px">
+  <div class="container" style="padding-top:50px; padding-bottom:50px">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <div class="logo">
-                    <%= image_tag(@company.picture.url,class:"img-thumbnail float comment-image") if @company.picture? %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <div class="logo">
+            <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <%= link_to like_company_path(@company), class: "like-btn", method: :put, remote: :true do %>
+                <div>
+                  <p id="like_prompt">
+                    <% if current_user.liked? @company %>
+                      Unlike
+                    <% else %>
+                      Like
+                    <% end %>
+                  </p>
                 </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
-                        </div>
-                        <div>
-                            <img src="/images/5star.png" style="width:100px;height:40px;">
-                        </div>
-                    </div>
-                </div>
+              <% end %>
+              <span class="like-count"><%= @company.get_upvotes.size %></span>
+              <div>
+                <img src="/images/5star.png" style="width:100px;height:40px;">
+              </div>
             </div>
+          </div>
         </div>
         <div class="col-sm-8">
             <div class="card">
@@ -279,41 +287,43 @@
                     </div>
                 </div>
             </div>
+            <div class="float-right">
+              <ul class="nav justify-content-end">
+                <li class="nav-item">
+                  <a style="padding:5px;" href="<%= "/companies/#{@company.id}/edit" %>"><i class="fa fa-edit fa-1x"></i></a>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to '<i class="fas fa-trash-alt fa-1x"></i>'.html_safe, @company, method: :delete, data: {confirm: 'Are you sure?'} %>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <div>
-        <hr />
-        <h2>Comments</h2>
-        <div class="row" style="padding-top:10px;">
-            <div class="col-md-2">
-                <img src="/images/avatar.jpeg" class="rounded-circle img-thumbnail float comment-image" >
-            </div>
-            <div class="col-md-10 align-self-center">
-                <div class="input-group ">
-                    <input type="text" class="form-control" placeholder="Comment" aria-label="Recipient's username"
-                        aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Comment</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p></p>
-        <div class="row" style="padding-top:10px;">
-            <div class="col-md-2 align-self-center">
-                <img src="/images/avatar.jpeg" class="rounded-circle img-thumbnail float comment-image">
-            </div>
-            <div class="col-md-10">
-                <div class="card" style="border: none">
-                    <div class="card-body">
-                        <p>Username </p>
-                        <p>Some comment</p>
-                        <p>5 mins ago </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <hr/>
+      <h2>
+        Comments
+      </h2>
+      <section id="comments-section">
+        <ol id="comments">
+          <%= render @comments %>
+        </ol>
+
+        <%= form_for [@company, @company.comments.new], remote: true do |f| %>
+          <ol>
+            <li>
+              <%= f.text_area :content, rows: 2, cols: 60, placeholder: "Write your comment here" %>
+            </li>
+            <li>
+              <%= f.submit 'Comment', class: 'button' %>
+            </li>
+          </ol>
+        <% end %>
+      </section>
     </div>
-</div>
+  </div>
 </main>
 
