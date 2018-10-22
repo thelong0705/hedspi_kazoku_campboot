@@ -1,0 +1,13 @@
+<li>
+  <%= link_to comment.user.email, comment.user %>
+  <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
+  <p>
+    <%= comment.content %>
+  </p>
+  <% if comment.user.id == current_user.id %>
+    <%= link_to "Delete", [comment.company, comment], data: {confirm: "Are you sure?"}, method: :delete, remote: true %>
+    <%= link_to "Edit", edit_company_comment_path(comment.company, comment) %>
+
+  <% end %>
+  <hr>
+</li>
