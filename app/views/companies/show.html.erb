@@ -8,21 +8,23 @@
           </div>
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <%= link_to like_company_path(@company), class: "like-btn", method: :put, remote: :true do %>
-                <div>
-                  <p id="like_prompt">
-                    <% if current_user.liked? @company %>
-                      Unlike
-                    <% else %>
-                      Like
-                    <% end %>
-                  </p>
-                </div>
-              <% end %>
-              <span class="like-count"><%= @company.get_upvotes.size %></span>
-              <div>
-                <img src="/images/5star.png" style="width:100px;height:40px;">
-              </div>
+            <p class="like-count"><%= @company.get_upvotes.size %></p>
+            <div class="btn-group">
+                  <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
+                    <div>
+                      <span id="like_prompt">
+                        <% if current_user.liked? @company %>
+                          Unlike
+                        <% else %>
+                          Like
+                        <% end %>
+                      </span>
+                    </div>
+                  <% end %>
+            </div>
+            <div>
+              <img src="/images/5star.png" style="width:100px;height:30px;">
+            </div>
             </div>
           </div>
         </div>
