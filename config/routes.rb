@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   scope "(:locale)", locale: /en|vi/ do
     resources :companies do
-    member do
-      put 'like' => 'companies#like'
+      member do
+        put 'like' => 'companies#like'
+      end
+      resources :comments
     end
-    resources :comments
-  end
     root 'static_pages#home'
   
     devise_for :users,

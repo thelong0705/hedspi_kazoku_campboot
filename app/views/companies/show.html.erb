@@ -1,7 +1,7 @@
 <main role="main">
   <div class="container" style="padding-top:50px; padding-bottom:50px">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-sm-4">
         <div class="card mb-4 shadow-sm">
           <div class="logo">
             <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
@@ -25,6 +25,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
         <div class="col-sm-8">
             <div class="card">
@@ -127,6 +128,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <table class="table table-hover">
                               <tbody>
@@ -174,7 +176,7 @@
                                       </td>
                                   </tr>
                                   <tr>
-                                      <td><%= t :c_english_level %></td>
+                                      <td><%= t :c_work_type %></td>
                                       <td>
                                           @company.english_level
                                       </td>
@@ -194,6 +196,7 @@
                               </tbody>
                           </table>
                         </div>
+                        
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                           <table class="table table-hover">
                             <tbody>
@@ -274,6 +277,7 @@
                           </table>
                         </div>
                     </div>
+                    
                     <div class="float-right">
                         <ul class="nav justify-content-end">
                         <li class="nav-item">
@@ -287,42 +291,8 @@
                     </div>
                 </div>
             </div>
-            <div class="float-right">
-              <ul class="nav justify-content-end">
-                <li class="nav-item">
-                  <a style="padding:5px;" href="<%= "/companies/#{@company.id}/edit" %>"><i class="fa fa-edit fa-1x"></i></a>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to '<i class="fas fa-trash-alt fa-1x"></i>'.html_safe, @company, method: :delete, data: {confirm: 'Are you sure?'} %>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div>
-      <hr/>
-      <h2>
-        Comments
-      </h2>
-      <section id="comments-section">
-        <ol id="comments">
-          <%= render @comments %>
-        </ol>
-
-        <%= form_for [@company, @company.comments.new], remote: true do |f| %>
-          <ol>
-            <li>
-              <%= f.text_area :content, rows: 2, cols: 60, placeholder: "Write your comment here" %>
-            </li>
-            <li>
-              <%= f.submit 'Comment', class: 'button' %>
-            </li>
-          </ol>
-        <% end %>
-      </section>
+     
     </div>
   </div>
 </main>
