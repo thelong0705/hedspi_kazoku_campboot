@@ -1,6 +1,6 @@
 <main role="main">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true}) do |f| %>
-    <h1 class="h3 mb-3 font-weight-normal" style="padding-bottom:10px;">Edit your profile</h1>
+    <h1 class="h3 mb-3 font-weight-normal" style="padding-bottom:10px;"><%= t :u_edit %></h1>
     <div class="form-row">
         <div class="field form-group col-md-6">
           <%= f.label :email %>
@@ -13,7 +13,7 @@
     </div>
     <div class="form-row">
       <div class="field form-group col-md-12">
-        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+        <%= f.label :password %> <i><%= t :msg_can_blank %></i>
         <%= f.password_field :password, autocomplete: "new-password", :class => "form-control" %>
         </div>
     </div>
@@ -37,17 +37,17 @@
       <div class="field form-group col-md-12">
         <div class="form-check form-check-inline">
           <%= f.radio_button :gender, 0, :class => "form-check-input" %> 
-          <label class="form-check-label" for="user_gender_0">Male</label>
+          <label class="form-check-label" for="user_gender_0"><%= t :u_gender_male %></label>
         </div>
         <div class="form-check form-check-inline">
           <%= f.radio_button :gender, 1, :class => "form-check-input" %>
-          <label class="form-check-label" for="user_gender_1">Female</label>
+          <label class="form-check-label" for="user_gender_1"><%= t :u_gender_female %></label>
         </div>
       </div>
     </div>
     <div class="form-row">
       <div class="field form-group col-md-12">
-        <%= f.label :current_password %> <i>(enter current password to confirm)</i>
+        <%= f.label :current_password %> <i><%= t :msg_current_pass%></i>
         <%= f.password_field :current_password, autocomplete: "current-password",:class => "form-control" %>
       </div>
     </div>
