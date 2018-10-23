@@ -7,8 +7,9 @@
             <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
           </div>
           <div class="card-body">
+            <p class="like-count">Number of likes: <%= @company.get_upvotes.size %></p>
+            <p class="avg-count">Avarage rating: 4</p>
             <div class="d-flex justify-content-between align-items-center">
-            <p class="like-count"><%= @company.get_upvotes.size %></p>
             <div class="btn-group">
                   <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
                     <div>
