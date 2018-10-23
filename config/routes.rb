@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :admins, skip: [:registrations], controllers: { sessions: "admins/sessions"}
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   resources :companies do
     member do
       put 'like' => 'companies#like'
@@ -8,7 +11,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   devise_for :users,
-             skip: [:registrations]
+             skip: [:registrations], controllers: { sessions: "users/sessions" }
 
   devise_scope :user do
     get 'users/sign_up', to: 'users/registrations#new', as: :new_user_registration
