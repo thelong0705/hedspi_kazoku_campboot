@@ -10,22 +10,24 @@
             <p class="like-count">Number of likes: <%= @company.get_upvotes.size %></p>
             <p class="avg-count">Avarage rating: 4</p>
             <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-                  <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
-                    <div>
-                      <span id="like_prompt">
-                        <% if current_user.liked? @company %>
-                          Unlike
-                        <% else %>
-                          Like
-                        <% end %>
-                      </span>
-                    </div>
-                  <% end %>
-            </div>
-            <div>
-              <img src="/images/5star.png" style="width:100px;height:30px;">
-            </div>
+            <% if current_user %>
+              <div class="btn-group">
+                    <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
+                      <div>
+                        <span id="like_prompt">
+                          <% if current_user.liked? @company %>
+                            Unlike
+                          <% else %>
+                            Like
+                          <% end %>
+                        </span>
+                      </div>
+                    <% end %>
+              </div>
+              <div>
+                <img src="/images/5star.png" style="width:100px;height:30px;">
+              </div>
+            <% end %>
             </div>
           </div>
         </div>
