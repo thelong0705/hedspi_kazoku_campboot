@@ -1,7 +1,7 @@
 <main role="main">
   <div class="container" style="padding-top:50px; padding-bottom:50px">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
           <div class="logo">
             <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
@@ -29,273 +29,291 @@
             </div>
           </div>
         </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-11">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                        aria-controls="home" aria-selected="true"><%= t :c_info %></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                        aria-controls="profile" aria-selected="false"><%= t :c_recruit %></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                                        aria-controls="contact" aria-selected="false"><%= t :c_compensation %></a>
-                                </li>
-                                </ul>
-                        </div>
-                    </div>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <table class="table table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td style="border-top:none"><%= t :c_name %></td>
-                                        <td style="border-top:none">
-                                             <%= @company.name %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_address %></td>
-                                        <td>
-                                            <%= @company.address %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_representative_name %></td>
-                                        <td>
-                                            <%= @company.representative_name %>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><%= t :c_representative_role %></td>
-                                        <td>
-                                            <%= @company.representative_role %>
-                                        </td>
-                                    </tr>
-                                    <p>
-                                    <tr>
-                                        <td><%= t :c_foundation %></td>
-                                        <td>
-                                            <%= @company.foundation %>
-                                        </td>
-                                    </tr>
-                                        <td><%= t :c_vietnam_representative %></td>
-                                        <td>
-                                            <%=@company.vietnam_representative %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_business_content %></td>
-                                        <td>
-                                            <%= @company.business_content %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_code_language %></td>
-                                        <td>
-                                            <%= @company.code_language %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_work_time %></td>
-                                        <td>
-                                            <%= @company.work_time %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_work_hour %></td>
-                                        <td>
-                                            <%= @company.work_hour %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_appeal %></td>
-                                        <td>
-                                            <%= @company.appeal %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><%= t :c_other %></td>
-                                        <td>
-                                            <%= @company.other %>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <table class="table table-hover">
-                              <tbody>
-                                  <tr>
-                                      <td style="border-top:none"><%= t :c_work_type %></td>
-                                      <td style="border-top:none">
-                                          @company.work_type
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td><%= t :c_number_employee %></td>
-                                      <td>
-                                          @company.employee_no 
-                                      </td>
-                                  </tr>
-
-                                  <tr>
-                                      <td><%= t :c_work_place %></td>
-                                      <td>
-                                          @company.work_place
-                                      </td>
-                                  </tr>
-                                  <p>
-                                  <tr>
-                                      <td><%= t :u_gender %></td>
-                                      <td>
-                                          @company.gender 
-                                      </td>
-                                  </tr>
-                                      <td><%= t :c_applicable_student %></td>
-                                      <td>
-                                          @company.applicable_student		 
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td><%= t :c_japanese_level %></td>
-                                      <td>
-                                          @company.japanese_level
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td><%= t :c_code_language %></td>
-                                      <td>
-                                          <%= @company.code_language %>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td><%= t :c_english_level %></td>
-                                      <td>
-                                          @company.english_level
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td><%= t :c_personality_desired %></td>
-                                      <td>
-                                           @company.personality_desired	
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td><%= t :c_status %></td>
-                                      <td>
-                                           @company.status
-                                      </td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                        </div>
-                        
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                          <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <td style="border-top:none"><%= t :c_name %></td>
-                                    <td style="border-top:none">
-                                        <%= @company.name %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_address %></td>
-                                    <td>
-                                        <%= @company.address %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_representative_name %></td>
-                                    <td>
-                                        <%= @company.representative_name %>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td><%= t :c_representative_role %></td>
-                                    <td>
-                                        <%= @company.representative_role %>
-                                    </td>
-                                </tr>
-                                <p>
-                                <tr>
-                                    <td><%= t :c_foundation %></td>
-                                    <td>
-                                        <%= @company.foundation %>
-                                    </td>
-                                </tr>
-                                    <td><%= t :c_vietnam_representative %></td>
-                                    <td>
-                                        <%=@company.vietnam_representative %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_business_content %></td></td>
-                                    <td>
-                                        <%= @company.business_content %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_code_language %>:</td>
-                                    <td>
-                                        <%= @company.code_language %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_work_time %></td>
-                                    <td>
-                                        <%= @company.work_time %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_work_hour %>:</td>
-                                    <td>
-                                        <%= @company.work_hour %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_appeal %></td>
-                                    <td>
-                                        <%= @company.appeal %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%= t :c_other %></td>
-                                    <td>
-                                        <%= @company.other %>
-                                    </td>
-                                </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                    </div>
-                    
-                    <div class="float-right">
-                        <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <a style="padding:5px;"href ="<%= "/companies/#{@company.id}/edit" %>"><i class="fa fa-edit fa-1x"></i></a>
-                        </li>
-        
-                        <li class="nav-item">
-                            <%= link_to '<i class="fas fa-trash-alt fa-1x"></i>'.html_safe, @company, method: :delete, data: { confirm: 'Are you sure?' } %>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-11">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="true">Company Information</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                       aria-controls="profile" aria-selected="false">Recruit</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                       aria-controls="contact" aria-selected="false">Compensation</a>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <td style="border-top:none">Name:</td>
+                    <td style="border-top:none">
+                      <%= @company.name %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Address:</td>
+                    <td>
+                      <%= @company.address %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Representative_name</td>
+                    <td>
+                      <%= @company.representative_name %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Representative_role</td>
+                    <td>
+                      <%= @company.representative_role %>
+                    </td>
+                  </tr>
+                  <p>
+                    <tr>
+                      <td>Foundation</td>
+                      <td>
+                        <%= @company.foundation %>
+                      </td>
+                    </tr>
+                  <td>Vietnam representative</td>
+                  <td>
+                    <%= @company.vietnam_representative %>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>Business content:</td>
+                    <td>
+                      <%= @company.business_content %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Code language:</td>
+                    <td>
+                      <%= @company.code_language %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Work time:</td>
+                    <td>
+                      <%= @company.work_time %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Work hour:</td>
+                    <td>
+                      <%= @company.work_hour %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Appeal:</td>
+                    <td>
+                      <%= @company.appeal %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Other:</td>
+                    <td>
+                      <%= @company.other %>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <td style="border-top:none">Work type</td>
+                    <td style="border-top:none">
+                      @company.work_type
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Number of employee</td>
+                    <td>
+                      @company.employee_no
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Work place</td>
+                    <td>
+                      @company.work_place
+                    </td>
+                  </tr>
+                  <p>
+                    <tr>
+                      <td>Gender</td>
+                      <td>
+                        @company.gender
+                      </td>
+                    </tr>
+                  <td>Applicable student</td>
+                  <td>
+                    @company.applicable_student
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>Japanese level:</td>
+                    <td>
+                      @company.japanese_level
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Code language:</td>
+                    <td>
+                      <%= @company.code_language %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>English level:</td>
+                    <td>
+                      @company.english_level
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Personality desired</td>
+                    <td>
+                      @company.personality_desired
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Status:</td>
+                    <td>
+                      @company.status
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <td style="border-top:none">Name:</td>
+                    <td style="border-top:none">
+                      <%= @company.name %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Address:</td>
+                    <td>
+                      <%= @company.address %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Representative_name</td>
+                    <td>
+                      <%= @company.representative_name %>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Representative_role</td>
+                    <td>
+                      <%= @company.representative_role %>
+                    </td>
+                  </tr>
+                  <p>
+                    <tr>
+                      <td>Foundation</td>
+                      <td>
+                        <%= @company.foundation %>
+                      </td>
+                    </tr>
+                  <td>Vietnam representative</td>
+                  <td>
+                    <%= @company.vietnam_representative %>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td>Business content:</td>
+                    <td>
+                      <%= @company.business_content %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Code language:</td>
+                    <td>
+                      <%= @company.code_language %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Work time:</td>
+                    <td>
+                      <%= @company.work_time %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Work hour:</td>
+                    <td>
+                      <%= @company.work_hour %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Appeal:</td>
+                    <td>
+                      <%= @company.appeal %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Other:</td>
+                    <td>
+                      <%= @company.other %>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="float-right">
+              <ul class="nav justify-content-end">
+                <li class="nav-item">
+                  <a style="padding:5px;" href="<%= "/companies/#{@company.id}/edit" %>"><i class="fa fa-edit fa-1x"></i></a>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to '<i class="fas fa-trash-alt fa-1x"></i>'.html_safe, @company, method: :delete, data: {confirm: 'Are you sure?'} %>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-     
+      </div>
+    </div>
+    <div>
+      <hr/>
+      <h2>
+        Comments
+      </h2>
+      <section id="comments-section">
+        <ol id="comments">
+          <%= render @comments %>
+        </ol>
+
+        <%= form_for [@company, @company.comments.new], remote: true do |f| %>
+          <ol>
+            <li>
+              <%= f.text_area :content, rows: 2, cols: 60, placeholder: "Write your comment here" %>
+            </li>
+            <li>
+              <%= f.submit 'Comment', class: 'button' %>
+            </li>
+          </ol>
+        <% end %>
+      </section>
     </div>
   </div>
 </main>
