@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 .idea/
+
+#Ignore public uploads folder
+/public/uploads

@@ -91,7 +91,11 @@
                     </tr>
                   <td>Vietnam representative</td>
                   <td>
-                    <%= @company.vietnam_representative %>
+                    <% if @company.vietnam_representative != '0' %>
+                      Có
+                    <% else %>
+                      Không
+                    <% end %>
                   </td>
                   </tr>
                   <tr>
