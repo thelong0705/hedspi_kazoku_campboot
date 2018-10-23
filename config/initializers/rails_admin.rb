@@ -38,4 +38,53 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+  
+  # config company create action
+  config.model Company do
+    create do
+      field :name do
+      end
+      
+      field :address, :text do
+        html_attributes rows: 5, cols: 100
+      end
+      
+      field :representative_name do
+      end
+      
+      field :representative_role do
+      end
+      
+      field :foundation, :date do
+      end
+      
+      field :vietnam_representative, :boolean do
+      end
+      
+      field :business_content, :text do
+        html_attributes rows: 10, cols: 100
+      end
+      
+      field :code_language, :text do
+        html_attributes rows: 5, cols: 100
+      end
+      
+      field :work_time do
+      end
+      
+      field :work_hour do
+      end
+      
+      field :appeal, :text do
+        html_attributes rows: 10, cols: 100
+      end
+      
+      field :other, :text do
+        html_attributes rows: 10, cols: 100
+      end
+      
+      field :picture, :carrierwave do
+      end
+    end
+  end
 end
