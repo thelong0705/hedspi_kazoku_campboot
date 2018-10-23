@@ -169,3 +169,11 @@ li {
 }
 
 
+.like-count{
+  padding-left: 85px;
+  margin-bottom: 5px;
+}
+.avg-count{
+  padding-left: 85px;
+  margin-bottom: 20px;
+}
