@@ -26,20 +26,27 @@
           <ul class="nav justify-content-end">
             <% if !user_signed_in? %>
               <li class="nav-item">
-                <a class="nav-link text-white" href="/users/sign_up">Sign up</a>
+                <a class="nav-link text-white" href="/users/sign_up"><%= t :h_signup %></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="/users/sign_in">Login</a>
+                <a class="nav-link text-white" href="/users/sign_in"><%= t :h_login %></a>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to("My profile", current_user, class: "nav-link text-white") %>
+                <%= link_to I18n.t(:u_profile), current_user, class: "nav-link text-white" %>
               </li>
               <li class="nav-item">
-                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link text-white") %>
+                <%= link_to I18n.t(:h_logout), destroy_user_session_path, method: :delete, class: "nav-link text-white" %>
               </li>
             <% end %>
+            <li class="nav-item">
+                <a class="nav-link text-white"><%= link_to I18n.t(:en), locale:"en" %></a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link text-white"><%= link_to I18n.t(:vi), locale:"vi" %></a>
+            </li>
           </ul>
+          
         </div>
       </div>
 
@@ -72,7 +79,7 @@
     <footer class="footer">
         <div class="container">
           <p class="float-right">
-            <a href="#">Back to top</a>
+            <a href="#"><%= t :back_to_top%></a>
           </p>
           <p>IT Nihongo 3 Project - Campboot team</p>
         </div>

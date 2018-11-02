@@ -1,23 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Companies</h1>
+<h1><%= t :companies %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Representative name</th>
-      <th>Representative role</th>
-      <th>Foundation</th>
-      <th>Vietnam representative</th>
-      <th>Business content</th>
-      <th>Code language</th>
-      <th>Work time</th>
-      <th>Work hour</th>
-      <th>Appeal</th>
-      <th>Other</th>
-      <th>Picture</th>
+      <th><%= t :c_name %></th>
+      <th><%= t :c_address %></th>
+      <th><%= t :c_representative_name %></th>
+      <th><%= t :c_representative_role %></th>
+      <th><%= t :c_foundation %></th>
+      <th><%= t :c_vietnam_representative %></th>
+      <th><%= t :c_business_content %></th>
+      <th><%= t :c_code_language %></th>
+      <th><%= t :c_work_time %></th>
+      <th><%= t :c_work_hour %></th>
+      <th><%= t :c_appeal %></th>
+      <th><%= t :c_other %></th>
+      <th><%= t :picture %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -38,9 +38,9 @@
         <td><%= company.appeal %></td>
         <td><%= company.other %></td>
         <td><%= company.picture %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to I18n.t(:show), company %></td>
+        <td><%= link_to I18n.t(:edit), edit_company_path(company) %></td>
+        <td><%= link_to I18n.t(:destroy), company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -48,4 +48,4 @@
 
 <br>
 
-<%= link_to 'New Company', new_company_path %>
+<%= link_to I18n.t(:create_company), new_company_path %>

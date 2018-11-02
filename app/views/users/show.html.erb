@@ -1,11 +1,10 @@
-
 <div class="container" style="padding-top:50px">
     <div class="card">
         <div class="card-header">
-            <h3>Your profile</h3>
+                <h3><%= t :u_profile %></h3>
         </div>
         <div class="card-body">
-            <div class="row">
+            <div class="row"> 
                 <div class="col-3">
                     <% if @user.picture.presence %>
                         <%= image_tag(@user.picture.thumb.url, class: "rounded-circle mx-auto d-block", alt: "image", width: "150px", height: "150px") %>
@@ -18,29 +17,29 @@
                     <table class="table table-hover">
                         <tbody>
                             <tr>
-                                <td>Email:</td>
+                                <td><%= t :u_email %></td>
                                 <td><%= @user.email %></td>
                             </tr>
                             <tr>
-                                <td>Name:</td>
+                                <td><%= t :u_name %></td>
                                 <td><%= @user.name %></td>
                             </tr>
                             <tr>
-                                <td>School</td>
+                                <td><%= t :u_school %></td>
                                 <td><%= @user.school %></td>
                             </tr>
 
                             <tr>
-                                <td>School Year</td>
+                                <td><%= t :u_school_year %></td>
                                 <td> <%= @user.school_year %></td>
                             </tr>
                             <tr>
-                                <td>Gender</td>
+                                <td><%= t :u_gender %></td>
                                 <td>
                                 <% if @user.gender == 0 %>
-                                    Male
+                                    <%= t :u_gender_male %>
                                 <% else %>
-                                    Female
+                                    <%= t :u_gender_female %>
                                 <% end %>
                                 </td>
                             </tr>
