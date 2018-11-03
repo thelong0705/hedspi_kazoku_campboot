@@ -1,4 +1,5 @@
 vi:
+  language: "Ngôn ngữ"
   en: "Tiếng anh " 
   vi: "Tiếng việt "
   create_account: "Tạo tài khoản" 
@@ -8,7 +9,7 @@ vi:
   h_logout: "Đăng xuất"
   h_add_company: "Thêm công ty"
   remember_me: "Lưu đăng nhập"
-  u_email: "Thư điện tử"
+  u_email: "Địa chỉ email"
   u_profile: "Hồ sơ cá nhân"
   u_name: "Tên"
   u_school: "Trường"
