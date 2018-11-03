@@ -35,6 +35,7 @@ en:
   edit: "Edit"
   show: "Show"
   destroy: "Destroy"
+  view: "View"
   
   # c = company
   companies: "Companies"
@@ -84,7 +85,7 @@ en:
         address: "Address"
         representative_name: "Representative name"
         representative_role: "Representative role"
-        vietnam_representative: "Vietnam representative"
+        vietnam_representative: "Vietnam representative" 
         foundation: "Foundation"
         business_content: "Business content"
         code_language: "Code language"
