@@ -44,8 +44,8 @@ class CommentsController < ApplicationController
   end
 
   def comment_owner
-    unless current_user.id == @comment.user_id
-      flash[:notice] = "Dont try to do this"
+    unless current_user && current_user.id == @comment.user_id
+      flash[:notice] = "You dont have permission to perform this action"
       redirect_to @company
     end
   end
