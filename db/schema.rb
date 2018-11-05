@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_030519) do
+ActiveRecord::Schema.define(version: 2018_11_05_100343) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2018_10_21_030519) do
     t.string "address"
     t.string "representative_name"
     t.string "representative_role"
-    t.string "foundation"
-    t.string "vietnam_representative"
+    t.date "foundation"
+    t.boolean "vietnam_representative"
     t.string "business_content"
     t.string "code_language"
     t.string "work_time"
