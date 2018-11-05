@@ -30,17 +30,12 @@ ActiveAdmin.register Company do
         selectable_column
         id_column
         column :name
-        column :address
-        column :representative_name
-        column :representative_role
         column :foundation
         column :vietnam_representative
         column :business_content
         column :code_language
         column :work_time
         column :work_hour
-        column :appeal
-        column :other
         column :picture do |company|
             image_tag company.picture.thumb.url
         end
@@ -68,18 +63,19 @@ ActiveAdmin.register Company do
     end
     
     form do |f|
+        para "* are required fields."
         f.semantic_errors
         f.inputs 'Basic Information' do
-            f.input :name
-            f.input :address
-            f.input :representative_name
-            f.input :representative_role
-            f.input :foundation
-            f.input :vietnam_representative
-            f.input :business_content, as: :text
-            f.input :code_language
-            f.input :work_time
-            f.input :work_hour
+            f.input :name, :required => true
+            f.input :address, :required => true
+            f.input :representative_name, :required => true
+            f.input :representative_role, :required => true
+            f.input :vietnam_representative, as: :boolean
+            f.input :foundation, :required => true, as: :date_select, :start_year => 1900
+            f.input :business_content, :required => true, as: :text
+            f.input :code_language, :required => true
+            f.input :work_time, :required => true
+            f.input :work_hour, :required => true
             f.input :appeal, as: :text
             f.input :other
             f.input :picture, as: :file
