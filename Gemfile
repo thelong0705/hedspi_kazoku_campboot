@@ -5,8 +5,7 @@ ruby '2.5.1'
 
 gem 'carrierwave'
 gem 'remotipart', github: 'mshibuya/remotipart'
-gem 'rails_admin', github: 'sferik/rails_admin'
-gem 'rails_admin_rollincode', '~> 1.0'
+gem 'activeadmin'
 
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

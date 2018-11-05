@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :admins, skip: [:registrations], controllers: { sessions: "admins/sessions"}
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
+  devise_for :admins, skip: [:registrations], controllers: { sessions: "admins/sessions" }
+  ActiveAdmin.routes(self)
+  
   resources :companies do
     member do
       put 'like' => 'companies#like'
