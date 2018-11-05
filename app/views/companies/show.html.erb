@@ -25,7 +25,27 @@
                     <% end %>
               </div>
               <div>
-                <img src="/images/5star.png" style="width:100px;height:30px;">
+                <section class='rating-widget'>
+  
+  <div class='rating-stars text-center'>
+    <ul id='stars'>
+      <li class='star' title='Poor' data-value='1'>
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Fair' data-value='2'>
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Good' data-value='3'>
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Excellent' data-value='4'>
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='WOW!!!' data-value='5'>
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+    </ul>
+  </div>
               </div>
             <% end %>
             </div>
@@ -301,26 +321,94 @@
     </div>
     <div>
       <hr/>
-      <h2>
-        Comments
-      </h2>
+      <h2>Comments</h2>
       <section id="comments-section">
         <ol id="comments">
           <%= render @comments %>
         </ol>
-
+        
         <%= form_for [@company, @company.comments.new], remote: true do |f| %>
           <ol>
-            <li>
-              <%= f.text_area :content, rows: 2, cols: 60, placeholder: "Write your comment here" %>
-            </li>
-            <li>
-              <%= f.submit 'Comment', class: 'button' %>
-            </li>
+          <div class="row" style="padding-top:10px;">
+            <div class="col-md-1">
+              <% if current_user.picture.presence %>
+              <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+              <% else %>
+              <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                class="rounded-circle mx-auto d-block" alt="image" width="150px" height="150px">
+              <% end %>
+            </div>
+             <div class="col-md-11" style="padding-left:30px;">
+              <li>
+                <%= f.text_area :content, rows: 2, cols: 60, placeholder: "Write your comment here" %>
+              </li>
+              <li>
+                <%= f.submit 'Comment', class: 'button' %>
+              </li>
+            </div>
+          </div>
           </ol>
         <% end %>
       </section>
     </div>
   </div>
 </main>
+<script>
+  $(document).ready(function(){
+    
+    /* 1. Visualizing things on Hover - See next part for action on click */
+    $('#stars li').on('mouseover', function(){
+      var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+    
+      // Now highlight all the stars that's not after the current hovered star
+      $(this).parent().children('li.star').each(function(e){
+        if (e < onStar) {
+          $(this).addClass('hover');
+        }
+        else {
+          $(this).removeClass('hover');
+        }
+      });
+      
+    }).on('mouseout', function(){
+      $(this).parent().children('li.star').each(function(e){
+        $(this).removeClass('hover');
+      });
+    });
+    
+    
+    /* 2. Action to perform on click */
+    $('#stars li').on('click', function(){
+      var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+      var stars = $(this).parent().children('li.star');
+      
+      for (i = 0; i < stars.length; i++) {
+        $(stars[i]).removeClass('selected');
+      }
+      
+      for (i = 0; i < onStar; i++) {
+        $(stars[i]).addClass('selected');
+      }
+      
+      // JUST RESPONSE (Not needed)
+      var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+      var msg = "";
+      if (ratingValue > 1) {
+          alert(ratingValue);
+      }
+      else {
+          alert(ratingValue);
+      }
+      responseMessage(msg);
+      
+    });
+    
+    
+  });
 
+
+  function responseMessage(msg) {
+    $('.success-box').fadeIn(200);  
+    $('.success-box div.text-message').html("<span>" + msg + "</span>");
+  }
+</script>

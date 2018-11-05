@@ -1,13 +1,31 @@
 <li>
-  <%= link_to comment.user.email, comment.user %>
-  <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
-  <p>
-    <%= comment.content %>
-  </p>
-  <% if current_user && comment.user.id == current_user.id %>
-    <%= link_to "Delete", [comment.company, comment], data: {confirm: "Are you sure?"}, method: :delete, remote: true %>
-    <%= link_to "Edit", edit_company_comment_path(comment.company, comment) %>
-
-  <% end %>
+  <div class="row" style="padding-top:10px;">
+    <div class="col-md-1 align-self-center">
+    <% if comment.user.picture.presence %>
+      <%= image_tag(comment.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+    <% else %>
+    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+        class="rounded-circle mx-auto d-block" alt="image" width="150px" height="150px">
+    <% end %>
+    </div>
+    <div class="col-md-11">
+      <div class="card" style="border: none">
+          <div class="card-body">
+            <%= link_to comment.user.email, comment.user %>
+            <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
+            <p>
+              <%= comment.content %>
+             </p>
+             <% if current_user && comment.user.id == current_user.id %>
+                <%= link_to "Delete", [comment.company, comment], data: {confirm: "Are you sure?"}, method: :delete, remote: true %>
+                <%= link_to "Edit", edit_company_comment_path(comment.company, comment) %>
+              <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
   <hr>
+  
 </li>
+  
+
