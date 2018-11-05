@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       match 'search' => 'companies#search', :via => [:get, :post], :as => :search
     end
     resources :comments
+    resources :reviews, only: [:index, :show, :create, :update, :destroy]
   end
   root 'static_pages#home'
 
