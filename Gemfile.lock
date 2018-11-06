@@ -282,6 +282,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   puma (~> 3.11)
   rails (~> 5.2.1)
+  ransack
   ratyrate
   remotipart!
   sass-rails (~> 5.0)
