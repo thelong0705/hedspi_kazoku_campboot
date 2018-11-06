@@ -7,16 +7,10 @@
     <tr>
       <th>Name</th>
       <th>Address</th>
-      <th>Representative name</th>
-      <th>Representative role</th>
-      <th>Foundation</th>
-      <th>Vietnam representative</th>
       <th>Business content</th>
       <th>Code language</th>
       <th>Work time</th>
       <th>Work hour</th>
-      <th>Appeal</th>
-      <th>Other</th>
       <th>Picture</th>
       <th colspan="3"></th>
     </tr>
@@ -27,25 +21,14 @@
       <tr>
         <td><%= company.name %></td>
         <td><%= company.address %></td>
-        <td><%= company.representative_name %></td>
-        <td><%= company.representative_role %></td>
-        <td><%= company.foundation %></td>
-        <td><%= company.vietnam_representative %></td>
         <td><%= company.business_content %></td>
         <td><%= company.code_language %></td>
         <td><%= company.work_time %></td>
         <td><%= company.work_hour %></td>
-        <td><%= company.appeal %></td>
-        <td><%= company.other %></td>
-        <td><%= company.picture %></td>
+        <td><%= image_tag company.picture.thumb.url %></td>
         <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-<%= link_to 'New Company', new_company_path %>

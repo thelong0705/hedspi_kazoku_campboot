@@ -6,7 +6,7 @@ ruby '2.5.1'
 gem 'carrierwave'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'activeadmin'
-
+gem 'ransack'
 gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'

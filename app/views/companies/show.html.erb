@@ -303,17 +303,6 @@
                 </table>
               </div>
             </div>
-            <div class="float-right">
-              <ul class="nav justify-content-end">
-                <li class="nav-item">
-                  <a style="padding:5px;" href="<%= "/companies/#{@company.id}/edit" %>"><i class="fa fa-edit fa-1x"></i></a>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to '<i class="fas fa-trash-alt fa-1x"></i>'.html_safe, @company, method: :delete, data: {confirm: 'Are you sure?'} %>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -330,12 +319,13 @@
           <ol>
           <div class="row" style="padding-top:10px;">
             <div class="col-md-1">
-              <% if current_user.picture.presence %>
-              <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
-              <% else %>
-              <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
-                class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
-              <% end %>
+              
+                <% if current_user.picture.presence %>
+                <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                <% else %>
+                <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                  class="rounded-circle mx-auto d-block" alt="image" width="150px" height="150px">
+                <% end %>
             </div>
              <div class="col-md-11" style="padding-left:30px;">
               <li>
@@ -348,7 +338,7 @@
           </div>
           </ol>
         <% end %>
-        <% end %>
+      <% end %>
       </section>
     </div>
   </div>

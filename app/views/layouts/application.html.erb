@@ -24,6 +24,11 @@
             <strong>Hedspi家族</strong>
           </a>
           <ul class="nav justify-content-end">
+            <%= search_form_for @q, :url => search_companies_path, :html => {:method => :post}  do |f| %>
+              <%= f.text_field :name_cont, placeholder: 'Company name' %>
+              <%= f.submit %>
+            <% end %>
+
             <% if !user_signed_in? %>
               <li class="nav-item">
                 <a class="nav-link text-white" href="/users/sign_up">Sign up</a>
