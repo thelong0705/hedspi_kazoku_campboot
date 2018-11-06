@@ -24,11 +24,16 @@
             <strong>Hedspi家族</strong>
           </a>
           <ul class="nav justify-content-end">
+            <li class="nav-item">
             <%= search_form_for @q, :url => search_companies_path, :html => {:method => :post}  do |f| %>
-              <%= f.text_field :name_cont, placeholder: 'Company name' %>
-              <%= f.submit %>
+              <div class="input-group">
+                <%= f.text_field :name_cont, placeholder: 'Company name', class:"form-control" %>
+                <div class="input-group-append">
+                  <input type="submit" name="commit" value="Search" class="btn btn-outline-secondary text-white" data-disable-with="Search">
+                </div>
+              </div>
             <% end %>
-
+            </li>           
             <% if !user_signed_in? %>
               <li class="nav-item">
                 <a class="nav-link text-white" href="/users/sign_up">Sign up</a>
