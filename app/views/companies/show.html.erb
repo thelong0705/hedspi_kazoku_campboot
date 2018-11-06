@@ -8,7 +8,7 @@
           </div>
           <div class="card-body">
             <p class="like-count">Number of likes: <%= @company.get_upvotes.size %></p>
-            <p class="avg-count">Avarage rating: 4</p>
+            <p class="avg-count">Avarage rating:  <%= @company.reviews.average(:rating) %></p>
             <div class="d-flex justify-content-between align-items-center">
               <% if current_user %>
                 <div class="btn-group">
@@ -343,6 +343,7 @@
     </div>
   </div>
 </main>
+<% if current_user %>
 <script>
     $(document).ready(function(){
 
@@ -381,15 +382,27 @@
             }
 
             // JUST RESPONSE (Not needed)
+           
             var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
             var msg = "";
-            if (ratingValue > 1) {
-                alert(ratingValue);
+            var user_id = <%= current_user.id %>
+            var company_id = <%= @company.id %>
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": `http://localhost:3000/companies/${company_id}/reviews`,
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json",
+                "cache-control": "no-cache",
+              },
+              "processData": false,
+              "data":  `{"rating":"${ratingValue}", "user_id":"${user_id}"}`
             }
-            else {
-                alert(ratingValue);
-            }
-            responseMessage(msg);
+            
+            $.ajax(settings).done(function (response) {
+              $( ".avg-count" ).text(`Average rating: ${response.rating} `);
+            });            
 
         });
 
@@ -402,3 +415,4 @@
         $('.success-box div.text-message').html("<span>" + msg + "</span>");
     }
 </script>
+<% end %>
