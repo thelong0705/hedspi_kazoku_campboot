@@ -5,16 +5,17 @@ class ReviewsController < ApplicationController
   respond_to :js, :json, :html
 
   def index
-    render json: @company.reviews, status: :ok
+    response = {average: @company.reviews.average(:rating), data: @company.reviews}
+    render json: response, status: :ok
   end
 
   def show
-    render json: @review, status: :ok
+    response = {average: @company.reviews.average(:rating), data: @review}
+    render json: response, status: :ok
   end
 
   def create
     @review = nil
-
     @company.reviews.each do |r|
       if r.user_id.to_s == params[:user_id]
         puts "true"
@@ -27,16 +28,18 @@ class ReviewsController < ApplicationController
       @review.company_id = @company.id
       @review.user_id = params[:user_id]
       if @review.save
-        render json: @review, status: :ok
+        response = {average: @company.reviews.average(:rating), data: @review}
+        render json: response, status: :ok
       else
         response = {message: "Can't create review"}
         render json: response, status: :unprocessable_entity
       end
     else
       if @review.update(review_params)
-        render json: @review, status: :ok
+        response = {average: @company.reviews.average(:rating), data: @review}
+        render json: response, status: :ok
       else
-        response = {message: "Can't create review"}
+        response = {message: "Can't update review"}
         render json: response, status: :unprocessable_entity
       end
     end
@@ -44,15 +47,18 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      render json: @review, status: :ok
+      response = {average: @company.reviews.average(:rating), data: @review}
+      render json: response, status: :ok
     else
+      response = {message: "Can't update review"}
       render json: response, status: :unprocessable_entity
     end
   end
 
   def destroy
     @review.destroy
-    render json: @review, status: :ok
+    response = {average: @company.reviews.average(:rating), data: @review}
+    render json: response, status: :ok
   end
 
   private
