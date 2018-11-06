@@ -346,7 +346,11 @@
 <% if current_user %>
 <script>
     $(document).ready(function(){
-        var rated = <%=  @cur_review.rating %>;
+        var rated = 0;
+        <% if @cur_review %>
+        rated = <%=  @cur_review.rating %>;
+        <% end %>
+        
         let stars = $(`#stars`).find(`li`).parent().children('li.star');
         for (let i = 0; i < rated; i++) {
             $(stars[i]).addClass('selected');
