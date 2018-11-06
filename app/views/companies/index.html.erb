@@ -49,3 +49,35 @@
 <br>
 
 <%= link_to I18n.t(:create_company), new_company_path %>
+<div style="min-height: 500px;">
+  
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <% if !@companies.blank? %>
+          <% @companies.each do |company| %>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <div class="logo">
+                  <%= image_tag(company.picture.url,class:"img-thumbnail float comment-image") if company.picture? %>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                              <a href="<%= "/companies/#{company.id}" %>" class="btn btn-sm btn-outline-secondary"> View </a>  
+                        </div>
+                        <div>
+                            <img src="/images/5star.png" style="width:100px;height:30px;">
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          No companies found.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,8 @@ vi:
   language: "Ngôn ngữ"
   en: "Tiếng anh " 
   vi: "Tiếng việt "
+  search: "Tìm"
+  h_companyname: "Tên công ty"
   create_account: "Tạo tài khoản" 
   log_in: "Xin mời đăng nhập"
   h_login: "Đăng nhập"

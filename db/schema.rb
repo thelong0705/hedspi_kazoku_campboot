@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_030519) do
+ActiveRecord::Schema.define(version: 2018_11_06_021918) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_030519) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,8 +40,8 @@ ActiveRecord::Schema.define(version: 2018_10_21_030519) do
     t.string "address"
     t.string "representative_name"
     t.string "representative_role"
-    t.string "foundation"
-    t.string "vietnam_representative"
+    t.date "foundation"
+    t.boolean "vietnam_representative"
     t.string "business_content"
     t.string "code_language"
     t.string "work_time"
@@ -57,6 +58,14 @@ ActiveRecord::Schema.define(version: 2018_10_21_030519) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.integer "user_id"
+    t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

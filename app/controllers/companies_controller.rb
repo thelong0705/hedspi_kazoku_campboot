@@ -1,16 +1,21 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy like]
+
   respond_to :js, :json, :html
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @q = Company.ransack(params[:q])
+    @companies = @q.result
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
     @comments = @company.comments
+    if user_signed_in?
+      @cur_review = Review.find_by user_id:current_user.id, company_id:@company.id
+    end
   end
 
   def like
@@ -68,6 +73,11 @@ class CompaniesController < ApplicationController
       format.html {redirect_to companies_url, notice: 'Company was successfully destroyed.'}
       format.json {head :no_content}
     end
+  end
+
+  def search
+    index
+    render :index
   end
 
   private

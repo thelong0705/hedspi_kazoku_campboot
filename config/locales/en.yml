@@ -1,9 +1,11 @@
 en:
   en: "English " 
   vi: "Vietnamese "
+  search: "Search"
+  h_companyname: "Company name"
   create_account: "Create an account" 
   log_in: "Please login"
-  h_login: "Login"
+  h_login: "Login" 
   h_signup: "Signup"
   h_logout: "Logout"
   h_add_company: "Add Company"

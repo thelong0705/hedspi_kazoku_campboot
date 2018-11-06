@@ -17,4 +17,9 @@ class ApplicationController < ActionController::Base
   def default_url_options
     { locale: I18n.locale }
   end
+  before_action :set_search
+  
+  def set_search
+    @q = Company.search(params[:q])
+  end
 end

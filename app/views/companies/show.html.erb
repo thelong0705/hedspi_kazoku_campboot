@@ -8,12 +8,12 @@
           </div>
           <div class="card-body">
             <p class="like-count"><%= t :number_like %><%= @company.get_upvotes.size %></p>
-            <p class="avg-count"><%= t :rating %></p>
+            <p class="avg-count"><%= t :rating %><%= @company.reviews.average(:rating) %></p>
             <div class="d-flex justify-content-between align-items-center">
-            <% if current_user %>
-              <div class="btn-group">
-                    <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
-                      <div>
+              <% if current_user %>
+                <div class="btn-group">
+                  <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
+                    <div>
                         <span id="like_prompt">
                           <% if current_user.liked? @company %>
                             <%= t :unlike %>
@@ -21,13 +21,32 @@
                             <%= t :like %>
                           <% end %>
                         </span>
-                      </div>
-                    <% end %>
-              </div>
-              <div>
-                <img src="/images/5star.png" style="width:100px;height:30px;">
-              </div>
-            <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div>
+                  <div class='rating-stars text-center'>
+                    <br/>
+                    <ul id='stars'>
+                      <li class='star' title='Poor' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                      </li>
+                      <li class='star' title='Fair' data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                      </li>
+                      <li class='star' title='Good' data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                      </li>
+                      <li class='star' title='Excellent' data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                      </li>
+                      <li class='star' title='WOW!!!' data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -308,19 +327,105 @@
         <ol id="comments">
           <%= render @comments %>
         </ol>
-
-        <%= form_for [@company, @company.comments.new], remote: true do |f| %>
-          <ol>
-            <li>
-              <%= f.text_area :content, rows: 2, cols: 60, placeholder: I18n.t(:placeholder) %>
-            </li>
-            <li>
-              <%= f.submit I18n.t(:comment), class: 'button' %>
-            </li>
-          </ol>
+        <% if current_user %>
+          <%= form_for [@company, @company.comments.new], remote: true do |f| %>
+            <ol>
+              <div class="row" style="padding-top:10px;">
+                <div class="col-md-1">
+                  <% if current_user.picture.presence %>
+                    <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                  <% else %>
+                    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                         class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                  <% end %>
+                </div>
+                <div class="col-md-11" style="padding-left:30px;">
+                  <li>
+                    <%= f.text_area :content, rows: 2, cols: 60, placeholder: I18n.t(:placeholder) %>
+                  </li>
+                  <li>
+                    <%= f.submit I18n.t(:comment), class: 'button' %>
+                  </li>
+                </div>
+              </div>
+            </ol>
+          <% end %>
         <% end %>
       </section>
     </div>
   </div>
 </main>
+<% if current_user %>
+<script>
+    $(document).ready(function(){
+        var rated = <%=  @cur_review.rating %>;
+        let stars = $(`#stars`).find(`li`).parent().children('li.star');
+        for (let i = 0; i < rated; i++) {
+            $(stars[i]).addClass('selected');
+        }
+        $('#stars li').on('mouseover', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
 
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function(e){
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        }).on('mouseout', function(){
+            $(this).parent().children('li.star').each(function(e){
+                $(this).removeClass('hover');
+            });
+        });
+
+
+        $('#stars li').on('click', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('li.star');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+            // JUST RESPONSE (Not needed)
+           
+            var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+            var user_id = <%= current_user.id %>;
+            var company_id = <%= @company.id %>;
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": `http://localhost:3000/companies/${company_id}/reviews`,
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json",
+                "cache-control": "no-cache",
+              },
+              "processData": false,
+              "data":  `{"rating":"${ratingValue}", "user_id":"${user_id}"}`
+            }
+            
+            $.ajax(settings).done(function (response) {
+              $( ".avg-count" ).text(`Average rating: ${response.average} `);
+            });            
+
+        });
+
+
+    });
+
+
+    function responseMessage(msg) {
+        $('.success-box').fadeIn(200);
+        $('.success-box div.text-message').html("<span>" + msg + "</span>");
+    }
+</script>
+<% end %>
