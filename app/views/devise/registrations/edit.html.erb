@@ -1,0 +1,66 @@
+<main role="main">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true}) do |f| %>
+    <h1 class="h3 mb-3 font-weight-normal" style="padding-bottom:10px;">Edit your profile</h1>
+    <div class="form-row">
+        <div class="field form-group col-md-6">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
+        </div>
+        <div class="field form-group col-md-6">
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "form-control" %>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-12">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control" %>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-12">
+        <%= f.label :password_confirmation %> 
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-8">
+        <%= f.label :school %>
+        <%= f.text_field :school, :class => "form-control" %>
+      </div>
+      <div class="field form-group col-md-4">
+        <%= f.label :school_year %>
+        <%= f.select(:school_year, ['1', '2', '3', '4', '5'], {}, { :class => "form-control" }) %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-12">
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :gender, 0, :class => "form-check-input" %> 
+          <label class="form-check-label" for="user_gender_0">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= f.radio_button :gender, 1, :class => "form-check-input" %>
+          <label class="form-check-label" for="user_gender_1">Female</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-12">
+        <%= f.label :current_password %> <i>(enter current password to confirm)</i>
+        <%= f.password_field :current_password, autocomplete: "current-password",:class => "form-control" %>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="field form-group ">
+        <%= f.label :picture %><br />
+        <%= f.file_field :picture %>
+      </div>
+    </div>
+    <%= devise_error_messages! %>
+    <div class="actions form-row">
+      <%= f.submit "Update", :class => "float-left col-md-12 btn btn-lg btn-primary btn-block" %>
+    </div>
+  <% end %>
+</main>
