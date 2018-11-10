@@ -1,0 +1,6 @@
+<%= form_for [@company, @comment], remote: true do |f| %>
+  <li>
+    <%= f.text_area :content, class: 'comment_box', :id => 'comment_box' %>
+  </li>
+  <%= button_to ('Update'), company_comments_path(company_id: @company), remote: true %>
+<% end %>

@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
+  skip_forgery_protection
   before_action :find_company
   before_action :find_comment, only: [:destroy, :edit, :update, :comment_owner]
-  before_action :comment_owner, only:  [:destroy, :edit, :update]
+  before_action :comment_owner, only: [:destroy, :edit, :update]
 
   def create
     @comment = @company.comments.new(params[:comment].permit(:content))
@@ -22,14 +23,17 @@ class CommentsController < ApplicationController
   end
 
   def edit
-
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
-    if @comment.update(params[:comment].permit(:content))
-      redirect_to company_path(@company)
-    else
-      render 'edit'
+    @comments = Comment.where(company_id: @company)
+    @comment.update(params[:comment].permit(:content))
+    respond_to do |format|
+      format.html {redirect_to @company}
+      format.js
     end
   end
 
