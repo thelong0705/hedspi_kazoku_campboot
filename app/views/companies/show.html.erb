@@ -14,13 +14,13 @@
                 <div class="btn-group">
                   <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
                     <div>
-                        <span id="like_prompt">
-                          <% if current_user.liked? @company %>
-                            Unlike
-                          <% else %>
-                            Like
-                          <% end %>
-                        </span>
+                      <span id="like_prompt">
+                        <% if current_user.liked? @company %>
+                          Unlike
+                        <% else %>
+                          Like
+                        <% end %>
+                      </span>
                     </div>
                   <% end %>
                 </div>
@@ -76,229 +76,226 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <table class="table table-hover">
                   <tbody>
-                  <tr>
-                    <td style="border-top:none">Name:</td>
-                    <td style="border-top:none">
-                      <%= @company.name %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Address:</td>
-                    <td>
-                      <%= @company.address %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Representative_name</td>
-                    <td>
-                      <%= @company.representative_name %>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Representative_role</td>
-                    <td>
-                      <%= @company.representative_role %>
-                    </td>
-                  </tr>
-                  <p>
                     <tr>
-                      <td>Foundation</td>
-                      <td>
-                        <%= @company.foundation %>
+                      <td style="border-top:none">Name:</td>
+                      <td style="border-top:none">
+                        <%= @company.name %>
                       </td>
                     </tr>
-                  <td>Vietnam representative</td>
-                  <td>
-                    <% if @company.vietnam_representative != '0' %>
-                      Có
-                    <% else %>
-                      Không
-                    <% end %>
-                  </td>
-                  </tr>
-                  <tr>
-                    <td>Business content:</td>
-                    <td>
-                      <%= @company.business_content %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Code language:</td>
-                    <td>
-                      <%= @company.code_language %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Work time:</td>
-                    <td>
-                      <%= @company.work_time %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Work hour:</td>
-                    <td>
-                      <%= @company.work_hour %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Appeal:</td>
-                    <td>
-                      <%= @company.appeal %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Other:</td>
-                    <td>
-                      <%= @company.other %>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>Address:</td>
+                      <td>
+                        <%= @company.address %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Representative_name</td>
+                      <td>
+                        <%= @company.representative_name %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Representative_role</td>
+                      <td>
+                        <%= @company.representative_role %>
+                      </td>
+                    </tr>
+                    <p>
+                      <tr>
+                        <td>Foundation</td>
+                        <td>
+                          <%= @company.foundation %>
+                        </td>
+                      </tr>
+                      <td>Vietnam representative</td>
+                      <td>
+                        <% if @company.vietnam_representative != '0' %>
+                          Có
+                        <% else %>
+                          Không
+                        <% end %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Business content:</td>
+                      <td>
+                        <%= @company.business_content %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Code language:</td>
+                      <td>
+                        <%= @company.code_language %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Work time:</td>
+                      <td>
+                        <%= @company.work_time %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Work hour:</td>
+                      <td>
+                        <%= @company.work_hour %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Appeal:</td>
+                      <td>
+                        <%= @company.appeal %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Other:</td>
+                      <td>
+                        <%= @company.other %>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <table class="table table-hover">
                   <tbody>
-                  <tr>
-                    <td style="border-top:none">Work type</td>
-                    <td style="border-top:none">
-                      @company.work_type
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Number of employee</td>
-                    <td>
-                      @company.employee_no
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Work place</td>
-                    <td>
-                      @company.work_place
-                    </td>
-                  </tr>
-                  <p>
                     <tr>
-                      <td>Gender</td>
-                      <td>
-                        @company.gender
+                      <td style="border-top:none">Work type</td>
+                      <td style="border-top:none">
+                        @company.work_type
                       </td>
                     </tr>
-                  <td>Applicable student</td>
-                  <td>
-                    @company.applicable_student
-                  </td>
-                  </tr>
-                  <tr>
-                    <td>Japanese level:</td>
-                    <td>
-                      @company.japanese_level
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Code language:</td>
-                    <td>
-                      <%= @company.code_language %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>English level:</td>
-                    <td>
-                      @company.english_level
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Personality desired</td>
-                    <td>
-                      @company.personality_desired
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Status:</td>
-                    <td>
-                      @company.status
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>Number of employee</td>
+                      <td>
+                        @company.employee_no
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Work place</td>
+                      <td>
+                        @company.work_place
+                      </td>
+                    </tr>
+                    <p>
+                      <tr>
+                        <td>Gender</td>
+                        <td>
+                          @company.gender
+                        </td>
+                      </tr>
+                      <td>Applicable student</td>
+                      <td>
+                        @company.applicable_student
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Japanese level:</td>
+                      <td>
+                        @company.japanese_level
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Code language:</td>
+                      <td>
+                        <%= @company.code_language %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>English level:</td>
+                      <td>
+                        @company.english_level
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Personality desired</td>
+                      <td>
+                        @company.personality_desired
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Status:</td>
+                      <td>
+                        @company.status
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <table class="table table-hover">
                   <tbody>
-                  <tr>
-                    <td style="border-top:none">Name:</td>
-                    <td style="border-top:none">
-                      <%= @company.name %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Address:</td>
-                    <td>
-                      <%= @company.address %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Representative_name</td>
-                    <td>
-                      <%= @company.representative_name %>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Representative_role</td>
-                    <td>
-                      <%= @company.representative_role %>
-                    </td>
-                  </tr>
-                  <p>
                     <tr>
-                      <td>Foundation</td>
-                      <td>
-                        <%= @company.foundation %>
+                      <td style="border-top:none">Name:</td>
+                      <td style="border-top:none">
+                        <%= @company.name %>
                       </td>
                     </tr>
-                  <td>Vietnam representative</td>
-                  <td>
-                    <%= @company.vietnam_representative %>
-                  </td>
-                  </tr>
-                  <tr>
-                    <td>Business content:</td>
-                    <td>
-                      <%= @company.business_content %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Code language:</td>
-                    <td>
-                      <%= @company.code_language %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Work time:</td>
-                    <td>
-                      <%= @company.work_time %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Work hour:</td>
-                    <td>
-                      <%= @company.work_hour %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Appeal:</td>
-                    <td>
-                      <%= @company.appeal %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Other:</td>
-                    <td>
-                      <%= @company.other %>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>Address:</td>
+                      <td>
+                        <%= @company.address %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Representative_name</td>
+                      <td>
+                        <%= @company.representative_name %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Representative_role</td>
+                      <td>
+                        <%= @company.representative_role %>
+                      </td>
+                    </tr>
+                    <p>
+                      <tr>
+                        <td>Foundation</td>
+                        <td>
+                          <%= @company.foundation %>
+                        </td>
+                      </tr>
+                      <td>Vietnam representative</td>
+                      <td>
+                        <%= @company.vietnam_representative %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Business content:</td>
+                      <td>
+                        <%= @company.business_content %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Code language:</td>
+                      <td>
+                        <%= @company.code_language %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Work time:</td>
+                      <td>
+                        <%= @company.work_time %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Work hour:</td>
+                      <td>
+                        <%= @company.work_hour %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Appeal:</td>
+                      <td>
+                        <%= @company.appeal %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Other:</td>
+                      <td>
+                        <%= @company.other %>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -319,7 +316,6 @@
             <ol>
               <div class="row" style="padding-top:10px;">
                 <div class="col-md-1">
-
                   <% if current_user.picture.presence %>
                     <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
                   <% else %>
@@ -344,20 +340,20 @@
   </div>
 </main>
 <% if current_user %>
-<script>
+  <script>
     $(document).ready(function(){
         var rated = 0;
         <% if @cur_review %>
         rated = <%=  @cur_review.rating %>;
         <% end %>
-        
+    
         let stars = $(`#stars`).find(`li`).parent().children('li.star');
         for (let i = 0; i < rated; i++) {
             $(stars[i]).addClass('selected');
         }
         $('#stars li').on('mouseover', function(){
             var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-
+    
             // Now highlight all the stars that's not after the current hovered star
             $(this).parent().children('li.star').each(function(e){
                 if (e < onStar) {
@@ -367,28 +363,28 @@
                     $(this).removeClass('hover');
                 }
             });
-
+    
         }).on('mouseout', function(){
             $(this).parent().children('li.star').each(function(e){
                 $(this).removeClass('hover');
             });
         });
-
-
+    
+    
         $('#stars li').on('click', function(){
             var onStar = parseInt($(this).data('value'), 10); // The star currently selected
             var stars = $(this).parent().children('li.star');
-
+    
             for (i = 0; i < stars.length; i++) {
                 $(stars[i]).removeClass('selected');
             }
-
+    
             for (i = 0; i < onStar; i++) {
                 $(stars[i]).addClass('selected');
             }
-
+    
             // JUST RESPONSE (Not needed)
-           
+    
             var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
             var user_id = <%= current_user.id %>;
             var company_id = <%= @company.id %>;
@@ -404,20 +400,49 @@
               "processData": false,
               "data":  `{"rating":"${ratingValue}", "user_id":"${user_id}"}`
             }
-            
+    
             $.ajax(settings).done(function (response) {
               $( ".avg-count" ).text(`Average rating: ${response.average} `);
-            });            
-
+            });
+    
         });
-
-
     });
-
-
-    function responseMessage(msg) {
-        $('.success-box').fadeIn(200);
-        $('.success-box div.text-message').html("<span>" + msg + "</span>");
-    }
-</script>
+  </script>
 <% end %>
+<script>
+  $(document).ready(function(){
+    $(".reply-button").click(function(event){
+      event.preventDefault();
+      $(event.target).closest(".comment").append(`
+          <div class="reply-form">
+            <div class="row" style="padding-top:10px;">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-1">
+                <% if current_user.picture.presence %>
+                  <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                <% else %>
+                  <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                        class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                <% end %>
+              </div>
+              <div class="col-md-10" style="padding-left:30px;">
+                <li>
+                  <textarea rows="2" cols="60" placeholder="Write your comment here" class = "reply-text"></textarea>
+                </li>
+                <li>
+                <input type="submit" name="commit" value="Comment" class = "button reply">
+                </li>
+              </div>
+            </div>
+          </div>
+      `);
+    });
+  
+  
+    $("body").delegate(".reply", "click",function(event){
+      $(event.target).closest(".reply-form").replaceWith(`<p> New comments</p>`);
+    });
+  
+  });
+</script>
