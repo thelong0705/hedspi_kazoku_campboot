@@ -16,8 +16,12 @@ Rails.application.routes.draw do
     resources :comments do
       resources :replies, only: [:create, :show, :update, :destroy, :index]
     end
-    resources :reviews, only: [:index, :show, :create, :update, :destroy]
+    resources :reviews, only: [:index, :show, :create]
   end
+
+  put '/replies/:id', to: 'replies#update'
+  delete '/replies/:id', to: 'replies#destroy'
+
   root 'static_pages#home'
 
   devise_for :users,

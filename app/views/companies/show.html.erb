@@ -314,11 +314,11 @@
               <div class="row" style="padding-top:10px;">
                 <div class="col-md-1">
                   <% if current_user.picture.presence %>
-                  <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                    <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
                   <% else %>
-                  <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
              class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
-                <% end %>
+                  <% end %>
                 </div>
                 <div class="col-md-11" style="padding-left:30px;">
                   <li>
@@ -408,122 +408,196 @@
         });
     });
   </script>
-
-
-<script>
-  $(document).ready(function(){
-      $(".reply-button").click(function(event){
-        let comment_id = $(event.target).attr('id');
-        event.preventDefault();
-        $(event.target).closest(".comment").append(`
-        <div class="reply-form">
-          <div class="row" style="padding-top:10px;">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-1">
-              <% current_user && if current_user.picture.presence %>
-                <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
-              <% else %>
-                <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
-                      class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
-              <% end %>
-            </div>
-            <div class="col-md-10" style="padding-left:30px;">
-              <li>
-                <textarea rows="2" cols="60" placeholder="Write your comment here" class = "reply-text"></textarea>
-              </li>
-              <li>
-              <input type="submit" name="commit" value="Comment" id="${comment_id}"  class = "button reply">
-              </li>
+  <script>
+    $(document).ready(function(){
+        $("body").delegate(".reply-button", "click",function(event){
+          let comment_id = $(event.target).attr('id');
+          event.preventDefault();
+          $(event.target).closest(".comment").append(`
+          <div class="reply-form">
+            <div class="row" style="padding-top:10px;">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-1">
+                <% if current_user.picture.presence %>
+                  <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                <% else %>
+                  <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                        class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                <% end %>
+              </div>
+              <div class="col-md-10" style="padding-left:30px;">
+                <li>
+                  <textarea rows="2" cols="60" placeholder="Write your comment here" class = "reply-text"></textarea>
+                </li>
+                <li>
+                <input type="submit" name="commit" value="Comment" id="${comment_id}"  class = "button reply">
+                </li>
+              </div>
             </div>
           </div>
-        </div>
-    `);
-      });
-  
-  
-      $("body").delegate(".reply", "click",function(event){
-          let comment_id = $(event.target).attr('id');
-          let content = $(event.target).closest(".reply-form").find(".reply-text").val();
-          let user_id = <%= current_user.id %>;
-          let company_id = <%= @company.id %>;
-          let user_name = `<%= current_user.email %>`;
-          var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": `http://localhost:3000/companies/${company_id}/comments/${comment_id}/replies`,
-            "method": "POST",
-            "headers": {
-              "Content-Type": "application/json",
-              "cache-control": "no-cache",
-            },
-            "processData": false,
-            "data":  `{"content":"${content}", "user_id":"${user_id}"}`
-          }
-  
-          $.ajax(settings).done(function (response) {
-            $(event.target).closest(".reply-form").replaceWith(`
-              <div class="row">
-                <div class="col-md-1 align-self-center">
-                </div>
-                <div class="col-md-1 align-self-center">
-                  <% if current_user.picture.presence %>
-                    <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
-                  <% else %>
-                    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
-                      class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
-                  <% end %>
-                </div>
-                <div class="col-md-10">
-                  <div class="card" style="border: none">
-                    <div class="card-body">
-                      <a href="/users/${user_id}">${user_name}</a>
-                      <span class="date">just now</span>
-                      <p>${content}</p>
-                        <a href="#">Delete</a>
-                        <a href="#">Edit</a>
+      `);
+        });
+    
+    
+        $("body").delegate(".reply", "click",function(event){
+            let comment_id = $(event.target).attr('id');
+            let content = $(event.target).closest(".reply-form").find(".reply-text").val();
+            let user_id = <%= current_user.id %>;
+            let company_id = <%= @company.id %>;
+            let user_name = `<%= current_user.email %>`;
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": `http://localhost:3000/companies/${company_id}/comments/${comment_id}/replies`,
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json",
+                "cache-control": "no-cache",
+              },
+              "processData": false,
+              "data":  `{"content":"${content}", "user_id":"${user_id}"}`
+            }
+    
+            $.ajax(settings).done(function (response) {
+              $(event.target).closest(".reply-form").replaceWith(`
+                <div class="reply-comment">
+                  <div class="row">
+                    <div class="col-md-1 align-self-center">
+                    </div>
+                    <div class="col-md-1 align-self-center">
+                      <% if current_user.picture.presence %>
+                        <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                      <% else %>
+                        <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                          class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                      <% end %>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="card" style="border: none">
+                        <div class="card-body">
+                          <a href="/users/${user_id}">${user_name}</a>
+                          <span class="date">just now</span>
+                          <p>${content}</p>
+                            <a href="#" id="${response.data.id}" class="reply-delete">Delete</a>
+                            <a href="#" id="${response.data.id}" class="reply-edit">Edit</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              `);
+            });
+    
+        });
+    
+    });
+  </script>
+  <script>
+    $("body").delegate(".reply-edit", "click",function(event){
+      let reply_id = $(event.target).attr('id');
+      let current_content = $(event.target).closest(".reply-comment").find("p").text();
+      event.preventDefault();
+      console.log($(event.target).closest(".reply-comment").html());
+      $(event.target).closest(".reply-comment").replaceWith(`
+          <div class="reply-form">
+            <div class="row" style="padding-top:10px;">
+              <div class="col-md-1">
               </div>
-            `);
-          });
-  
-      });
-  
-  });
-</script>
-
-<script>
-  $("body").delegate(".reply-edit", "click",function(event){
-    let reply_id = $(event.target).attr('id');
-    let current_content = $(event.target).closest(".reply-comment").find("p").text();
-    alert(current_content);
-    event.preventDefault();
-    $(event.target).closest(".reply-comment").replaceWith(`
-        <div class="reply-form">
-          <div class="row" style="padding-top:10px;">
-            <div class="col-md-1">
+              <div class="col-md-1">
+                <% current_user && if current_user.picture.presence %>
+                  <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                <% else %>
+                  <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                        class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                <% end %>
+              </div>
+              <div class="col-md-10" style="padding-left:30px;">
+                <li>
+                  <textarea rows="2" cols="60" placeholder="Write your comment here" class = "reply-text">${current_content}</textarea>
+                </li>
+                <li>
+                <input type="submit" name="commit" value="Update" id="${reply_id}"  class = "button reply-update">
+                </li>
+              </div>
             </div>
-            <div class="col-md-1">
-              <% current_user && if current_user.picture.presence %>
+          </div>
+      `);
+    });
+  </script>
+  <script>
+    $("body").delegate(".reply-update", "click",function(event){
+      event.preventDefault();
+      let reply_id = $(event.target).attr('id');
+      let content = $(event.target).closest(".reply-form").find(".reply-text").val();
+      let user_id = <%= current_user.id %>;
+      let company_id = <%= @company.id %>;
+      let user_name = `<%= current_user.email %>`;
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": `http://localhost:3000/replies/${reply_id}`,
+        "method": "PUT",
+        "headers": {
+          "Content-Type": "application/json",
+          "cache-control": "no-cache",
+        },
+        "processData": false,
+        "data": `{"content":"${content}"}`
+      }
+    
+      $.ajax(settings).done(function (response) {
+        $(event.target).closest(".reply-form").replaceWith(`
+        <div class="reply-comment">
+          <div class="row">
+            <div class="col-md-1 align-self-center">
+            </div>
+            <div class="col-md-1 align-self-center">
+              <% if current_user.picture.presence %>
                 <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
               <% else %>
                 <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
-                      class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                  class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
               <% end %>
             </div>
-            <div class="col-md-10" style="padding-left:30px;">
-              <li>
-                <textarea rows="2" cols="60" placeholder="Write your comment here" class = "reply-text">${current_content}</textarea>
-              </li>
-              <li>
-              <input type="submit" name="commit" value="Update" id="${reply_id}"  class = "button reply">
-              </li>
+            <div class="col-md-10">
+              <div class="card" style="border: none">
+                <div class="card-body">
+                  <a href="/users/${user_id}">${user_name}</a>
+                  <span class="date">just now</span>
+                  <p>${content}</p>
+                    <a href="#" id="${reply_id}" class="reply-delete">Delete</a>
+                    <a href="#" id="${reply_id} class="reply-edit">Edit</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-    `);
-  });
-</script>
+      `);
+      });
+    });
+  </script>
+  <script>
+    $("body").delegate(".reply-delete", "click",function(event){
+      event.preventDefault();
+      let reply_id = $(event.target).attr('id');
+      var r = confirm("Delete this comment?");
+      if (r == false) {
+          return;
+      }
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": `http://localhost:3000/replies/${reply_id}`,
+        "method": "DELETE",
+        "headers": {
+          "cache-control": "no-cache",
+        }
+      }
+    
+      $.ajax(settings).done(function (response) {
+        $(event.target).closest(".reply-comment").remove();
+      });
+    });
+  </script>
 <% end %>
