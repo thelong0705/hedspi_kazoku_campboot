@@ -1,7 +1,7 @@
 class RepliesController < ApplicationController
   skip_forgery_protection
   respond_to :js, :json, :html
-  before_action :find_comment
+  before_action :find_comment, except: [:update, :destroy]
   before_action :find_reply, only: [:show, :update, :destroy]
 
   def index
