@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @recruit.company_id %>
+</p>
+
+<p>
+  <strong>Work type:</strong>
+  <%= @recruit.work_type %>
+</p>
+
+<p>
+  <strong>Employee no:</strong>
+  <%= @recruit.employee_no %>
+</p>
+
+<p>
+  <strong>Workplace:</strong>
+  <%= @recruit.workplace %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @recruit.gender %>
+</p>
+
+<p>
+  <strong>Applicable student:</strong>
+  <%= @recruit.applicable_student %>
+</p>
+
+<p>
+  <strong>Japanese level:</strong>
+  <%= @recruit.japanese_level %>
+</p>
+
+<p>
+  <strong>English level:</strong>
+  <%= @recruit.english_level %>
+</p>
+
+<p>
+  <strong>Job description:</strong>
+  <%= @recruit.job_description %>
+</p>
+
+<p>
+  <strong>Personality desired:</strong>
+  <%= @recruit.personality_desired %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @recruit.status %>
+</p>
+
+<%= link_to 'Edit', edit_recruit_path(@recruit) %> |
+<%= link_to 'Back', recruits_path %>
