@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Compensations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Insurance</th>
+      <th>Holiday</th>
+      <th>Paid holidays</th>
+      <th>Holidays no</th>
+      <th>Annual salary</th>
+      <th>Month salary</th>
+      <th>Bonus</th>
+      <th>Pay rise</th>
+      <th>Housing allowance</th>
+      <th>Other allowance</th>
+      <th>Commuting allowance</th>
+      <th>Retirement</th>
+      <th>Other</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @compensations.each do |compensation| %>
+      <tr>
+        <td><%= compensation.company_id %></td>
+        <td><%= compensation.insurance %></td>
+        <td><%= compensation.holiday %></td>
+        <td><%= compensation.paid_holidays %></td>
+        <td><%= compensation.holidays_no %></td>
+        <td><%= compensation.annual_salary %></td>
+        <td><%= compensation.month_salary %></td>
+        <td><%= compensation.bonus %></td>
+        <td><%= compensation.pay_rise %></td>
+        <td><%= compensation.housing_allowance %></td>
+        <td><%= compensation.other_allowance %></td>
+        <td><%= compensation.commuting_allowance %></td>
+        <td><%= compensation.retirement %></td>
+        <td><%= compensation.other %></td>
+        <td><%= link_to 'Show', compensation %></td>
+        <td><%= link_to 'Edit', edit_compensation_path(compensation) %></td>
+        <td><%= link_to 'Destroy', compensation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Compensation', new_compensation_path %>

@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   end
   
   resources :users, only: [:show]
+  resources :compensations, only: [:show]
+  resources :recruits, only: [:show]
 end

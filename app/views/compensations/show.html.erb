@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @compensation.company_id %>
+</p>
+
+<p>
+  <strong>Insurance:</strong>
+  <%= @compensation.insurance %>
+</p>
+
+<p>
+  <strong>Holiday:</strong>
+  <%= @compensation.holiday %>
+</p>
+
+<p>
+  <strong>Paid holidays:</strong>
+  <%= @compensation.paid_holidays %>
+</p>
+
+<p>
+  <strong>Holidays no:</strong>
+  <%= @compensation.holidays_no %>
+</p>
+
+<p>
+  <strong>Annual salary:</strong>
+  <%= @compensation.annual_salary %>
+</p>
+
+<p>
+  <strong>Month salary:</strong>
+  <%= @compensation.month_salary %>
+</p>
+
+<p>
+  <strong>Bonus:</strong>
+  <%= @compensation.bonus %>
+</p>
+
+<p>
+  <strong>Pay rise:</strong>
+  <%= @compensation.pay_rise %>
+</p>
+
+<p>
+  <strong>Housing allowance:</strong>
+  <%= @compensation.housing_allowance %>
+</p>
+
+<p>
+  <strong>Other allowance:</strong>
+  <%= @compensation.other_allowance %>
+</p>
+
+<p>
+  <strong>Commuting allowance:</strong>
+  <%= @compensation.commuting_allowance %>
+</p>
+
+<p>
+  <strong>Retirement:</strong>
+  <%= @compensation.retirement %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @compensation.other %>
+</p>
+
+<%= link_to 'Edit', edit_compensation_path(@compensation) %> |
+<%= link_to 'Back', compensations_path %>
