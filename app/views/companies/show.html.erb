@@ -309,7 +309,7 @@
       <hr/>
       <section id="comments-section">
         <% if current_user %>
-          <form class="new_comment" id="new_comment" action="/companies/1/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
+          <form class="new_comment" id="new_comment" action="/companies/<%= @company.id %>/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
             <ol>
               <div class="row" style="padding-top:10px;">
                 <div class="col-md-1">
