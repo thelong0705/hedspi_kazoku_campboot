@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2018_11_11_035952) do
-
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -62,12 +60,6 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.float "cached_weighted_average", default: 0.0
   end
 
-
-  create_table "replies", force: :cascade do |t|
-    t.integer "comment_id"
-    t.integer "user_id"
-    t.string "content"
-
   create_table "compensations", force: :cascade do |t|
     t.integer "company_id"
     t.string "insurance"
@@ -87,6 +79,21 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "recruiments", force: :cascade do |t|
+    t.string "content"
+    t.string "job_category"
+    t.integer "company_id"
+    t.integer "number_of_people"
+    t.integer "employed"
+    t.string "work_location"
+    t.string "applicable_student"
+    t.string "english_required"
+    t.string "personality_desered"
+    t.string "sex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recruits", force: :cascade do |t|
     t.integer "company_id"
     t.string "work_type"
@@ -99,7 +106,14 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.text "job_description"
     t.string "personality_desired"
     t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
+  create_table "replies", force: :cascade do |t|
+    t.integer "comment_id"
+    t.integer "user_id"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -108,6 +122,17 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.integer "rating"
     t.integer "user_id"
     t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "treatments", force: :cascade do |t|
+    t.string "content"
+    t.boolean "social_insurance"
+    t.integer "integer"
+    t.string "welfare"
+    t.integer "company_id"
+    t.integer "annual_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
