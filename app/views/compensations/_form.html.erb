@@ -1,0 +1,87 @@
+<%= form_with(model: compensation, local: true) do |form| %>
+  <% if compensation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(compensation.errors.count, "error") %> prohibited this compensation from being saved:</h2>
+
+      <ul>
+      <% compensation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company_id %>
+    <%= form.number_field :company_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :insurance %>
+    <%= form.text_field :insurance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :holiday %>
+    <%= form.text_field :holiday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :paid_holidays %>
+    <%= form.text_field :paid_holidays %>
+  </div>
+
+  <div class="field">
+    <%= form.label :holidays_no %>
+    <%= form.number_field :holidays_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :annual_salary %>
+    <%= form.text_field :annual_salary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :month_salary %>
+    <%= form.text_field :month_salary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bonus %>
+    <%= form.text_field :bonus %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pay_rise %>
+    <%= form.text_field :pay_rise %>
+  </div>
+
+  <div class="field">
+    <%= form.label :housing_allowance %>
+    <%= form.text_field :housing_allowance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :other_allowance %>
+    <%= form.text_field :other_allowance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :commuting_allowance %>
+    <%= form.text_field :commuting_allowance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :retirement %>
+    <%= form.text_field :retirement %>
+  </div>
+
+  <div class="field">
+    <%= form.label :other %>
+    <%= form.text_field :other %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
