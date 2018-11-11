@@ -28,29 +28,29 @@
     </div>
   </div>
   <% comment.replies.each do |reply| %>
-    <div class="row">
-      <div class="col-md-1 align-self-center">
-      </div>
-      <div class="col-md-1 align-self-center">
-        <% if reply.user.picture.presence %>
-          <%= image_tag(comment.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
-        <% else %>
-          <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+    <div class="reply-comment">
+      <div class="row">
+        <div class="col-md-1 align-self-center">
+        </div>
+        <div class="col-md-1 align-self-center">
+          <% if reply.user.picture.presence %>
+            <%= image_tag(comment.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+          <% else %>
+            <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
              class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
-        <% end %>
-      </div>
-      <div class="col-md-10">
-        <div class="card" style="border: none">
-          <div class="card-body">
-            <%= link_to reply.user.email, reply.user %>
-            <span class="date"><%= time_ago_in_words(reply.created_at) %> ago</span>
-            <p>
-              <%= reply.content %>
-            </p>
-            <% if current_user && reply.user.id == reply.id %>
-              <a href="#">Delete</a>
-              <a href="#">Edit</a>
-            <% end %>
+          <% end %>
+        </div>
+        <div class="col-md-10">
+          <div class="card" style="border: none">
+            <div class="card-body">
+              <%= link_to reply.user.email, reply.user %>
+              <span class="date"><%= time_ago_in_words(reply.created_at) %> ago</span>
+              <p><%= reply.content %></p>
+              <% if current_user && reply.user.id == current_user.id %>
+                <a href="#" id="<%= reply.id %>" class="reply-delete" >Delete</a>
+                <a href="#" id="<%= reply.id %>" class="reply-edit">Edit</a>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

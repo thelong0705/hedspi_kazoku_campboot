@@ -313,7 +313,12 @@
             <ol>
               <div class="row" style="padding-top:10px;">
                 <div class="col-md-1">
+                  <% if current_user.picture.presence %>
                   <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                  <% else %>
+                  <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+             class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                <% end %>
                 </div>
                 <div class="col-md-11" style="padding-left:30px;">
                   <li>
@@ -474,9 +479,7 @@
                     <div class="card-body">
                       <a href="/users/${user_id}">${user_name}</a>
                       <span class="date">just now</span>
-                      <p>
-                        ${content}
-                      </p>
+                      <p>${content}</p>
                         <a href="#">Delete</a>
                         <a href="#">Edit</a>
                     </div>
@@ -488,6 +491,39 @@
   
       });
   
+  });
+</script>
+
+<script>
+  $("body").delegate(".reply-edit", "click",function(event){
+    let reply_id = $(event.target).attr('id');
+    let current_content = $(event.target).closest(".reply-comment").find("p").text();
+    alert(current_content);
+    event.preventDefault();
+    $(event.target).closest(".reply-comment").replaceWith(`
+        <div class="reply-form">
+          <div class="row" style="padding-top:10px;">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-1">
+              <% current_user && if current_user.picture.presence %>
+                <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+              <% else %>
+                <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                      class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+              <% end %>
+            </div>
+            <div class="col-md-10" style="padding-left:30px;">
+              <li>
+                <textarea rows="2" cols="60" placeholder="Write your comment here" class = "reply-text">${current_content}</textarea>
+              </li>
+              <li>
+              <input type="submit" name="commit" value="Update" id="${reply_id}"  class = "button reply">
+              </li>
+            </div>
+          </div>
+        </div>
+    `);
   });
 </script>
 <% end %>
