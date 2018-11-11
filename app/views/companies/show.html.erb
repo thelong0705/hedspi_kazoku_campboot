@@ -409,7 +409,6 @@
   $(document).ready(function(){
       $(".reply-button").click(function(event){
         let comment_id = $(event.target).attr('id');
-        alert(comment_id);
         event.preventDefault();
         $(event.target).closest(".comment").append(`
         <div class="reply-form">
@@ -440,7 +439,6 @@
   
       $("body").delegate(".reply", "click",function(event){
           let comment_id = $(event.target).attr('id');
-          alert(comment_id);
           let content = $(event.target).closest(".reply-form").find(".reply-text").val();
           let user_id = <%= current_user.id %>;
           let company_id = <%= @company.id %>;
