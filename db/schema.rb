@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_021918) do
+ActiveRecord::Schema.define(version: 2018_11_11_085051) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -58,6 +58,50 @@ ActiveRecord::Schema.define(version: 2018_11_06_021918) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.float "average_review", default: 0.0
+  end
+
+  create_table "compensations", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "insurance"
+    t.string "holiday"
+    t.string "paid_holidays"
+    t.integer "holidays_no"
+    t.string "annual_salary"
+    t.string "month_salary"
+    t.string "bonus"
+    t.string "pay_rise"
+    t.string "housing_allowance"
+    t.string "other_allowance"
+    t.string "commuting_allowance"
+    t.string "retirement"
+    t.string "other"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recruits", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "work_type"
+    t.integer "employee_no"
+    t.string "workplace"
+    t.integer "gender"
+    t.boolean "applicable_student"
+    t.string "japanese_level"
+    t.string "english_level"
+    t.text "job_description"
+    t.string "personality_desired"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.integer "comment_id"
+    t.integer "user_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reviews", force: :cascade do |t|

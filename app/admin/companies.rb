@@ -37,7 +37,9 @@ ActiveAdmin.register Company do
         column :work_time
         column :work_hour
         column :picture do |company|
-            image_tag company.picture.thumb.url
+            if company.picture.present? && FileTest.exist?("#{Rails.public_path}#{company.picture}")
+                image_tag company.picture.thumb.url
+            end
         end
         actions
     end
@@ -57,7 +59,9 @@ ActiveAdmin.register Company do
             row :appeal
             row :other
             row :picture do |company|
-                image_tag company.picture.thumb.url
+                if company.picture.present? && FileTest.exist?("#{Rails.public_path}#{company.picture}")
+                    image_tag company.picture.thumb.url
+                end
             end
         end
     end

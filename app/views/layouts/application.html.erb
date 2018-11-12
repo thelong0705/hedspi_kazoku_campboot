@@ -25,14 +25,14 @@
           </a>
           <ul class="nav justify-content-end">
             <li class="nav-item">
-            <%= search_form_for @q, :url => search_companies_path, :html => {:method => :post}  do |f| %>
-              <div class="input-group">
-                <%= f.text_field :name_cont, placeholder: 'Company name', class:"form-control" %>
-                <div class="input-group-append">
-                  <input type="submit" name="commit" value="Search" class="btn btn-outline-secondary text-white" data-disable-with="Search">
+              <%= search_form_for @q, :url => search_companies_path, :html => {:method => :get}  do |f| %>
+                <div class="input-group">
+                  <%= text_field_tag :search, params[:search], autocomplete: :off, placeholder: 'Company name', class:"form-control search-form" %>
+                  <div class="input-group-append">
+                    <input type="submit" name="commit" value="Search" class="btn btn-outline-secondary text-white" data-disable-with="Search">
+                  </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
             </li>           
             <% if !user_signed_in? %>
               <li class="nav-item">
@@ -52,7 +52,10 @@
           </ul>
         </div>
       </div>
-
+      <div class="search-results">
+        <ul class="results">
+        </ul>
+      </div>
      <% if !flash.empty? %>
       <div id = "myModal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -75,7 +78,6 @@
         /div>
       </div>
     <% end %>
-
     </header>
     
     <%= yield %>

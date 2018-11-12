@@ -1,12 +1,12 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy like]
-
+  #before_action :find_result, only: :index
+  
   respond_to :js, :json, :html
   # GET /companies
   # GET /companies.json
   def index
-    @q = Company.ransack(params[:q])
-    @companies = @q.result
+    @companies = Company.All
   end
 
   # GET /companies/1
@@ -76,8 +76,16 @@ class CompaniesController < ApplicationController
   end
 
   def search
-    index
-    render :index
+    if params[:search].present?
+      @q = Company.ransack(name_or_address_or_code_language_cont: params[:search])
+      @companies = @q.result
+      respond_to do |format|
+        format.html
+        format.js do
+          render json: {results: @companies, status: 200}
+        end
+      end
+    end
   end
 
   private
