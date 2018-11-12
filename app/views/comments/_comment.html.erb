@@ -20,6 +20,8 @@
             <% if current_user && comment.user.id == current_user.id %>
               <%= link_to "Delete", [comment.company, comment], data: {confirm: "Are you sure?"}, method: :delete, remote: true %>
               <%= link_to "Edit", edit_company_comment_path(comment.company, comment), :remote => true %>
+            <% end %>
+            <% if current_user %>
               <a href="#" id="<%= comment.id %>" class="reply-button">Reply</a>
             <% end %>
           </div>
