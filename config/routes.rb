@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations], controllers: {sessions: "admins/sessions"}
   ActiveAdmin.routes(self)
 
-  resources :companies, only: [:show] do
+  resources :companies, only: [:show, :index] do
     member do
       put 'like' => 'companies#like'
     end
