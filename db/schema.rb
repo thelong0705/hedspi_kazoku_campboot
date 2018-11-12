@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_035952) do
+ActiveRecord::Schema.define(version: 2018_11_11_085051) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.float "average_review", default: 0.0
   end
 
   create_table "compensations", force: :cascade do |t|
@@ -75,21 +76,6 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.string "commuting_allowance"
     t.string "retirement"
     t.string "other"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "recruiments", force: :cascade do |t|
-    t.string "content"
-    t.string "job_category"
-    t.integer "company_id"
-    t.integer "number_of_people"
-    t.integer "employed"
-    t.string "work_location"
-    t.string "applicable_student"
-    t.string "english_required"
-    t.string "personality_desered"
-    t.string "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -122,17 +108,6 @@ ActiveRecord::Schema.define(version: 2018_11_11_035952) do
     t.integer "rating"
     t.integer "user_id"
     t.integer "company_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "treatments", force: :cascade do |t|
-    t.string "content"
-    t.boolean "social_insurance"
-    t.integer "integer"
-    t.string "welfare"
-    t.integer "company_id"
-    t.integer "annual_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
