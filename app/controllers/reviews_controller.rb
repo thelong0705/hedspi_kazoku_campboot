@@ -28,6 +28,7 @@ class ReviewsController < ApplicationController
       @review.company_id = @company.id
       @review.user_id = params[:user_id]
       if @review.save
+        @company.update_attribute(:average_review, @company.reviews.average(:rating))
         response = {average: @company.reviews.average(:rating), data: @review}
         render json: response, status: :ok
       else
@@ -36,6 +37,7 @@ class ReviewsController < ApplicationController
       end
     else
       if @review.update(review_params)
+        @company.update_attribute(:average_review, @company.reviews.average(:rating))
         response = {average: @company.reviews.average(:rating), data: @review}
         render json: response, status: :ok
       else
@@ -47,6 +49,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
+      @company.update_attribute(:average_review, @company.reviews.average(:rating))
       response = {average: @company.reviews.average(:rating), data: @review}
       render json: response, status: :ok
     else
@@ -57,6 +60,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
+    @company.update_attribute(:average_review, @company.reviews.average(:rating))
     response = {average: @company.reviews.average(:rating), data: @review}
     render json: response, status: :ok
   end
