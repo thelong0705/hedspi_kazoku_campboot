@@ -61,7 +61,11 @@
                     <a href="<%= "companies/#{company.id}" %>" class="btn btn-sm btn-outline-secondary"> View </a>
                   </div>
                   <div>
-                    <img src="/images/5star.png" style="width:100px;height:30px;">
+                    <br/>
+                    <p>
+                      <i class="fa fa-star fa_custom"></i> <%= company.average_review %>
+                      <i class="far fa-thumbs-up"></i> <%= company.get_upvotes.size %>
+                      </p>
                   </div>
                 </div>
               </div>

@@ -27,7 +27,7 @@
             <li class="nav-item">
               <%= search_form_for @q, :url => search_companies_path, :html => {:method => :get}  do |f| %>
                 <div class="input-group">
-                  <%= text_field_tag :search, params[:search], autocomplete: :off, placeholder: 'Company name', class:"form-control search-form" %>
+                  <%= text_field_tag :search, params[:search], autocomplete: :off, placeholder: 'Company name, language', class:"form-control search-form" %>
                   <div class="input-group-append">
                     <input type="submit" name="commit" value="Search" class="btn btn-outline-secondary text-white" data-disable-with="Search">
                   </div>
