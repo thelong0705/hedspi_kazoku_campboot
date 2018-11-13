@@ -23,7 +23,8 @@ ActiveAdmin.register Company do
                     :work_hour,
                     :appeal,
                     :other,
-                    :picture
+                    :picture,
+                    :average_review
         
     config.per_page = 10 
     index do
@@ -41,6 +42,7 @@ ActiveAdmin.register Company do
                 image_tag company.picture.thumb.url
             end
         end
+        column :average_review
         actions
     end
     
@@ -63,6 +65,7 @@ ActiveAdmin.register Company do
                     image_tag company.picture.thumb.url
                 end
             end
+            row :average_review
         end
     end
     
