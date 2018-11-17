@@ -9,6 +9,9 @@
           <div class="card-body">
             <p class="like-count">Number of likes: <%= @company.get_upvotes.size %></p>
             <p class="avg-count">Avarage rating:  <%= @company.average_review %></p>
+            <% if !current_user %>
+            <p class="signup-link"><a href="/users/sign_up">Sign up to rate</a></p>
+            <% end %>
             <div class="d-flex justify-content-between align-items-center">
               <% if current_user %>
                 <div class="btn-group">
@@ -28,6 +31,7 @@
                   <div class='rating-stars text-center'>
                     <br/>
                     <ul id='stars'>
+                    
                       <li class='star' title='Poor' data-value='1'>
                         <i class='fa fa-star fa-fw'></i>
                       </li>
@@ -61,14 +65,18 @@
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                        aria-controls="home" aria-selected="true">Company Information</a>
                   </li>
+                  <% if @recruit %>
                   <li class="nav-item">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                        aria-controls="profile" aria-selected="false">Recruit</a>
                   </li>
+                  <% end %>
+                  <% if @compensation %>
                   <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                        aria-controls="contact" aria-selected="false">Compensation</a>
                   </li>
+                  <% end %>
                 </ul>
               </div>
             </div>
@@ -110,9 +118,9 @@
                       <td>Vietnam representative</td>
                       <td>
                         <% if @company.vietnam_representative != '0' %>
-                          Có
+                          Yes
                         <% else %>
-                          Không
+                          No
                         <% end %>
                       </td>
                     </tr>
@@ -155,150 +163,136 @@
                   </tbody>
                 </table>
               </div>
+              <% if @recruit %>
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <table class="table table-hover">
                   <tbody>
                     <tr>
                       <td style="border-top:none">Work type</td>
                       <td style="border-top:none">
-                        @company.work_type
+                        <%=  @recruit.work_type  %>
                       </td>
                     </tr>
                     <tr>
                       <td>Number of employee</td>
                       <td>
-                        @company.employee_no
+                        <%= @recruit.employee_no %>
                       </td>
                     </tr>
                     <tr>
                       <td>Work place</td>
                       <td>
-                        @company.work_place
+                        <%= @recruit.workplace %>
                       </td>
                     </tr>
-                    <p>
-                      <tr>
-                        <td>Gender</td>
-                        <td>
-                          @company.gender
-                        </td>
-                      </tr>
+                    <tr>
                       <td>Applicable student</td>
                       <td>
-                        @company.applicable_student
+                        <%= @recruit.applicable_student %>
                       </td>
                     </tr>
                     <tr>
                       <td>Japanese level:</td>
                       <td>
-                        @company.japanese_level
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Code language:</td>
-                      <td>
-                        <%= @company.code_language %>
+                        <%= @recruit.japanese_level %>
                       </td>
                     </tr>
                     <tr>
                       <td>English level:</td>
                       <td>
-                        @company.english_level
+                        <%= @recruit.english_level %>
                       </td>
                     </tr>
                     <tr>
                       <td>Personality desired</td>
                       <td>
-                        @company.personality_desired
+                        <%= @recruit.personality_desired %>
                       </td>
                     </tr>
                     <tr>
                       <td>Status:</td>
                       <td>
-                        @company.status
+                        <%= @recruit.status %>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <% end %>
+              <% if @compensation %>
               <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 <table class="table table-hover">
                   <tbody>
                     <tr>
-                      <td style="border-top:none">Name:</td>
+                      <td style="border-top:none">Insurance</td>
                       <td style="border-top:none">
-                        <%= @company.name %>
+                        <%= @compensation.insurance %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Address:</td>
+                      <td>Holiday</td>
                       <td>
-                        <%= @company.address %>
+                        <%= @compensation.holiday %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Representative_name</td>
+                      <td>Paid holidays</td>
                       <td>
-                        <%= @company.representative_name %>
+                        <%= @compensation.paid_holidays %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Representative_role</td>
-                      <td>
-                        <%= @company.representative_role %>
-                      </td>
-                    </tr>
-                    <p>
-                      <tr>
-                        <td>Foundation</td>
+                        <td>Annual salary</td>
                         <td>
-                          <%= @company.foundation %>
+                          <%= @compensation.annual_salary %>
                         </td>
-                      </tr>
-                      <td>Vietnam representative</td>
+                    </tr>
+                    <tr>
+                      <td>Month salary</td>
                       <td>
-                        <%= @company.vietnam_representative %>
+                        <%= @compensation.month_salary %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Business content:</td>
+                      <td>Bonus:</td>
                       <td>
-                        <%= @company.business_content %>
+                       <%= @compensation.bonus %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Code language:</td>
+                      <td>Pay rise:</td>
                       <td>
-                        <%= @company.code_language %>
+                        <%= @compensation.pay_rise %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Work time:</td>
+                      <td>House allowance:</td>
                       <td>
-                        <%= @company.work_time %>
+                        <%= @compensation.housing_allowance %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Work hour:</td>
+                      <td>Other allowance:</td>
                       <td>
-                        <%= @company.work_hour %>
+                        <%= @compensation.other_allowance %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Appeal:</td>
+                      <td>Commuting allowance:</td>
                       <td>
-                        <%= @company.appeal %>
+                        <%= @compensation.commuting_allowance %>
                       </td>
                     </tr>
                     <tr>
-                      <td>Other:</td>
+                      <td>Retirement:</td>
                       <td>
-                        <%= @company.other %>
+                        <%= @compensation.retirement %>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -306,6 +300,7 @@
     </div>
     <div>
       <h2>Comments</h2>
+      <% if !current_user %><a href="/users/sign_up">(Sign up to comment)</a><% end %>
       <hr/>
       <section id="comments-section">
         <% if current_user %>

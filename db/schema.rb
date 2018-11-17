@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_085051) do
+ActiveRecord::Schema.define(version: 2018_11_17_125515) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_085051) do
     t.integer "employee_no"
     t.string "workplace"
     t.integer "gender"
-    t.boolean "applicable_student"
+    t.string "applicable_student"
     t.string "japanese_level"
     t.string "english_level"
     t.text "job_description"

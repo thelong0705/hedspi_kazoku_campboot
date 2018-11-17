@@ -13,6 +13,8 @@ class CompaniesController < ApplicationController
   # GET /companies/1.json
   def show
     @comments = @company.comments
+    @recruit = @company.recruit
+    @compensation = @company.compensation
     if user_signed_in?
       @cur_review = Review.find_by user_id:current_user.id, company_id:@company.id
     end

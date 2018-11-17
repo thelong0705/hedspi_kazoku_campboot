@@ -175,6 +175,10 @@ li {
   padding-left: 85px;
   margin-bottom: 20px;
 }
+.signup-link{
+  padding-left: 200px;
+}
+
 
 .rating-stars ul {
   list-style-type:none;

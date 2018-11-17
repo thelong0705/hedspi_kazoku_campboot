@@ -11,5 +11,6 @@ ActiveAdmin.register Recruit do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-
+permit_params :company_id, :work_type, :employee_no, :workplace, :applicable_student,
+:job_description, :personality_desired, :japanese_level, :english_level, :status
 end
