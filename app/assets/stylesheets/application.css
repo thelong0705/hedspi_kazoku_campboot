@@ -82,9 +82,7 @@ html {
   }
 
   
-  .carousel {
-    margin-bottom: 4rem;
-  }
+  
   /* Since positioning the image, we need to help out the caption */
   .carousel-caption {
     bottom: 3rem;
@@ -177,6 +175,10 @@ li {
   padding-left: 85px;
   margin-bottom: 20px;
 }
+.signup-link{
+  padding-left: 200px;
+}
+
 
 .rating-stars ul {
   list-style-type:none;
@@ -204,4 +206,32 @@ li {
 /* Selected state of the stars */
 .rating-stars ul > li.star.selected > i.fa {
   color:#FF912C;
+}
+
+
+.fa_custom {
+  color: yellow;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 5px;
+  cursor: pointer;
+  background-color: #fff; 
 }

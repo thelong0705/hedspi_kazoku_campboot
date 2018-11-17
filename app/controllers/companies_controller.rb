@@ -6,13 +6,15 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.All
+    @companies = Company.paginate(:page => params[:page], :per_page => 9).order('name ASC')
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
     @comments = @company.comments
+    @recruit = @company.recruit
+    @compensation = @company.compensation
     if user_signed_in?
       @cur_review = Review.find_by user_id:current_user.id, company_id:@company.id
     end

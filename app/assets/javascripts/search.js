@@ -1,6 +1,12 @@
 var timer, length_str = 100, length_item = 4;
 
+
 $(document).on('keyup', '.search-form', function() {
+  if ($('#search').val().length > 0){
+    $( ".results" ).show();
+  }else{
+    $( ".results" ).hide();
+  }
   clearTimeout(timer);
   timer = setTimeout(function () {
     var search = $('.search-form').val();
@@ -13,17 +19,20 @@ $(document).on('keyup', '.search-form', function() {
       var companies = data.results;
       if(companies.length) {
         for (i = 0; i < companies.length; i++) {
-          $('.results').append('<a href="/companies/' + companies[i].id +
-            '"><li style="margin:0; margin-top:20px;"><span class="company-image"><img src="'
-            + cover_company(companies[i])
-            + '" height="40" width="40"></span><span class="company-name"> '
-            + '<ul style="padding-left: 50px; margin-top: -50px;"><li>Name: '
-            + companies[i].name.substring(0, length_str)
-            +'</li><li><span class="company-name">Code language: '
-            + companies[i].code_language.substring(0, length_str)
-            +'</li><li><span class="company-name">Address: '
-            + companies[i].address.substring(0, length_str)
-            +'</li></ul></span></li></a><hr>');
+          $('.results').append(`
+            <a href = "/companies/${companies[i].id}" class="media">
+              <div>
+              <img class="mr-3" src="${cover_company(companies[i])}" width="80" height="auto">
+              </div>
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">${companies[i].name.substring(0, length_str)}</h5>
+                  Programming language: ${companies[i].code_language.substring(0, length_str)}
+              </div>
+            </a>
+          `)
+          if (i != companies.length - 1){
+            $('.results').append(`<hr>`);
+          }
           if(i == length_item) {
             $('.results').append('<a href="/companies/search?search=' + search + '"><li><p>View more</p></li></a>');
             break;
