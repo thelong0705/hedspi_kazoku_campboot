@@ -1,6 +1,16 @@
-<%= form_for [@company, @comment], remote: true do |f| %>
+<%= form_for [@company, @comment], :html => {:class => 'edit_comment'}, remote: true do |f| %>
   <li>
     <%= f.text_area :content, class: 'comment_box', :id => 'comment_box' %>
   </li>
   <%= button_to ('Update'), company_comments_path(company_id: @company), remote: true %>
 <% end %>
+<script>
+    $('.edit_comment').submit(function (evt) {
+        let content = $('#comment_box').val();
+        if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
+            evt.preventDefault();
+            alert('Comment cannot be blank!');
+            return false;
+        }
+    })
+</script>

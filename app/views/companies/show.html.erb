@@ -438,6 +438,10 @@
         $("body").delegate(".reply", "click",function(event){
             let comment_id = $(event.target).attr('id');
             let content = $(event.target).closest(".reply-form").find(".reply-text").val();
+            if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
+              alert('Comment cannot be blank!');
+              return;
+            }
             let user_id = <%= current_user.id %>;
             let company_id = <%= @company.id %>;
             let user_name = `<%= current_user.email %>`;
@@ -525,6 +529,10 @@
       event.preventDefault();
       let reply_id = $(event.target).attr('id');
       let content = $(event.target).closest(".reply-form").find(".reply-text").val();
+      if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
+            alert('Comment cannot be blank!');
+            return false;
+      }
       let user_id = <%= current_user.id %>;
       let company_id = <%= @company.id %>;
       let user_name = `<%= current_user.email %>`;
@@ -594,5 +602,15 @@
         $(event.target).closest(".reply-comment").remove();
       });
     });
+  </script>
+  <script>
+    $('.new_comment').submit(function (evt) {
+        let content = $('#comment_content').val();
+        if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
+            evt.preventDefault();
+            alert('Comment cannot be blank!');
+            return false;
+        }
+    })
   </script>
 <% end %>
