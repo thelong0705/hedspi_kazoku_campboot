@@ -7,7 +7,7 @@
 <script>
     $('.edit_comment').submit(function (evt) {
         let content = $('#comment_box').val();
-        if (content === "" || content.length === 0 || content == null){
+        if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
             evt.preventDefault();
             alert('Comment cannot be blank!');
             return false;
