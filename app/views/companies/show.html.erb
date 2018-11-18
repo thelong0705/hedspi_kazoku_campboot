@@ -595,4 +595,14 @@
       });
     });
   </script>
+  <script>
+    $('.new_comment').submit(function (evt) {
+        let content = $('#comment_content').val();
+        if (content === "" || content.length === 0 || content == null){
+            evt.preventDefault();
+            alert('Comment cannot be blank!');
+            return false;
+        }
+    })
+  </script>
 <% end %>
