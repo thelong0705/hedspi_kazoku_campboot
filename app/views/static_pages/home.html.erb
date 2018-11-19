@@ -34,7 +34,7 @@
                   <div>
                     <br/>
                     <p>
-                      <i class="fa fa-star fa_custom"></i> <%= company.average_review %>
+                      <i class="fa fa-star fa_custom"></i> <%= company.average_review.round(1) %>
                       <i class="far fa-thumbs-up"></i> <%= company.get_upvotes.size %>
                     </p>
                   </div>

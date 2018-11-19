@@ -7,8 +7,13 @@
             <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
           </div>
           <div class="card-body">
-            <p class="like-count">Number of likes: <%= @company.get_upvotes.size %></p>
-            <p class="avg-count">Avarage rating:  <%= @company.average_review %></p>
+            <div class="lcrt" data-gpa="3.7">
+                <b class="avg"><%= @company.average_review.round(1) %> <i class='fa fa-star fa-fw'></i></b>
+                <span class="avg-count"><%= @company.reviews.count %> reviews</span>
+                <span class="like-count"><%= @company.get_upvotes.size %> likes</span>
+
+            </div>
+            <div id="chart_div"></div>
             <% if !current_user %>
             <p class="signup-link"><a href="/users/sign_in">Sign in to rate</a></p>
             <% end %>
@@ -31,7 +36,6 @@
                   <div class='rating-stars text-center'>
                     <br/>
                     <ul id='stars'>
-                    
                       <li class='star' title='Poor' data-value='1'>
                         <i class='fa fa-star fa-fw'></i>
                       </li>
@@ -54,6 +58,7 @@
             </div>
           </div>
         </div>
+        
       </div>
       <div class="col-sm-8">
         <div class="card">
@@ -368,7 +373,7 @@
     
     
         $('#stars li').on('click', function(){
-            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var onStar = parseInt($(this).data('value'), 10); 
             var stars = $(this).parent().children('li.star');
     
             for (i = 0; i < stars.length; i++) {
@@ -397,9 +402,12 @@
             }
     
             $.ajax(settings).done(function (response) {
-                $( ".avg-count" ).text(`Average rating: ${response.average} `);
+                $( ".avg-count" ).text(`${response.count} reviews `);
+                $( ".avg" ).html(`${response.average} <i class='fa fa-star fa-fw'></i>`);
+                google.charts.setOnLoadCallback(function() { 
+                  drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']); 
+                });
             });
-    
         });
     });
   </script>
@@ -408,6 +416,9 @@
         $("body").delegate(".reply-button", "click",function(event){
           let comment_id = $(event.target).attr('id');
           event.preventDefault();
+          if($(event.target).closest(".comment").find(".reply-form").length != 0){
+            return;
+          }
           $(event.target).closest(".comment").append(`
           <div class="reply-form">
             <div class="row" style="padding-top:10px;">
@@ -438,6 +449,7 @@
         $("body").delegate(".reply", "click",function(event){
             let comment_id = $(event.target).attr('id');
             let content = $(event.target).closest(".reply-form").find(".reply-text").val();
+            content = content.trim();
             if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
               alert('Comment cannot be blank!');
               return;
@@ -494,10 +506,10 @@
   </script>
   <script>
     $("body").delegate(".reply-edit", "click",function(event){
+
       let reply_id = $(event.target).attr('id');
       let current_content = $(event.target).closest(".reply-comment").find("p").text();
       event.preventDefault();
-      console.log($(event.target).closest(".reply-comment").html());
       $(event.target).closest(".reply-comment").replaceWith(`
           <div class="reply-form">
             <div class="row" style="padding-top:10px;">
@@ -529,6 +541,8 @@
       event.preventDefault();
       let reply_id = $(event.target).attr('id');
       let content = $(event.target).closest(".reply-form").find(".reply-text").val();
+      
+      content = content.trim();
       if (content === "" || content.length === 0 || content == null|| !content.replace(/\s/g, '').length){
             alert('Comment cannot be blank!');
             return false;
@@ -614,3 +628,17 @@
     })
   </script>
 <% end %>
+
+<script>
+$(document).ready(function(){
+  let star5 = <%= @company.reviews.star(5).count %>;
+  let star4 = <%= @company.reviews.star(4).count %>;
+  let star3 = <%= @company.reviews.star(3).count %>;
+  let star2 = <%= @company.reviews.star(2).count %>;
+  let star1 = <%= @company.reviews.star(1).count %>;
+  google.charts.setOnLoadCallback(function() { drawBasic(
+    star5,star4,star3,star2,star1
+    ); 
+  });
+});
+</script>

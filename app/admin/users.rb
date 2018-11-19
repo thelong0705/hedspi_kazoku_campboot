@@ -21,8 +21,8 @@ ActiveAdmin.register User do
         column :email
         column :gender do |user|
             if user.gender == 0
-                'Nam'
-            else "Nữ"
+                'Male'
+            else "Female"
             end        
         end
         column :school
@@ -36,8 +36,8 @@ ActiveAdmin.register User do
             row :email
             row :gender do |user|
                 if user.gender == 0
-                    'Nam'
-                else "Nữ"
+                    'Male'
+                else "Female"
                 end        
             end
             row :school
