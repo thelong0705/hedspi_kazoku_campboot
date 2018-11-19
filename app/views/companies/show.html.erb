@@ -419,7 +419,7 @@
           if($(event.target).closest(".comment").find(".reply-form").length != 0){
             return;
           }
-          $(event.target).closest(".comment").append(`
+          $(event.target).closest(".comment").after(`
           <div class="reply-form">
             <div class="row" style="padding-top:10px;">
               <div class="col-md-1">
@@ -456,7 +456,7 @@
             }
             let user_id = <%= current_user.id %>;
             let company_id = <%= @company.id %>;
-            let user_name = `<%= current_user.email %>`;
+            let user_name = `<%= current_user.name %>`;
             var settings = {
               "async": true,
               "crossDomain": true,
@@ -549,7 +549,7 @@
       }
       let user_id = <%= current_user.id %>;
       let company_id = <%= @company.id %>;
-      let user_name = `<%= current_user.email %>`;
+      let user_name = `<%= current_user.name %>`;
       var settings = {
         "async": true,
         "crossDomain": true,

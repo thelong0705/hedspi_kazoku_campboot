@@ -12,7 +12,7 @@
       <div class="col-md-11">
         <div class="card" style="border: none">
           <div class="card-body">
-            <%= link_to comment.user.email, comment.user %>
+            <%= link_to comment.user.name, comment.user %>
             <span class="date"><%= time_ago_in_words(comment.created_at) %> ago</span>
             <p id="content_box_<%= comment.id %>">
               <%= comment.content %>
@@ -45,7 +45,7 @@
         <div class="col-md-10">
           <div class="card" style="border: none">
             <div class="card-body">
-              <%= link_to reply.user.email, reply.user %>
+              <%= link_to reply.user.name, reply.user %>
               <span class="date"><%= time_ago_in_words(reply.created_at) %> ago</span>
               <p><%= reply.content %></p>
               <% if current_user && reply.user.id == current_user.id %>
