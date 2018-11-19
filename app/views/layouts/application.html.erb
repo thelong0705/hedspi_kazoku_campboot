@@ -79,6 +79,7 @@
           <p>IT Nihongo 3 Project - Campboot team</p>
         </div>
       </footer>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
       <!-- Placed at the end of the document so the pages load faster -->
       <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -95,6 +96,36 @@
             $('#myModal').fadeOut('slow');
             $('#myModal').modal('hide');
         }, 700);
+      </script>
+      <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        
+        function drawBasic(star5,star4,star3,star2,star1) {
+        
+              var data = google.visualization.arrayToDataTable([
+                ['Star', '', {role: 'annotation'},{ role: 'style' }],
+                ['5★', star5, star5,'#f25800'],            
+                ['4★', star4, star4,'#f25800'],            
+                ['3★', star3, star3,'#f25800'],
+                ['2★', star2, star2,'#f25800' ],
+                ['1★', star1, star1,'#f25800' ],
+              ]);
+        
+              var options = {
+                chartArea: {width: '80%'},
+                legend: {position: 'none'},
+                hAxis: {
+                  textPosition: 'none',
+                  baselineColor: '#fff',
+         	        gridlineColor: '#fff'
+                },
+                enableInteractivity: false
+              };
+        
+              var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        
+              chart.draw(data, options);
+            }
       </script>
     </body>
   </html>
