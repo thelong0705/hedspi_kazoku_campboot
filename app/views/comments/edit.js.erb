@@ -1,3 +1,3 @@
 $('#content_box_<%= @comment.id %>').html("<%= j (render 'comments/edit') %>");
 $('.comment_box').focus();
-$('.comment_box').val('.comment_box').val("<%= @comment.content %>");
+$('.comment_box').val("<%= @comment.content %>");
