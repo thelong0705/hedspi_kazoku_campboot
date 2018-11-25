@@ -1,0 +1,35 @@
+<div class="col-md-4">
+<div class="card mb-4 shadow-sm">
+    <div class="logo">
+    <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
+    </div>
+    <div class="card-body">
+    <div class="lcrt" data-gpa="3.7">
+        <b class="avg"><%= @company.average_review.round(1) %> <i class='fa fa-star fa-fw'></i></b>
+        <span class="avg-count"><%= @company.reviews.count %> reviews</span>
+        <span class="like-count"><%= @company.get_upvotes.size %> likes</span>
+    </div>
+    <div id="chart_div"></div>
+    <% if !current_user %>
+        <p class="signup-link"><a href="/users/sign_in">Sign in to rate</a></p>
+    <% end %>
+    <div class="d-flex justify-content-between align-items-center">
+        <% if current_user %>
+        <div class="btn-group">
+            <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
+            <div>
+                <span id="like_prompt">
+                <% if current_user.liked? @company %>
+                    Unlike
+                <% else %>
+                    Like
+                <% end %>
+                </span>
+            </div>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+    </div>
+</div>
+</div>
