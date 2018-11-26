@@ -1,0 +1,37 @@
+<%= search_form_for @search do |f| %>
+  <%= search_form_for @search do |f| %>
+
+  <%= tag.fieldset do %>
+    <%= tag.legend 'Filter' %>
+    <%= tag.ul do %>
+      <%= tag.li do %>
+        <%= f.label :company_name_cont %>
+        <%= f.text_field :name_cont %>
+      <% end %>
+      <%= tag.li do %>
+        <%= f.label :address_cont %>
+        <%= f.text_field :address_cont %>
+      <% end %>
+      <%= tag.li do %>
+        <%= f.label :business_content_cont %>
+        <%= f.text_field :business_content_cont %>
+      <% end %>
+      <%= tag.li do %>
+        <%= f.label :programming_language_cont %>
+        <%= f.text_field :code_language_cont %>
+      <% end %>
+      <%= tag.li do %>
+        <%= f.label :work_time_cont %>
+        <%= f.text_field :work_time_cont %>
+      <% end %>
+      <%= tag.li do %>
+        <%= f.label :work_hour_cont %>
+        <%= f.text_field :work_hour_cont %>
+      <% end %>
+      
+    <% end %>
+  <% end %>
+
+  <%= f.submit class: 'btn btn--invert' %>
+<% end %>
+<% end %>

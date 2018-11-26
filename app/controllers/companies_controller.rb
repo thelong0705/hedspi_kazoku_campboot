@@ -6,9 +6,16 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.paginate(:page => params[:page], :per_page => 9).order('name ASC')
+    @search = ransack_params
+    @companies = ransack_result.paginate(:page => params[:page], :per_page => 9).order('name ASC')
   end
 
+  def advanced_search
+    @search = ransack_params
+    @search.build_grouping unless @search.groupings.any?
+    @companies  = ransack_result
+  end
+  
   # GET /companies/1
   # GET /companies/1.json
   def show
@@ -105,5 +112,13 @@ class CompaniesController < ApplicationController
                                     :representative_role, :foundation, :vietnam_representative,
                                     :business_content, :code_language, :work_time, :work_hour,
                                     :appeal, :other, :picture)
+  end
+  
+  def ransack_params
+    Company.ransack(params[:q])
+  end
+
+  def ransack_result
+    @search.result
   end
 end
