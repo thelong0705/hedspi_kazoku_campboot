@@ -1,9 +1,8 @@
-<%= render "star_js" %>
+
 <script>
   $(document).ready(function(){
-    $( "input" ).click(function( event ) {
+    $("body").delegate("input", "click",function(event){
       event.preventDefault();
-  
       let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
       let content = $('.content').val().trim();
       let company_id = <%= @company.id %>;
@@ -11,10 +10,12 @@
   
       if (!content){
         alert('Content can not be empty');
+        return false;
       }
   
       if (!ratingValue){
         alert('Rating can not be empty');
+        return false;
       }
   
       var settings = {
@@ -36,7 +37,7 @@
   
       $.ajax(settings).done(function (response) {
         let starHTML = "";
-        for (let i = 0; i < ratingValue; i++) { 
+        for (let i = 0; i < ratingValue; i++) {
             starHTML += `
               <li class='star selected'>
                 <i class='fa fa-star fa-fw'></i>
@@ -89,5 +90,33 @@
       star5,star4,star3,star2,star1
       );
     });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    let avatar = `<%= render "avatar" %>`;
+    let star = `<%= render "star" %>`
+    $("body").delegate("#edit-btn", "click",function(event){
+    $(event.target).closest(".row").replaceWith(`
+      <form>
+        ${avatar}
+        <div class="col-md-11" style="padding-left:30px;">
+            ${star}
+            <li>
+            <textarea rows="2" cols="60" placeholder="Write your comment here" class="content"></textarea>
+            </li>
+            <li>
+            <input type="submit" name="commit" value="Submit" class="submit-review">
+            </li>
+        </div>
+      </form>
+    `)
+    });
+  });
+</script>
+<%= render "star_js" %>
+<script>
+  $("body").delegate("#delete-btn", "click",function(event){
+    alert('wew');
   });
 </script>

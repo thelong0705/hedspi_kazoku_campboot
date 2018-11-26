@@ -1,5 +1,5 @@
 <% @reviews.each do |review| %>
-<% if review.user_id != current_user.id %>
+  <% if review.user_id == current_user.id %>
   <div class="row" style="padding-top:10px;">
     <div class="col-md-1 align-self-center">
       <% if review.user.picture.presence %>
@@ -12,6 +12,13 @@
     <div class="col-md-6">
       <div class="card" style="border: none">
         <div class="card-body">
+          <button class="btn btn-light float-right" id="delete-btn">
+            <i class="fas fa-times"></i>
+          </button>  
+          <button class="btn btn-light float-right" id="edit-btn">
+            <i class="fa fa-edit fa-1x"></i>
+          </button>
+             
           <%= link_to review.user.name, review.user %>
           <span class="date"><%= time_ago_in_words(review.updated_at) %> ago</span>
           <br/>
@@ -33,5 +40,5 @@
       </div>
     </div>
   </div>
-<% end %>
+  <% end %>
 <% end %>
