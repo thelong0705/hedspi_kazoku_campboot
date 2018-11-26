@@ -5,34 +5,18 @@
       <%= render "table" %>
     </div>
     <div>
-      <h2>Comments</h2>
+      <h3>Your review</h3>
       <% if !current_user %><a href="/users/sign_in">(Sign in to comment)</a><% end %>
       <hr/>
-      <section id="comments-section">
-        <% if current_user %>
-          <form>
-            <ol>
-                <%= render "avatar" %>
-                <div class="col-md-11" style="padding-left:30px;">
-                  <%= render "star" %>
-                  </br>
-                  <li>
-                    <textarea rows="2" cols="60" placeholder="Write your comment here"></textarea>
-                  </li>
-                  <li>
-                    <input type="submit" name="commit" value="Submit" class="button">
-                  </li>
-                </div>
-              </div>
-            </ol>
-          </form>
+      <% if current_user %>
+          <%= render 'review_form' %>
           <hr/>
-        <% end %>
-        <ol id="comments">
-          <%= render @comments %>
-        </ol>
-      </section>
+      <% end %>
     </div>
+    <%= render 'review' %>
   </div>
+</div>
 </main>
-<%= render "reply" %>
+<% if current_user %>
+  <%= render "script" %>
+<% end %>

@@ -1,0 +1,35 @@
+<% @reviews.each do |review| %>
+  <div class="row" style="padding-top:10px;">
+    <div class="col-md-1 align-self-center">
+      <% if review.user.picture.presence %>
+        <%= image_tag(review.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+      <% else %>
+        <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                    class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+      <% end %>
+    </div>
+    <div class="col-md-11">
+      <div class="card" style="border: none">
+        <div class="card-body">
+          <%= link_to review.user.name, review.user %>
+          <span class="date"><%= time_ago_in_words(review.updated_at) %> ago</span>
+          <br/>
+          <div style="padding-top:10px">
+              <div class='rating-stars'>
+              <ul>
+                <% (1..review.rating).each do |i| %>
+                  <li class='star selected'>
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                <% end %>
+                </ul>
+              </div>
+          </div>
+          <p id="content_box_<%= review.id %>">
+            <%= review.content %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end %>

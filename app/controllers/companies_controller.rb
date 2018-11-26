@@ -15,6 +15,7 @@ class CompaniesController < ApplicationController
     @comments = @company.comments
     @recruit = @company.recruit
     @compensation = @company.compensation
+    @reviews = @company.reviews
     if user_signed_in?
       @cur_review = Review.find_by user_id:current_user.id, company_id:@company.id
     end
