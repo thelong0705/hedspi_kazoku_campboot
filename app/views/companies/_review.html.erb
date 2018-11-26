@@ -1,5 +1,5 @@
 <% @reviews.each do |review| %>
-<% if review.user_id != current_user.id %>
+<% current_user && if review.user_id != current_user.id %>
   <div class="row" style="padding-top:10px;">
     <div class="col-md-1 align-self-center">
       <% if review.user.picture.presence %>

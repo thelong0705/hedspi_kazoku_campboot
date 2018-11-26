@@ -67,7 +67,10 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     @company.update_attribute(:average_review, @company.reviews.average(:rating))
-    response = {average: @company.reviews.average(:rating), data: @review}
+    response = {average: @company.reviews.average(:rating).round(1), review: {"5": @company.reviews.star(5).count,
+        "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count},
+        count: @company.reviews.count
+      }
     render json: response, status: :ok
   end
 
