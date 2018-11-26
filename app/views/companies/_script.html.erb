@@ -1,4 +1,3 @@
-
 <script>
   $(document).ready(function(){
     $("body").delegate("input", "click",function(event){
@@ -45,7 +44,7 @@
             `
         }
         $(event.target).closest("form").replaceWith(`
-          <div class="row" style="padding-top:10px;">
+          <div class="row" style="padding-top:10px;" id = ${response.data.id}>
             <div class="col-md-1 align-self-center">
               <% if current_user.picture.presence %>
                 <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
@@ -54,9 +53,15 @@
                             class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
               <% end %>
             </div>
-            <div class="col-md-11">
+            <div class="col-md-6">
               <div class="card" style="border: none">
                 <div class="card-body">
+                  <button class="btn btn-light float-right" id="delete-btn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <button class="btn btn-light float-right" id="edit-btn">
+                    <i class="fa fa-edit fa-1x"></i>
+                  </button>
                   <%= link_to current_user.name, current_user %>
                   <span class="date">just now</span>
                   <br/>
@@ -117,6 +122,34 @@
 <%= render "star_js" %>
 <script>
   $("body").delegate("#delete-btn", "click",function(event){
-    alert('wew');
+    let avatar = `<%= render "avatar" %>`;
+    let star = `<%= render "star" %>`
+    let id = $(event.target).closest(".row").attr('id');
+    let company_id = <%= @company.id %>
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": `/companies/${company_id}/reviews/${id}`,
+      "method": "DELETE",
+      "headers": {
+        "cache-control": "no-cache",
+      }
+    }
+    $.ajax(settings).done(function (response) {
+      $(event.target).closest(".row").replaceWith(`
+        <form>
+          ${avatar}
+          <div class="col-md-11" style="padding-left:30px;">
+              ${star}
+              <li>
+              <textarea rows="2" cols="60" placeholder="Write your comment here" class="content"></textarea>
+              </li>
+              <li>
+              <input type="submit" name="commit" value="Submit" class="submit-review">
+              </li>
+          </div>
+        </form>
+    `)
+    });
   });
 </script>

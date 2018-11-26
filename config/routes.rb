@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :comments do
       resources :replies, only: [:create, :show, :update, :destroy, :index]
     end
-    resources :reviews, only: [:index, :show, :create]
+    resources :reviews, only: [:index, :show, :create, :destroy]
   end
 
   put '/replies/:id', to: 'replies#update'

@@ -1,6 +1,6 @@
 <% @reviews.each do |review| %>
   <% if review.user_id == current_user.id %>
-  <div class="row" style="padding-top:10px;">
+  <div class="row" style="padding-top:10px;" id ="<%= review.id %>" >
     <div class="col-md-1 align-self-center">
       <% if review.user.picture.presence %>
         <%= image_tag(review.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
