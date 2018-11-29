@@ -1,27 +1,29 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   skip_forgery_protection
   before_action :find_company
-  before_action :find_review, only: [:show, :update, :destroy]
+  before_action :find_review, only: %i[show update destroy]
   respond_to :js, :json, :html
 
   def index
-    response = {average: @company.reviews.average(:rating), data: @company.reviews}
+    response = { average: @company.reviews.average(:rating), data: @company.reviews }
     render json: response, status: :ok
   end
 
   def show
-    response = {average: @company.reviews.average(:rating), data: @review}
+    response = { average: @company.reviews.average(:rating), data: @review }
     render json: response, status: :ok
   end
 
   def create
     @review = nil
     @company.reviews.each do |r|
-      if r.user_id.to_s == params[:user_id]
-        puts "true"
-        @review = r
-        break
-      end
+      next unless r.user_id.to_s == params[:user_id]
+
+      puts 'true'
+      @review = r
+      break
     end
     if @review.nil?
       @review = Review.new(review_params)
@@ -29,25 +31,23 @@ class ReviewsController < ApplicationController
       @review.user_id = params[:user_id]
       if @review.save
         @company.update_attribute(:average_review, @company.reviews.average(:rating))
-        response = {average: @company.reviews.average(:rating).round(1), data: @review, review: {"5": @company.reviews.star(5).count,
-        "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count},
-        count: @company.reviews.count
-      }
+        response = { average: @company.reviews.average(:rating).round(1), data: @review, review: { "5": @company.reviews.star(5).count,
+                                                                                                   "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count },
+                     count: @company.reviews.count }
         render json: response, status: :ok
       else
-        response = {message: "Can't create review"}
+        response = { message: "Can't create review" }
         render json: response, status: :unprocessable_entity
       end
     else
       if @review.update(review_params)
         @company.update_attribute(:average_review, @company.reviews.average(:rating))
-        response = {average: @company.reviews.average(:rating).round(1), data: @review, review: {"5": @company.reviews.star(5).count,
-        "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count},
-        count: @company.reviews.count
-      }
+        response = { average: @company.reviews.average(:rating).round(1), data: @review, review: { "5": @company.reviews.star(5).count,
+                                                                                                   "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count },
+                     count: @company.reviews.count }
         render json: response, status: :ok
       else
-        response = {message: "Can't update review"}
+        response = { message: "Can't update review" }
         render json: response, status: :unprocessable_entity
       end
     end
@@ -56,21 +56,25 @@ class ReviewsController < ApplicationController
   def update
     if @review.update(review_params)
       @company.update_attribute(:average_review, @company.reviews.average(:rating))
-      response = {average: @company.reviews.average(:rating), data: @review}
+      response = { average: @company.reviews.average(:rating), data: @review }
       render json: response, status: :ok
     else
-      response = {message: "Can't update review"}
+      response = { message: "Can't update review" }
       render json: response, status: :unprocessable_entity
     end
   end
 
   def destroy
     @review.destroy
-    @company.update_attribute(:average_review, @company.reviews.average(:rating))
-    response = {average: @company.reviews.average(:rating).round(1), review: {"5": @company.reviews.star(5).count,
-        "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count},
-        count: @company.reviews.count
-      }
+    avg = @company.reviews.average(:rating)
+    avg ||= 0
+    @company.update_attribute(:average_review, avg)
+    response = { average: avg, review: { "5": @company.reviews.star(5).count,
+                                         "4": @company.reviews.star(4).count,
+                                         "3": @company.reviews.star(3).count,
+                                         "2": @company.reviews.star(2).count,
+                                         "1": @company.reviews.star(1).count },
+                 count: @company.reviews.count }
     render json: response, status: :ok
   end
 

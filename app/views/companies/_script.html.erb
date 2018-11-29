@@ -6,7 +6,36 @@
       let content = $('.content').val().trim();
       let company_id = <%= @company.id %>;
       let user_id = <%= current_user.id %>;
-  
+      let star = `<%= render "star" %>`
+      let avatar = `<%= render "avatar" %>`;
+      if($(event.target).val() == 'Submit'){
+        $('#q-modal').modal('show');
+        $("#no-btn").click(function() {
+          $(".modal-footer").hide();
+          $("#modal-text").html("You can not review this company");
+          $("form").replaceWith(`
+            <form>
+              ${avatar}
+              <div class="col-md-11" style="padding-left:30px;">
+                  ${star}
+                  <li>
+                  <textarea rows="2" cols="60" placeholder="Write your comment here" class="content"></textarea>
+                  </li>
+                  <li>
+                  <input type="submit" name="commit" value="Submit" class="submit-review">
+                  </li>
+              </div>
+            </form>
+          `);  
+          return false;         
+        });
+
+        $("#yes-btn").click(function() {
+          $("#modal-text").html("which parts");
+        });
+        
+      }
+      return false;
       if (!content){
         alert('Content can not be empty');
         return false;
@@ -16,7 +45,12 @@
         alert('Rating can not be empty');
         return false;
       }
-  
+      
+      
+
+      
+      
+    
       var settings = {
         "async": true,
         "crossDomain": true,
@@ -106,7 +140,10 @@
   
     $("body").delegate("#edit-btn", "click",function(event){
     let current_content = $(event.target).closest(".row").find("p").text().trim();
-    let current_rating = <%= @cur_review.rating %>;
+    let current_rating = 0;
+    <% if @cur_review %>
+      current_rating = <%= @cur_review.rating %>;    
+    <% end %>
     let starHTML = `
     <div>
       <div class="rating-stars">
@@ -140,7 +177,7 @@
           <textarea rows="2" cols="60" placeholder="Write your comment here" class="content">${current_content}</textarea>
           </li>
           <li>
-          <input type="submit" name="commit" value="Submit" class="submit-review">
+          <input type="submit" name="commit" value="Update" class="submit-review">
           </li>
         </div>
       </form>
