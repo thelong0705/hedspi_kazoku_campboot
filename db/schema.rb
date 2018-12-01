@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_083349) do
+ActiveRecord::Schema.define(version: 2018_12_01_030207) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -80,21 +80,6 @@ ActiveRecord::Schema.define(version: 2018_11_25_083349) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recruiments", force: :cascade do |t|
-    t.string "content"
-    t.string "job_category"
-    t.integer "company_id"
-    t.integer "number_of_people"
-    t.integer "employed"
-    t.string "work_location"
-    t.string "applicable_student"
-    t.string "english_required"
-    t.string "personality_desered"
-    t.string "sex"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "recruits", force: :cascade do |t|
     t.integer "company_id"
     t.string "work_type"
@@ -126,17 +111,8 @@ ActiveRecord::Schema.define(version: 2018_11_25_083349) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "content"
-  end
-
-  create_table "treatments", force: :cascade do |t|
-    t.string "content"
-    t.boolean "social_insurance"
-    t.integer "integer"
-    t.string "welfare"
-    t.integer "company_id"
-    t.integer "annual_income"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "year"
+    t.string "department"
   end
 
   create_table "users", force: :cascade do |t|
