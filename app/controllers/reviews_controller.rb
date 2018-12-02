@@ -81,7 +81,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :content, :year, :company)
+    params.require(:review).permit(:rating, :content, :year, :company, :department)
   end
 
   def find_company

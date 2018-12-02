@@ -2,12 +2,7 @@
   $(document).ready(function(){
     $("body").delegate("input", "click",function(event){
       event.preventDefault();
-      let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-      let content = $('.content').val().trim();
-      let company_id = <%= @company.id %>;
-      let user_id = <%= current_user.id %>;
-      let star = `<%= render "star" %>`
-      let avatar = `<%= render "avatar" %>`;
+  
       if($(event.target).val() == 'Submit'){
         $('#q-modal').modal('show');
         $("#no-btn").click(function() {
@@ -26,47 +21,30 @@
                   </li>
               </div>
             </form>
-          `);  
-          return false;         
+          `);
+          return false;
         });
-
+  
         $("#yes-btn").click(function() {
-          $("#modal-text").html("which parts");
+          $("#modal-text").html(`
+            <div>
+              <div class="row">
+                <div class="col-md-9">
+                  <input type="text" class="form-control" id="department" placeholder="Which department">
+                </div>
+                <div class="col-md-3">
+                  <input type="number" class="form-control" id="years" placeholder="Years">
+                </div>
+              </div>
+            </div>
+          `);
+          $(".modal-footer").html(`
+            <button type="button" class="btn btn-primary" id="submit-q">Submit</button>
+          `);
         });
-        
+  
       }
       return false;
-      if (!content){
-        alert('Content can not be empty');
-        return false;
-      }
-  
-      if (!ratingValue){
-        alert('Rating can not be empty');
-        return false;
-      }
-      
-      
-
-      
-      
-    
-      var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": `/companies/${company_id}/reviews`,
-        "method": "POST",
-        "headers": {
-          "Content-Type": "application/json",
-          "cache-control": "no-cache",
-        },
-        "processData": false,
-        "data":  `{
-          "rating":"${ratingValue}",
-          "user_id":"${user_id}",
-          "content":"${content}"
-          }`
-      }
   
       $.ajax(settings).done(function (response) {
         google.charts.setOnLoadCallback(function() {
@@ -142,7 +120,7 @@
     let current_content = $(event.target).closest(".row").find("p").text().trim();
     let current_rating = 0;
     <% if @cur_review %>
-      current_rating = <%= @cur_review.rating %>;    
+      current_rating = <%= @cur_review.rating %>;
     <% end %>
     let starHTML = `
     <div>
@@ -164,10 +142,10 @@
         `;
     }
     starHTML +=
-        `
-        </ul>
-      </div>
-    </div>`
+                `
+                </ul>
+              </div>
+            </div>`
     $(event.target).closest(".row").replaceWith(`
       <form>
         ${avatar}
@@ -220,5 +198,52 @@
         </form>
     `)
     });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+      $("body").delegate("#submit-q", "click",function(event){
+        let department = $("#department").val();
+        let year = $("#years").val();
+        let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+        let content = $('.content').val().trim();
+        let company_id = <%= @company.id %>;
+        let user_id = <%= current_user.id %>;
+        let star = `<%= render "star" %>`
+        let avatar = `<%= render "avatar" %>`;
+        alert(content);
+        if (!content){
+          alert('Content can not be empty');
+          return false;
+        }
+  
+        if (!ratingValue){
+          alert('Rating can not be empty');
+          return false;
+        }
+  
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": `/companies/${company_id}/reviews`,
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache",
+          },
+          "processData": false,
+          "data":  `{
+            "rating":"${ratingValue}",
+            "user_id":"${user_id}",
+            "content":"${content}",
+            "department":"${department}",
+            "year":"${year}"
+            }`
+        }
+        $.ajax(settings).done(function (response) {
+          alert(`yes`);
+
+        })
+      });
   });
 </script>
