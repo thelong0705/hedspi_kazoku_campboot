@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/create'
   get 'replies/show'
   get 'replies/create'
   get 'replies/update'
@@ -37,4 +38,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :compensations, only: [:show]
   resources :recruits, only: [:show]
+  
+  resources :conversations, only: [:index, :create] do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
 end
