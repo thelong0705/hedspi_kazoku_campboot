@@ -15,6 +15,7 @@
           <%= link_to review.user.name, review.user %>
           <span class="date"><%= time_ago_in_words(review.updated_at) %> ago</span>
           <br/>
+          <span>(worked at <%= review.department%> department for <%= review.year %> years)</span>
           <div style="padding-top:10px">
               <div class='rating-stars'>
               <ul>
