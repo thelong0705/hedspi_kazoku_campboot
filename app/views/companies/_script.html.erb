@@ -105,6 +105,8 @@
         google.charts.setOnLoadCallback(function() {
                   drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']);
                 });
+        $(`.avg`).html(`${response.average}<i class="fa fa-star fa-fw"></i>`);
+        $(`.avg-count`).text(`${response.count} reviews`)
         $(`#form-review`).replaceWith(`
           <div class="row" style="padding-top:10px;" id = ${response.data.id}>
             <div class="col-md-1 align-self-center">
@@ -232,6 +234,9 @@
       google.charts.setOnLoadCallback(function() {
                   drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']);
                 });
+      $(`.avg`).html(`${response.average}<i class="fa fa-star fa-fw"></i>`);
+      $(`.avg-count`).text(`${response.count} reviews`);
+
       $(event.target).closest(".row").replaceWith(`
         <form id="form-review">
           ${avatar}
@@ -294,6 +299,8 @@
           google.charts.setOnLoadCallback(function() {
                     drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']);
                   });
+          $(`.avg`).html(`${response.average}<i class="fa fa-star fa-fw"></i>`);
+          $(`.avg-count`).text(`${response.count} reviews`);
           let starHTML = "";
           for (let i = 0; i < ratingValue; i++) {
               starHTML += `
