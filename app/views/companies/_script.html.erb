@@ -41,8 +41,10 @@
             <button type="button" class="btn btn-primary" id="submit-q">Submit</button>
           `);
         });
-        return;
+        return false;
       }
+      if($(event.target).val() == 'Update'){
+
       let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
       let current_rating = ratingValue;
       let content = $('.content').val().trim();
@@ -142,6 +144,7 @@
           </div>
         `);
       });
+      }
     });
   });
 </script>
@@ -249,11 +252,13 @@
 <script>
   $(document).ready(function(){
       $("body").delegate("#submit-q", "click",function(event){
+        $('#q-modal').modal('hide');
         let department = $("#department").val();
         let year = $("#years").val();
         let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
         let content = $('.content').val().trim();
         let company_id = <%= @company.id %>;
+        let user_id = <%= current_user.id %>
         let star = `<%= render "star" %>`
         let avatar = `<%= render "avatar" %>`;
   
