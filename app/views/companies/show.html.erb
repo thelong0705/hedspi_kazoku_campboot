@@ -23,4 +23,18 @@
 </main>
 <% if current_user %>
   <%= render "script" %>
+<% else %>
+  <script>
+  $(document).ready(function(){
+    let star5 = <%= @company.reviews.star(5).count %>;
+    let star4 = <%= @company.reviews.star(4).count %>;
+    let star3 = <%= @company.reviews.star(3).count %>;
+    let star2 = <%= @company.reviews.star(2).count %>;
+    let star1 = <%= @company.reviews.star(1).count %>;
+    google.charts.setOnLoadCallback(function() { drawBasic(
+      star5,star4,star3,star2,star1
+      );
+    });
+  });
+  </script>
 <% end %>

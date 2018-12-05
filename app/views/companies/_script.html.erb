@@ -4,6 +4,13 @@
       event.preventDefault();
       if($(event.target).val() == 'Submit'){
         $('#q-modal').modal('show');
+        $(".modal-footer").html(`
+          <button type="button" class="btn btn-primary" id="yes-btn">Yes</button>
+          <button type="button" class="btn btn-secondary" id="no-btn">No</button>
+        `);
+        $(".modal-footer").show();
+        $("#modal-text").html("Have you ever worked in this company");
+
         $("#no-btn").click(function() {
           $(".modal-footer").hide();
           $("#modal-text").html("You can not review this company");
@@ -274,6 +281,16 @@
   
         if (!ratingValue){
           alert('Rating can not be empty');
+          return false;
+        }
+
+        if (!department){
+          alert('Department can not be empty');
+          return false;
+        }
+
+        if (!year){
+          alert('Years can not be empty');
           return false;
         }
   
