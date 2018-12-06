@@ -6,15 +6,16 @@ Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations], controllers: {sessions: "admins/sessions"}
   ActiveAdmin.routes(self)
 
+  resources :comments do
+    resources :replies, only: [:create, :show, :update, :destroy, :index]
+  end
+
   resources :companies, only: [:show, :index] do
     member do
       put 'like' => 'companies#like'
     end
     collection do
       match 'search' => 'companies#search', :via => [:get, :post], :as => :search
-    end
-    resources :comments do
-      resources :replies, only: [:create, :show, :update, :destroy, :index]
     end
     resources :reviews, only: [:index, :show, :create, :destroy]
   end
