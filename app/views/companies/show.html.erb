@@ -18,11 +18,11 @@
     </div>
     <%= render 'review' %>
   </div>
-</div>
 <%= render 'modal' %>
 </main>
 <% if current_user %>
   <%= render "script" %>
+  <%= render "comment_script" %>
 <% else %>
   <script>
   $(document).ready(function(){

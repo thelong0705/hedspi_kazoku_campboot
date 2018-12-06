@@ -19,7 +19,6 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @comments = @company.comments
     @recruit = @company.recruit
     @compensation = @company.compensation
     @reviews = @company.reviews

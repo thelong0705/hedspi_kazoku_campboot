@@ -1,0 +1,13 @@
+<script>
+    $(document).ready(function () {
+        $(`.comment_list`).hide();
+        $("body").delegate(".show-comment", "click", function (event) {
+           let review_id = $(event.target).attr('id');
+           $(`#comment_list_${review_id}`).toggle();
+        });
+        $("body").delegate(".show-form-comment", "click", function (event) {
+            let review_id = $(event.target).attr('id');
+            $(`#comment_form_${review_id}`).toggle();
+        });
+    });
+</script>
