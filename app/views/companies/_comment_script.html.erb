@@ -5,9 +5,84 @@
            let review_id = $(event.target).attr('id');
            $(`#comment_list_${review_id}`).toggle();
         });
+
         $("body").delegate(".show-form-comment", "click", function (event) {
             let review_id = $(event.target).attr('id');
             $(`#comment_form_${review_id}`).toggle();
         });
+        
+        $("body").delegate(".submit-comment", "click", function (event) {
+            let review_id = $(event.target).attr('id');
+            let content = $(`#comment_box_${review_id}`).val();
+            let user_id = <%= current_user.id %>;
+            
+            content = content.trim();
+            if (!content) {
+                alert('Comment can not be empty');
+                return false;
+            }
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "/comments",
+                "method": "POST",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "cache-control": "no-cache",
+                },
+                "processData": false,
+                "data": `{
+                    "review_id":"${review_id}",
+                    "user_id":"${user_id}",
+                    "content":"${content}"
+                }`
+            }
+
+            $.ajax(settings).done(function (response) {
+                $(`#comment_list_${review_id}`).prepend(`
+                    <div class="row" style="padding-bottom:10px;">
+                        <div class="col-md-1 align-self-center">
+                        </div>
+                        <div class="col-md-1 align-self-center">
+                            <% if current_user.picture.presence %>
+                            <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                            <% else %>
+                            <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                                class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                            <% end %>
+                        </div>
+                        <div class="col-md-6">
+                            <%= link_to current_user.name, current_user %>
+                            <span class="date">
+                               just now</span>
+                            <br />
+                            ${content}
+                        </div>
+                    </div>
+                `);
+                $(`#comment_form_${review_id}`).html(`
+                    <div class="row">
+                        <div class="col-md-1 align-self-center">
+                        </div>
+                        <div class="col-md-1 align-self-center">
+                        <% if current_user.picture.presence %>
+                        <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                        <% else %>
+                        <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                            class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                        <% end %>
+                        </div>
+                        <div class="col-md-6">
+                        <textarea rows="2" cols="45" placeholder="Write your comment here" class="comment_box" id="comment_box_${review_id}"></textarea>
+                        </br>
+                        <input type="submit"  value="Comment" class="submit-comment" id="${review_id}">
+                        </div>
+                    </div>
+                `).toggle();
+            });
+            
+        });
+
     });
 </script>
