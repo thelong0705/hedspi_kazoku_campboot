@@ -70,7 +70,7 @@
 </div>
 <div class="comment_list" id="comment_list_<%= review.id %>">
   <% review.comments.reverse.each do |comment| %>
-  <div class="row" style="padding-bottom:10px;">
+  <div class="row" style="padding-bottom:10px;" id="comment_<%= comment.id %>">
     <div class="col-md-1 align-self-center">
     </div>
     <div class="col-md-1 align-self-center">
@@ -81,7 +81,12 @@
         class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
       <% end %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
+      <% if current_user && current_user.id == comment.user_id  %>
+      <button class="btn btn-light float-right delete-comment-btn" id="<%= comment.id %>">
+        <i class="fas fa-times" id="<%= comment.id %>"></i>
+      </button>
+      <% end %>
       <%= link_to comment.user.name, comment.user %>
       <span class="date">
         <%= time_ago_in_words(comment.updated_at) %> ago</span>

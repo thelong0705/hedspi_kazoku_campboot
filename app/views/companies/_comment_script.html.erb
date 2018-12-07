@@ -52,7 +52,7 @@
                                 class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
                             <% end %>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <%= link_to current_user.name, current_user %>
                             <span class="date">
                                just now</span>
@@ -84,5 +84,26 @@
             
         });
 
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("body").delegate(".delete-comment-btn", "click", function (event) {
+            let comment_id = $(event.target).attr('id');
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": `/comments/${comment_id}`,
+                "method": "DELETE",
+                "headers": {
+                    "cache-control": "no-cache",
+                }
+            }
+
+            $.ajax(settings).done(function (response) {
+                $(`#comment_${comment_id}`).hide();
+            });
+        });
     });
 </script>
