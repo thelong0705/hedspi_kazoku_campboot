@@ -86,12 +86,17 @@
       <button class="btn btn-light float-right delete-comment-btn" id="<%= comment.id %>">
         <i class="fas fa-times" id="<%= comment.id %>"></i>
       </button>
+      <button class="btn btn-light float-right edit-comment-btn" id="<%= comment.id %>">
+        <i class="fa fa-edit fa-1x" id="<%= comment.id %>"></i>
+      </button>
       <% end %>
       <%= link_to comment.user.name, comment.user %>
       <span class="date">
         <%= time_ago_in_words(comment.updated_at) %> ago</span>
       <br />
-      <%= comment.content %>
+      <span id = "comment_content_<%= comment.id %>">
+        <%= comment.content %>
+      </span>
     </div>
   </div>
   <% end %>

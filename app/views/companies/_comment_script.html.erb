@@ -105,5 +105,81 @@
                 $(`#comment_${comment_id}`).hide();
             });
         });
+
+        $("body").delegate(".edit-comment-btn", "click", function (event) {
+            let comment_id = $(event.target).attr('id');
+            let comment_content = $(`#comment_content_${comment_id}`).text().trim();
+            $(`#comment_${comment_id}`).hide();
+            $(event.target).closest(".comment_list").prepend(`
+                <div class="row" style="margin-bottom:10px" id = "form_update_comment_${comment_id}">
+                    <div class="col-md-1 align-self-center">
+                    </div>
+                    <div class="col-md-1 align-self-center">
+                    <% if current_user.picture.presence %>
+                    <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                    <% else %>
+                    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                        class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                    <% end %>
+                    </div>
+                    <div class="col-md-6">
+                    <textarea rows="2" cols="45" id = "content_box_${comment_id}">${comment_content}</textarea>
+                    </br>
+                    <button type="submit" class="update-comment" id="${comment_id}">Update
+                    </button>
+                    <button type="submit" class="cancel-update-comment" id="${comment_id}">
+                        Cancel
+                    </button>
+                    </div>
+                </div>
+            `);
+        });
+        $("body").delegate(".cancel-update-comment", "click", function (event) {
+            let comment_id = $(event.target).attr('id');
+            $(`#form_update_comment_${comment_id}`).remove();
+            $(`#comment_${comment_id}`).show();
+        });
+        $("body").delegate(".update-comment", "click", function (event) {
+            let comment_id = $(event.target).attr('id');
+            let content = $(`#content_box_${comment_id}`).val().trim();
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "/comments/12",
+                "method": "PUT",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "cache-control": "no-cache",
+                },
+                "processData": false,
+                 "data": `{
+                    "content":"${content}"
+                }`
+            }
+
+            $.ajax(settings).done(function (response) {
+                $(`#form_update_comment_${comment_id}`).replaceWith(`
+                    <div class="row" style="padding-bottom:10px;">
+                        <div class="col-md-1 align-self-center">
+                        </div>
+                        <div class="col-md-1 align-self-center">
+                            <% if current_user.picture.presence %>
+                            <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                            <% else %>
+                            <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                                class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                            <% end %>
+                        </div>
+                        <div class="col-md-5">
+                            <%= link_to current_user.name, current_user %>
+                            <span class="date">
+                               just now</span>
+                            <br />
+                            ${content}
+                        </div>
+                    </div>
+                `)
+            });
+        });
     });
 </script>
