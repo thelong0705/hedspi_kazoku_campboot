@@ -39,10 +39,10 @@
                   <input type="text" class="form-control" id="department" placeholder="Which department">
                 </div>
                 <div class="col-md-3">
-                  <input type="number" class="form-control" min="1990" max="2018" placeholder="From"/>
+                  <input type="number" id="year_begin" class="form-control" min="1990" max="2018" placeholder="From"/>
                 </div>
                 <div class="col-md-3">
-                  <input type="number" class="form-control" min="1990" max="2018"  placeholder="End"/>
+                  <input type="number" id="year_end" class="form-control" min="1990" max="2018"  placeholder="End"/>
                 </div>
               </div>
             </div>
@@ -275,9 +275,9 @@
 <script>
   $(document).ready(function(){
       $("body").delegate("#submit-q", "click",function(event){
-        $('#q-modal').modal('hide');
         let department = $("#department").val();
-        let year = $("#years").val();
+        let year_begin = $("#year_begin").val();
+        let year_end = $("#year_end").val();
         let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
         let content = $('.content').val().trim();
         let company_id = <%= @company.id %>;
@@ -300,10 +300,7 @@
           return false;
         }
 
-        if (!year){
-          alert('Years can not be empty');
-          return false;
-        }
+        
   
         var settings = {
           "async": true,
@@ -320,10 +317,15 @@
             "user_id":"${user_id}",
             "content":"${content}",
             "department":"${department}",
-            "year":"${year}"
+            "year_begin":"${year_begin}",
+            "year_end":"${year_end}"
             }`
         }
-        $.ajax(settings).done(function (response) {
+        $.ajax(settings).fail(function(response){
+          $("#modal-text").html("You have worked for other company in this time !!");
+          $(`.modal-footer`).hide();
+        }).done(function (response) {
+          $('#q-modal').modal('hide');
           google.charts.setOnLoadCallback(function() {
                     drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']);
                   });
