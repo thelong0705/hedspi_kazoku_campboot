@@ -40,7 +40,8 @@
           <%= review.content %>
         </p>
         <button class="btn btn-light float-right show-comment" id="<%= review.id %>">
-          <%= review.comments.count %> <i class="far fa-comment-dots" id="<%= review.id %>"></i>
+          <span id="cmt_count_<%= review.id %>"><%= review.comments.count %></span>
+          <i class="far fa-comment-dots" id="<%= review.id %>"></i>
         </button>
         <button class="btn btn-light float-right show-form-comment" id="<%= review.id %>">
           <i class="fas fa-reply" id="<%= review.id %>"></i>

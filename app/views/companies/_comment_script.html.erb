@@ -41,7 +41,7 @@
 
             $.ajax(settings).done(function (response) {
                 $(`#comment_list_${review_id}`).prepend(`
-                    <div class="row" style="padding-bottom:10px;">
+                    <div class="row" style="padding-bottom:10px;" id="comment_${response.data.id}">
                         <div class="col-md-1 align-self-center">
                         </div>
                         <div class="col-md-1 align-self-center">
@@ -53,11 +53,19 @@
                             <% end %>
                         </div>
                         <div class="col-md-5">
+                        <button class="btn btn-light float-right delete-comment-btn" id="${response.data.id}">
+                            <i class="fas fa-times" id="${response.data.id}"></i>
+                        </button>
+                        <button class="btn btn-light float-right edit-comment-btn" id="${response.data.id}">
+                            <i class="fa fa-edit fa-1x" id="${response.data.id}"></i>
+                        </button>
                             <%= link_to current_user.name, current_user %>
                             <span class="date">
                                just now</span>
                             <br />
-                            ${content}
+                            <span id = "comment_content_${response.data.id}">
+                                ${content}
+                            </span>
                         </div>
                     </div>
                 `);
@@ -80,6 +88,10 @@
                         </div>
                     </div>
                 `).toggle();
+                $(`#comment_list_${review_id}`).toggle();
+                let count = $(`#cmt_count_${review_id}`).text().trim();
+                count = Number.parseInt(count);
+                $(`#cmt_count_${review_id}`).text(`${count+1}`);
             });
             
         });
@@ -91,6 +103,11 @@
     $(document).ready(function () {
         $("body").delegate(".delete-comment-btn", "click", function (event) {
             let comment_id = $(event.target).attr('id');
+            let review_id = $(event.target).closest(".comment_list").attr('id').slice(-2).replace(/^\D+/g, '');
+            review_id = Number.parseInt(review_id);
+            if (!confirm('Are you sure you want to delete this comment')) {
+                return false;
+            } 
             var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -103,6 +120,10 @@
 
             $.ajax(settings).done(function (response) {
                 $(`#comment_${comment_id}`).hide();
+                let count = $(`#cmt_count_${review_id}`).text().trim();
+                count = Number.parseInt(count);
+                $(`#cmt_count_${review_id}`).text(`${count - 1}`);
+                
             });
         });
 
@@ -145,7 +166,7 @@
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "/comments/12",
+                "url": `/comments/${comment_id}`,
                 "method": "PUT",
                 "headers": {
                     "Content-Type": "application/json",
@@ -159,7 +180,7 @@
 
             $.ajax(settings).done(function (response) {
                 $(`#form_update_comment_${comment_id}`).replaceWith(`
-                    <div class="row" style="padding-bottom:10px;">
+                    <div class="row" style="padding-bottom:10px;" id="comment_${comment_id}">
                         <div class="col-md-1 align-self-center">
                         </div>
                         <div class="col-md-1 align-self-center">
@@ -171,11 +192,19 @@
                             <% end %>
                         </div>
                         <div class="col-md-5">
+                            <button class="btn btn-light float-right delete-comment-btn" id="${comment_id}">
+                                <i class="fas fa-times" id="${comment_id}"></i>
+                            </button>
+                            <button class="btn btn-light float-right edit-comment-btn" id="${comment_id}">
+                                <i class="fa fa-edit fa-1x" id="${comment_id}"></i>
+                            </button>
                             <%= link_to current_user.name, current_user %>
                             <span class="date">
                                just now</span>
                             <br />
-                            ${content}
+                            <span id = "comment_content_${comment_id}">
+                                ${content}
+                            </span>
                         </div>
                     </div>
                 `)
