@@ -205,15 +205,15 @@
               </div>
             </div>`
     $(event.target).closest(".row").replaceWith(`
-      <form id="form-review">
+      <form id="form-review" style="margin-bottom:10px;">
         ${avatar}
-        <div class="col-md-11" style="padding-left:30px;">
+        <div class="col-md-11">
           ${starHTML}
           <li>
           <textarea rows="2" cols="60" placeholder="Write your comment here" class="content">${current_content}</textarea>
           </li>
           <li>
-          <input type="submit" name="commit" value="Update" class="submit-review">
+          <input type="submit" name="commit" value="Update" class="submit-review" >
           </li>
         </div>
       </form>
@@ -223,10 +223,10 @@
 </script>
 <%= render "star_js" %>
 <script>
-  $("body").delegate("#delete-btn", "click",function(event){
+  $("body").delegate(".delete-btn", "click",function(event){
     let avatar = `<%= render "avatar" %>`;
     let star = `<%= render "star" %>`
-    let id = $(event.target).closest(".row").attr('id');
+    let id = $(event.target).attr('id');
     let company_id = <%= @company.id %>
     var settings = {
       "async": true,

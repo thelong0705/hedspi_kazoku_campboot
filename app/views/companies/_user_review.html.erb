@@ -1,6 +1,12 @@
-<% @reviews.each do |review| %>
-<% if review.user_id == current_user.id %>
-<div class="row" style="padding-top:10px;" id="<%= review.id %>">
+<% @reviews.reverse.each do |review| %>
+<% if current_user %>
+<% @cur_id = current_user.id %>
+<% else %>
+<% @cur_id = 0 %>
+<% end %>
+<% if review.user_id == @cur_id %>
+
+<div class="row" style="padding-top:10px;">
   <div class="col-md-1 align-self-center">
     <% if review.user.picture.presence %>
     <%= image_tag(review.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
@@ -12,13 +18,12 @@
   <div class="col-md-6">
     <div class="card" style="border: none">
       <div class="card-body">
-        <button class="btn btn-light float-right" id="delete-btn">
-          <i class="fas fa-times"></i>
+        <button class="btn btn-light float-right delete-btn" id = "<%= review.id %>">
+          <i class="fas fa-times" id = "<%= review.id %>""></i>
         </button>
         <button class="btn btn-light float-right" id="edit-btn">
           <i class="fa fa-edit fa-1x"></i>
         </button>
-
         <%= link_to review.user.name, review.user %>
         <span class="date">
           <%= time_ago_in_words(review.updated_at) %> ago</span>
@@ -39,13 +44,70 @@
         </div>
         <p id="content_box_<%= review.id %>">
           <%= review.content %>
-          <button class="btn btn-light float-right show-comment" id="<%= review.id %>">
-            <%= review.comments.count %> <i class="far fa-comment-dots" id="<%= review.id %>"></i>
-          </button>
         </p>
+        <button class="btn btn-light float-right show-comment" id="<%= review.id %>">
+          <span id="cmt_count_<%= review.id %>">
+            <%= review.comments.count %></span>
+          <i class="far fa-comment-dots" id="<%= review.id %>"></i>
+        </button>
+        <button class="btn btn-light float-right show-form-comment" id="<%= review.id %>">
+          <i class="fas fa-reply" id="<%= review.id %>"></i>
+        </button>
       </div>
     </div>
   </div>
+</div>
+<div class="comment_form" id="comment_form_<%= review.id %>" style="margin-bottom:10px; display:none;">
+  <div class="row">
+    <div class="col-md-1 align-self-center">
+    </div>
+    <div class="col-md-1 align-self-center">
+      <%  if current_user && current_user.picture.presence %>
+      <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+      <% else %>
+      <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+        class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <textarea rows="2" cols="45" placeholder="Write your comment here" class="comment_box" id="comment_box_<%= review.id %>"></textarea>
+      </br>
+      <input type="submit" value="Comment" class="submit-comment" id="<%= review.id %>">
+    </div>
+  </div>
+</div>
+<div class="comment_list" id="comment_list_<%= review.id %>">
+  <% review.comments.reverse.each do |comment| %>
+  <div class="row" style="padding-bottom:10px;" id="comment_<%= comment.id %>">
+    <div class="col-md-1 align-self-center">
+    </div>
+    <div class="col-md-1 align-self-center">
+      <% if comment.user.picture.presence %>
+      <%= image_tag(review.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+      <% else %>
+      <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+        class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+      <% end %>
+    </div>
+    <div class="col-md-5">
+      <% if current_user && current_user.id == comment.user_id  %>
+      <button class="btn btn-light float-right delete-comment-btn" id="<%= comment.id %>">
+        <i class="fas fa-times" id="<%= comment.id %>"></i>
+      </button>
+      <button class="btn btn-light float-right edit-comment-btn" id="<%= comment.id %>">
+        <i class="fa fa-edit fa-1x" id="<%= comment.id %>"></i>
+      </button>
+      <% end %>
+      <%= link_to comment.user.name, comment.user %>
+      <span class="date">
+        <%= time_ago_in_words(comment.updated_at) %> ago</span>
+      <br />
+      <span id="comment_content_<%= comment.id %>">
+        <%= comment.content %>
+      </span>
+    </div>
+  </div>
+  <% end %>
 </div>
 
 <% end %>

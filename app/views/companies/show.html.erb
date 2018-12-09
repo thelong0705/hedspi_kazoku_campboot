@@ -6,7 +6,7 @@
     </div>
     <div>
       <h3>Your review</h3>
-      <% if !current_user %><a href="/users/sign_in">(Sign in to comment)</a><% end %>
+      <% if !current_user %><a href="/users/sign_in">(Sign in to review and comment)</a><% end %>
       <hr/>
       <% if current_user && !@cur_review %>
           <%= render 'review_form' %>
@@ -20,21 +20,36 @@
   </div>
 <%= render 'modal' %>
 </main>
+
 <% if current_user %>
   <%= render "script" %>
   <%= render "comment_script" %>
-<% else %>
-  <script>
-  $(document).ready(function(){
-    let star5 = <%= @company.reviews.star(5).count %>;
-    let star4 = <%= @company.reviews.star(4).count %>;
-    let star3 = <%= @company.reviews.star(3).count %>;
-    let star2 = <%= @company.reviews.star(2).count %>;
-    let star1 = <%= @company.reviews.star(1).count %>;
-    google.charts.setOnLoadCallback(function() { drawBasic(
-      star5,star4,star3,star2,star1
-      );
-    });
-  });
-  </script>
 <% end %>
+<script>
+$(document).ready(function(){
+  let star5 = <%= @company.reviews.star(5).count %>;
+  let star4 = <%= @company.reviews.star(4).count %>;
+  let star3 = <%= @company.reviews.star(3).count %>;
+  let star2 = <%= @company.reviews.star(2).count %>;
+  let star1 = <%= @company.reviews.star(1).count %>;
+  google.charts.setOnLoadCallback(function() { drawBasic(
+    star5,star4,star3,star2,star1
+    );
+  });
+  $(`.comment_list`).hide();
+  $("body").delegate(".show-comment", "click", function (event) {
+    let review_id = $(event.target).attr('id');
+    $(`#comment_list_${review_id}`).toggle();
+  });
+
+  $("body").delegate(".show-form-comment", "click", function (event) {
+    let review_id = $(event.target).attr('id');
+    <% if current_user %>
+      $(`#comment_form_${review_id}`).toggle();
+    <% else %>
+      alert("You have to sign in to comment!");
+      window.location = '/users/sign_in';
+    <% end %>
+  });
+});
+</script>
