@@ -127,8 +127,8 @@
             <div class="col-md-6">
               <div class="card" style="border: none">
                 <div class="card-body">
-                  <button class="btn btn-light float-right" id="delete-btn">
-                    <i class="fas fa-times"></i>
+                  <button class="btn btn-light float-right delete-btn" id = "${response.data.id}">
+                    <i class="fas fa-times" id = "${response.data.id}"></i>
                   </button>
                   <button class="btn btn-light float-right" id="edit-btn">
                     <i class="fa fa-edit fa-1x"></i>
@@ -147,10 +147,18 @@
                   <p id="content_box_${response.data.id}">
                     ${content}
                   </p>
+                  <button class="btn btn-light float-right show-comment" id="${response.data.id}">
+                      <span id="cmt_count_${response.data.id}">0</span>
+                      <i class="far fa-comment-dots" id="${response.data.id}"></i>
+                    </button>
+                    <button class="btn btn-light float-right show-form-comment" id="${response.data.id}">
+                      <i class="fas fa-reply" id="${response.data.id}"></i>
+                    </button>
                 </div>
               </div>
             </div>
           </div>
+          
         `);
       });
       }
@@ -339,8 +347,8 @@
               <div class="col-md-6">
                 <div class="card" style="border: none">
                   <div class="card-body">
-                    <button class="btn btn-light float-right" id="delete-btn">
-                      <i class="fas fa-times"></i>
+                    <button class="btn btn-light float-right delete-btn" id = "${response.data.id}">
+                      <i class="fas fa-times" id = "${response.data.id}"></i>
                     </button>
                     <button class="btn btn-light float-right" id="edit-btn">
                       <i class="fa fa-edit fa-1x"></i>
