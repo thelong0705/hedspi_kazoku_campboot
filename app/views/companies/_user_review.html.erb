@@ -1,9 +1,9 @@
-<% @reviews.reverse.each do |review| %>
 <% if current_user %>
 <% @cur_id = current_user.id %>
 <% else %>
 <% @cur_id = 0 %>
 <% end %>
+<% @reviews.reverse.each do |review| %>
 <% if review.user_id == @cur_id %>
 
 <div class="row" style="padding-top:10px;">

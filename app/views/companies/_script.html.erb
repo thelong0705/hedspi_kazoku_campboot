@@ -359,9 +359,37 @@
                     <p id="content_box_${response.data.id}">
                       ${content}
                     </p>
+                    <button class="btn btn-light float-right show-comment" id="${response.data.id}">
+                      <span id="cmt_count_${response.data.id}">0</span>
+                      <i class="far fa-comment-dots" id="${response.data.id}"></i>
+                    </button>
+                    <button class="btn btn-light float-right show-form-comment" id="${response.data.id}">
+                      <i class="fas fa-reply" id="${response.data.id}"></i>
+                    </button>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="comment_form" id="comment_form_${response.data.id}" style="margin-bottom:10px; display:none;">
+              <div class="row">
+                <div class="col-md-1 align-self-center">
+                </div>
+                <div class="col-md-1 align-self-center">
+                  <%  if current_user && current_user.picture.presence %>
+                  <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
+                  <% else %>
+                  <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                    class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
+                  <% end %>
+                </div>
+                <div class="col-md-6">
+                  <textarea rows="2" cols="45" placeholder="Write your comment here" class="comment_box" id="comment_box_${response.data.id}"></textarea>
+                  </br>
+                  <input type="submit" value="Comment" class="submit-comment" id="${response.data.id}">
+                </div>
+              </div>
+            </div>
+            <div class="comment_list" id="comment_list_${response.data.id}">
             </div>
           `);
         });
