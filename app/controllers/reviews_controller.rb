@@ -21,11 +21,31 @@ class ReviewsController < ApplicationController
     @company.reviews.each do |r|
       next unless r.user_id.to_s == params[:user_id]
 
-      puts 'true'
       @review = r
       break
     end
+
     if @review.nil?
+      array = []
+      @user = User.find(params[:user_id])
+      @user.reviews.each do |r|
+        hash = { :year_begin => r.year_begin, :year_end => r.year_end }
+        array.push(hash)
+      end
+      array.each do |item|
+        if item[:year_begin] < params[:year_begin].to_i && params[:year_begin].to_i < item[:year_end]
+          response = { message: "Wrong year begin" }
+          render json: response, status: :unprocessable_entity
+          return
+        end
+
+        if item[:year_begin] < params[:year_end].to_i && params[:year_end].to_i < item[:year_end]
+          response = { message: "Wrong year end" }
+          render json: response, status: :unprocessable_entity
+          return
+        end
+      end
+
       @review = Review.new(review_params)
       @review.company_id = @company.id
       @review.user_id = params[:user_id]
@@ -81,7 +101,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :content, :year, :company, :department)
+    params.require(:review).permit(:rating, :content, :year_begin, :year_end, :company, :department)
   end
 
   def find_company
