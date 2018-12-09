@@ -5,8 +5,8 @@
 <% end %>
 <% @reviews.reverse.each do |review| %>
 <% if review.user_id == @cur_id %>
-
-<div class="row" style="padding-top:10px;">
+<div id="my_review">
+<div class="row" style="padding-top:10px;" >
   <div class="col-md-1 align-self-center">
     <% if review.user.picture.presence %>
     <%= image_tag(review.user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
@@ -29,8 +29,8 @@
           <%= time_ago_in_words(review.updated_at) %> ago</span>
         <br />
         <span>(worked at
-          <%= review.department%> department for
-          <%= review.year %> years)</span>
+          <%= review.department%> department from
+          <%= review.year_begin %> to <%= review.year_end %> )</span>
         <div style="padding-top:10px">
           <div class='rating-stars'>
             <ul>
@@ -112,3 +112,4 @@
 
 <% end %>
 <% end %>
+</div>

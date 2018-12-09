@@ -16,6 +16,7 @@
           $("#modal-text").html("You can not review this company");
           $("#form-review").replaceWith(`
             <form id="form-review">
+              <div class="row">
               ${avatar}
               <div class="col-md-11" style="padding-left:30px;">
                   ${star}
@@ -25,6 +26,7 @@
                   <li>
                   <input type="submit" name="commit" value="Submit" class="submit-review">
                   </li>
+              </div>
               </div>
             </form>
           `);
@@ -215,20 +217,24 @@
                 </ul>
               </div>
             </div>`
-    $(event.target).closest(".row").replaceWith(`
-      <form id="form-review" style="margin-bottom:10px;">
+    $(`#my_review`).hide();
+    $(`#my_review`).after(`
+      <form id="form-update-review">
+        <div class ="row">
         ${avatar}
-        <div class="col-md-11">
+        <div class="col-md-11" style="padding-left:30px;">
           ${starHTML}
           <li>
           <textarea rows="2" cols="60" placeholder="Write your comment here" class="content">${current_content}</textarea>
           </li>
           <li>
           <input type="submit" name="commit" value="Update" class="submit-review" >
+          <input type="submit" name="commit" value="Cancel" class="submit-review" id ="cancel-update">
           </li>
         </div>
+        </div>
       </form>
-    `)
+    `);
     });
   });
 </script>
@@ -257,6 +263,7 @@
 
       $(event.target).closest(".row").replaceWith(`
         <form id="form-review">
+          <div class="row">
           ${avatar}
           <div class="col-md-11" style="padding-left:30px;">
               ${star}
@@ -266,6 +273,7 @@
               <li>
               <input type="submit" name="commit" value="Submit" class="submit-review">
               </li>
+          </div>
           </div>
         </form>
     `)
@@ -406,6 +414,14 @@
             </div>
           `);
         });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+      $("body").delegate("#cancel-update", "click",function(event){
+        $(`#form-update-review`).hide();
+        $(`#my_review`).show();
       });
   });
 </script>

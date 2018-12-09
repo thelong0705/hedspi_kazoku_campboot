@@ -23,8 +23,8 @@
           <%= time_ago_in_words(review.updated_at) %> ago</span>
         <br />
         <span>(worked at
-          <%= review.department%> department for
-          <%= review.year %> years)</span>
+          <%= review.department%> department from
+          <%= review.year_begin %> to <%= review.year_end %> )</span>
         <div style="padding-top:10px">
           <div class='rating-stars'>
             <ul>
