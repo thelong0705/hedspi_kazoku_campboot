@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   get 'replies/show'
   get 'replies/create'
   get 'replies/update'
@@ -38,4 +39,14 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :compensations, only: [:show]
   resources :recruits, only: [:show]
+
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
+
+  get 'chat', to: 'home#index'
+  mount ActionCable.server => '/cable'
 end
