@@ -225,22 +225,61 @@ ul {
 
 
 .message-sent {
-    position: relative;
     background-color: #D9EDF7;
     border-color: #BCE8F1;
     margin: 5px 20px;
     padding: 10px;
-    float: right;
+    
 }
 
 
 .message-received {
     background-color: #F1F0F0;
     border-color: #EEEEEE;
-    margin: 5px 20px;
-    padding: 10px;
-    float: left;
+    padding: 5px;
+    padding-left: 10px ;
+    padding-right: 10px ;
+    margin-left: 5px;
 }
 .delete-comment-btn{
   margin-right:16px;
+}
+
+.chat-row{
+  margin-top:30px;
+}
+
+.panel-user-list{
+  text-align: center;
+  padding-top: 5px;
+}
+
+.panel-heading-chat{
+  text-align: center;
+  padding: 0 !important;
+}
+
+.chat-container{
+  min-height: 500px;
+}
+
+.row-message-sent{
+  float: right;
+}
+.avartar-chat{
+  margin-left: 15px;
+}
+
+.new_message{
+  margin-top: 20px;
+}
+
+.btn-send{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: right;
+}
+
+.message-received-list{
+  margin-top: 10px;
 }
