@@ -45,6 +45,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'ratyrate'
 gem 'devise'
 gem 'bootstrap-will_paginate'
+gem 'bootstrap-sass'
 
 
 group :development, :test do

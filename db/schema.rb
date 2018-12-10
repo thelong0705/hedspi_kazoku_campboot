@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_125515) do
+ActiveRecord::Schema.define(version: 2018_12_09_074243) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 2018_11_17_125515) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
+    t.integer "review_id"
     t.integer "user_id"
-    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_comments_on_company_id"
+    t.index ["review_id"], name: "index_comments_on_review_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -80,19 +80,24 @@ ActiveRecord::Schema.define(version: 2018_11_17_125515) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recruiments", force: :cascade do |t|
-    t.string "content"
-    t.string "job_category"
-    t.integer "company_id"
-    t.integer "number_of_people"
-    t.integer "employed"
-    t.string "work_location"
-    t.string "applicable_student"
-    t.string "english_required"
-    t.string "personality_desered"
-    t.string "sex"
+  create_table "conversations", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id"
+    t.integer "conversation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "recruits", force: :cascade do |t|
@@ -125,17 +130,11 @@ ActiveRecord::Schema.define(version: 2018_11_17_125515) do
     t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "treatments", force: :cascade do |t|
     t.string "content"
-    t.boolean "social_insurance"
-    t.integer "integer"
-    t.string "welfare"
-    t.integer "company_id"
-    t.integer "annual_income"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "year"
+    t.string "department"
+    t.integer "year_begin"
+    t.integer "year_end"
   end
 
   create_table "users", force: :cascade do |t|

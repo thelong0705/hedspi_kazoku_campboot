@@ -1,0 +1,35 @@
+<script>
+  $(document).ready(function(){
+      $("body").delegate("#stars li ", "mouseover",function(event){
+          var onStar = parseInt($(this).data('value'), 10); 
+  
+          $(this).parent().children('li.star').each(function(e){
+              if (e < onStar) {
+                  $(this).addClass('hover');
+              }
+              else {
+                  $(this).removeClass('hover');
+              }
+          });
+      });
+      $("body").delegate("#stars li", "mouseout",function(event){
+          $(this).parent().children('li.star').each(function(e){
+              $(this).removeClass('hover');
+          });
+      });
+  
+  
+      $("body").delegate("#stars li", "click",function(event){
+          var onStar = parseInt($(this).data('value'), 10);
+          var stars = $(this).parent().children('li.star');
+  
+          for (i = 0; i < stars.length; i++) {
+              $(stars[i]).removeClass('selected');
+          }
+  
+          for (i = 0; i < onStar; i++) {
+              $(stars[i]).addClass('selected');
+          }
+      });
+  });
+</script>

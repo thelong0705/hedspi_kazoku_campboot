@@ -1,0 +1,27 @@
+<% if user.id == message.user_id %>
+  <div class="container">
+    <li class="row justify-content-end">
+      <div class="message-sent rounded " >
+        <%= message.body %>
+      </div>
+    </li>
+  </div>
+<% else %>
+  <div class="message-received-list">
+    <li class="row" >
+      <div class="col-md-1">
+        <div class="avartar-chat">
+          <% if user.picture.presence %>
+            <%= image_tag(user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "40px", height: "40px") %>
+          <% else %>
+            <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+          class="rounded-circle mx-auto d-block" alt="image" width="40px" height="40px">
+          <% end %>
+        </div>
+      </div>
+      <div class="message-received rounded">
+        <%= message.body %>
+      </div>
+    </li>
+  </div>
+<% end %>

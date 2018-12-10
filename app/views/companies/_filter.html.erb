@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    Filter
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <form class="company_search" id="company_search" action="/companies" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+      <input name="utf8" type="hidden" value="✓">
+      <div class = "row">
+        <div class = "col-md-6">
+          <label for="q_company_name_cont">Company name contains&nbsp&nbsp</label>
+          <input type="text" name="q[name_cont]" id="q_name_cont">
+        </div>
+        <div class = "col-md-6">
+          <label for="q_address_cont">Address contains&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label>
+          <input type="text" name="q[address_cont]" id="q_address_cont">
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-6">
+          <label for="q_business_content_cont">Business content contains</label>
+          <input type="text" name="q[business_content_cont]" id="q_business_content_cont">
+        </div>
+        <div class = "col-md-6">
+          <label for="q_programming_language_cont">Programming language contains</label>
+          <input type="text" name="q[code_language_cont]" id="q_code_language_cont">
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-6">
+          <label for="q_work_time_cont">Work time contains&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+          <input type="text" name="q[work_time_cont]" id="q_work_time_cont">
+        </div>
+        <div class = "col-md-6">
+          <label for="q_work_hour_cont">Work hour contains&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+          <input type="text" name="q[work_hour_cont]" id="q_work_hour_cont">
+        </div>
+      </div>
+    </p>
+    <input type="submit" name="commit" value="Search" class="btn btn-primary" data-disable-with="Search">
+  </div>
+  </form>
+</div>
+

@@ -1,0 +1,26 @@
+<div class="container chat-container"> 
+<div class="row chat-row" >
+  <div class="col-md-9">
+    <ul id="conversations-list">
+      <% @conversations.each do |conversation| %>
+        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <div class="panel panel-primary card">
+      <div class="panel-heading panel-user-list">
+        <h5 class="panel-title card-title">User list</h5>
+      </div>
+      <div class="panel-body list-group list-group-flush">
+        <ul>
+          <% @users.each do |user| %>
+            <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post, class: "list-group-item" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,14 @@
+<form id="form-review">
+  <div class="row">
+    <%= render "avatar" %>
+    <div class="col-md-11" style="padding-left:30px;">
+      <%= render "star" %>
+      <li>
+        <textarea rows="2" cols="60" placeholder="Write your comment here" class="content"></textarea>
+      </li>
+      <li>
+        <input type="submit" name="commit" value="Submit" class="submit-review">
+      </li>
+    </div>
+  </div>
+</form>

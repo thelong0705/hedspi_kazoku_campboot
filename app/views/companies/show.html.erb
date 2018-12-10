@@ -1,343 +1,55 @@
 <main role="main">
   <div class="container" style="padding-top:50px; padding-bottom:50px">
     <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4 shadow-sm">
-          <div class="logo">
-            <%= image_tag(@company.picture.url, class: "img-thumbnail float comment-image") if @company.picture? %>
-          </div>
-          <div class="card-body">
-            <div class="lcrt" data-gpa="3.7">
-                <b class="avg"><%= @company.average_review.round(1) %> <i class='fa fa-star fa-fw'></i></b>
-                <span class="avg-count"><%= @company.reviews.count %> reviews</span>
-                <span class="like-count"><%= @company.get_upvotes.size %> likes</span>
-
-            </div>
-            <div id="chart_div"></div>
-            <% if !current_user %>
-            <p class="signup-link"><a href="/users/sign_in">Sign in to rate</a></p>
-            <% end %>
-            <div class="d-flex justify-content-between align-items-center">
-              <% if current_user %>
-                <div class="btn-group">
-                  <%= link_to like_company_path(@company), class: "like-btn btn btn-sm btn-outline-secondary", method: :put, remote: :true do %>
-                    <div>
-                      <span id="like_prompt">
-                        <% if current_user.liked? @company %>
-                          Unlike
-                        <% else %>
-                          Like
-                        <% end %>
-                      </span>
-                    </div>
-                  <% end %>
-                </div>
-                <div>
-                  <div class='rating-stars text-center'>
-                    <br/>
-                    <ul id='stars'>
-                      <li class='star' title='Poor' data-value='1'>
-                        <i class='fa fa-star fa-fw'></i>
-                      </li>
-                      <li class='star' title='Fair' data-value='2'>
-                        <i class='fa fa-star fa-fw'></i>
-                      </li>
-                      <li class='star' title='Good' data-value='3'>
-                        <i class='fa fa-star fa-fw'></i>
-                      </li>
-                      <li class='star' title='Excellent' data-value='4'>
-                        <i class='fa fa-star fa-fw'></i>
-                      </li>
-                      <li class='star' title='WOW!!!' data-value='5'>
-                        <i class='fa fa-star fa-fw'></i>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <div class="col-sm-8">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-11">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                       aria-controls="home" aria-selected="true">Company Information</a>
-                  </li>
-                  <% if @recruit %>
-                  <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                       aria-controls="profile" aria-selected="false">Recruit</a>
-                  </li>
-                  <% end %>
-                  <% if @compensation %>
-                  <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                       aria-controls="contact" aria-selected="false">Compensation</a>
-                  </li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td style="border-top:none">Name:</td>
-                      <td style="border-top:none">
-                        <%= @company.name %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Address:</td>
-                      <td>
-                        <%= @company.address %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Representative_name</td>
-                      <td>
-                        <%= @company.representative_name %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Representative_role</td>
-                      <td>
-                        <%= @company.representative_role %>
-                      </td>
-                    </tr>
-                    <p>
-                      <tr>
-                        <td>Foundation</td>
-                        <td>
-                          <%= @company.foundation %>
-                        </td>
-                      </tr>
-                      <td>Vietnam representative</td>
-                      <td>
-                        <% if @company.vietnam_representative != '0' %>
-                          Yes
-                        <% else %>
-                          No
-                        <% end %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Business content:</td>
-                      <td>
-                        <%= @company.business_content %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Code language:</td>
-                      <td>
-                        <%= @company.code_language %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Work time:</td>
-                      <td>
-                        <%= @company.work_time %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Work hour:</td>
-                      <td>
-                        <%= @company.work_hour %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Appeal:</td>
-                      <td>
-                        <%= @company.appeal %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Other:</td>
-                      <td>
-                        <%= @company.other %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <% if @recruit %>
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td style="border-top:none">Work type</td>
-                      <td style="border-top:none">
-                        <%=  @recruit.work_type  %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Number of employee</td>
-                      <td>
-                        <%= @recruit.employee_no %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Work place</td>
-                      <td>
-                        <%= @recruit.workplace %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Applicable student</td>
-                      <td>
-                        <%= @recruit.applicable_student %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Japanese level:</td>
-                      <td>
-                        <%= @recruit.japanese_level %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>English level:</td>
-                      <td>
-                        <%= @recruit.english_level %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Personality desired</td>
-                      <td>
-                        <%= @recruit.personality_desired %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Status:</td>
-                      <td>
-                        <%= @recruit.status %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <% end %>
-              <% if @compensation %>
-              <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td style="border-top:none">Insurance</td>
-                      <td style="border-top:none">
-                        <%= @compensation.insurance %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Holiday</td>
-                      <td>
-                        <%= @compensation.holiday %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Paid holidays</td>
-                      <td>
-                        <%= @compensation.paid_holidays %>
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>Annual salary</td>
-                        <td>
-                          <%= @compensation.annual_salary %>
-                        </td>
-                    </tr>
-                    <tr>
-                      <td>Month salary</td>
-                      <td>
-                        <%= @compensation.month_salary %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Bonus:</td>
-                      <td>
-                       <%= @compensation.bonus %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Pay rise:</td>
-                      <td>
-                        <%= @compensation.pay_rise %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>House allowance:</td>
-                      <td>
-                        <%= @compensation.housing_allowance %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Other allowance:</td>
-                      <td>
-                        <%= @compensation.other_allowance %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Commuting allowance:</td>
-                      <td>
-                        <%= @compensation.commuting_allowance %>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Retirement:</td>
-                      <td>
-                        <%= @compensation.retirement %>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render "company_card" %>
+      <%= render "table" %>
     </div>
     <div>
-      <h2>Comments</h2>
-      <% if !current_user %><a href="/users/sign_in">(Sign in to comment)</a><% end %>
+      <h3>Your review</h3>
+      <% if !current_user %><a href="/users/sign_in">(Sign in to review and comment)</a><% end %>
       <hr/>
-      <section id="comments-section">
-        <% if current_user %>
-          <form class="new_comment" id="new_comment" action="/companies/<%= @company.id %>/comments" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="✓">
-            <ol>
-              <div class="row" style="padding-top:10px;">
-                <div class="col-md-1">
-                  <% if current_user.picture.presence %>
-                    <%= image_tag(current_user.picture.thumb.url, class: "rounded-circle mx-auto d-block float-left", alt: "image", width: "75px", height: "75px") %>
-                  <% else %>
-                    <img src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
-             class="rounded-circle mx-auto d-block" alt="image" width="75px" height="75px">
-                  <% end %>
-                </div>
-                <div class="col-md-11" style="padding-left:30px;">
-                  <li>
-                    <textarea rows="2" cols="60" placeholder="Write your comment here" name="comment[content]" id="comment_content"></textarea>
-                  </li>
-                  <li>
-                    <input type="submit" name="commit" value="Comment" class="button" data-disable-with="Comment">
-                  </li>
-                </div>
-              </div>
-            </ol>
-          </form>
+      <% if current_user && !@cur_review %>
+          <%= render 'review_form' %>
           <hr/>
-        <% end %>
-        <ol id="comments">
-          <%= render @comments %>
-        </ol>
-      </section>
+      <% end %>
+      <% if current_user && @cur_review %>
+         <%= render 'user_review' %>
+      <% end %>
     </div>
+    <%= render 'review' %>
   </div>
+<%= render 'modal' %>
 </main>
-<%= render "reply" %>
+
+<% if current_user %>
+  <%= render "script" %>
+  <%= render "comment_script" %>
+<% end %>
+<script>
+$(document).ready(function(){
+  let star5 = <%= @company.reviews.star(5).count %>;
+  let star4 = <%= @company.reviews.star(4).count %>;
+  let star3 = <%= @company.reviews.star(3).count %>;
+  let star2 = <%= @company.reviews.star(2).count %>;
+  let star1 = <%= @company.reviews.star(1).count %>;
+  google.charts.setOnLoadCallback(function() { drawBasic(
+    star5,star4,star3,star2,star1
+    );
+  });
+  $(`.comment_list`).hide();
+  $("body").delegate(".show-comment", "click", function (event) {
+    let review_id = $(event.target).attr('id');
+    $(`#comment_list_${review_id}`).toggle();
+  });
+
+  $("body").delegate(".show-form-comment", "click", function (event) {
+    let review_id = $(event.target).attr('id');
+    <% if current_user %>
+      $(`#comment_form_${review_id}`).toggle();
+    <% else %>
+      alert("You have to sign in to comment!");
+      window.location = '/users/sign_in';
+    <% end %>
+  });
+});
+</script>

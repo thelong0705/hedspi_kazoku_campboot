@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  get 'home/index'
   get 'replies/show'
   get 'replies/create'
   get 'replies/update'
   get 'replies/delete'
   devise_for :admins, skip: [:registrations], controllers: {sessions: "admins/sessions"}
   ActiveAdmin.routes(self)
+
+  resources :comments do
+    resources :replies, only: [:create, :show, :update, :destroy, :index]
+  end
 
   resources :companies, only: [:show, :index] do
     member do
@@ -13,10 +18,7 @@ Rails.application.routes.draw do
     collection do
       match 'search' => 'companies#search', :via => [:get, :post], :as => :search
     end
-    resources :comments do
-      resources :replies, only: [:create, :show, :update, :destroy, :index]
-    end
-    resources :reviews, only: [:index, :show, :create]
+    resources :reviews, only: [:index, :show, :create, :destroy]
   end
 
   put '/replies/:id', to: 'replies#update'
@@ -37,4 +39,14 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :compensations, only: [:show]
   resources :recruits, only: [:show]
+
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
+
+  get 'chat', to: 'home#index'
+  mount ActionCable.server => '/cable'
 end
