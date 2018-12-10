@@ -203,8 +203,10 @@
     let avatar = `<%= render "avatar" %>`;
   
     $("body").delegate("#edit-btn", "click",function(event){
+    event.preventDefault();
+
     let current_content = $(event.target).closest(".row").find("p").text().trim();
-    let current_rating = 0;
+    let current_rating = Number.parseInt($(`.modal-footer`).html().trim());
     <% if @cur_review %>
       current_rating = <%= @cur_review.rating %>;
     <% end %>
@@ -256,6 +258,7 @@
 <%= render "star_js" %>
 <script>
   $("body").delegate(".delete-btn", "click",function(event){
+    event.preventDefault();
     let avatar = `<%= render "avatar" %>`;
     let star = `<%= render "star" %>`
     let id = $(event.target).attr('id');
@@ -303,6 +306,7 @@
 <script>
   $(document).ready(function(){
       $("body").delegate("#submit-q", "click",function(event){
+        event.preventDefault();
         let department = $("#department").val();
         let year_begin = Number.parseInt($("#year_begin").val());
         let year_end =  Number.parseInt($("#year_end").val());
@@ -356,6 +360,7 @@
           $("#modal-text").html("You have worked for other company in this time !!");
           $(`.modal-footer`).hide();
         }).done(function (response) {
+          $(`.modal-footer`).html(`${ratingValue}`);
           $('#q-modal').modal('hide');
           google.charts.setOnLoadCallback(function() {
                     drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']);
