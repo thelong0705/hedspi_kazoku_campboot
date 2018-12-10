@@ -119,7 +119,7 @@
                 });
         $(`.avg`).html(`${response.average}<i class="fa fa-star fa-fw"></i>`);
         $(`.avg-count`).text(`${response.count} reviews`)
-        $(`#form-review`).replaceWith(`
+        $(`#form-update-review`).replaceWith(`
           <div class="row" style="padding-top:10px;" id = ${response.data.id}>
             <div class="col-md-1 align-self-center">
               <% if current_user.picture.presence %>
@@ -141,7 +141,8 @@
                   <%= link_to current_user.name, current_user %>
                   <span class="date">just now</span>
                   <br/>
-                  <span>(worked at ${response.data.department} department for ${response.data.year} years)</span>
+                  <span>(worked at ${response.data.department} department from ${response.data.year_begin} to ${response.data.year_end} )</span>
+
                   <div style="padding-top:10px">
                       <div class='rating-stars'>
                       <ul>
@@ -153,7 +154,7 @@
                     ${content}
                   </p>
                   <button class="btn btn-light float-right show-comment" id="${response.data.id}">
-                      <span id="cmt_count_${response.data.id}">0</span>
+                      <span id="cmt_count_${response.data.id}">${response.count_cmt}</span>
                       <i class="far fa-comment-dots" id="${response.data.id}"></i>
                     </button>
                     <button class="btn btn-light float-right show-form-comment" id="${response.data.id}">
@@ -245,6 +246,9 @@
     let star = `<%= render "star" %>`
     let id = $(event.target).attr('id');
     let company_id = <%= @company.id %>
+    if (!confirm(`Are you sure want to delete this review`)){
+      return false;
+    }
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -255,6 +259,8 @@
       }
     }
     $.ajax(settings).done(function (response) {
+      location.reload();
+      return false;
       google.charts.setOnLoadCallback(function() {
                   drawBasic(response.review['5'],response.review['4'],response.review['3'],response.review['2'],response.review['1']);
                 });
@@ -348,6 +354,7 @@
               `
           }
           $(`#form-review`).replaceWith(`
+          <div id="my_review">
             <div class="row" style="padding-top:10px;" id = ${response.data.id}>
               <div class="col-md-1 align-self-center">
                 <% if current_user.picture.presence %>
@@ -369,7 +376,7 @@
                     <%= link_to current_user.name, current_user %>
                     <span class="date">just now</span>
                     <br/>
-                    <span>(worked at ${response.data.department} department for ${response.data.year} years)</span>
+                    <span>(worked at ${response.data.department} department from ${response.data.year_begin} to ${response.data.year_end} )</span>
                     <div style="padding-top:10px">
                         <div class='rating-stars'>
                         <ul>
@@ -391,6 +398,7 @@
                 </div>
               </div>
             </div>
+          </div>
             <div class="comment_form" id="comment_form_${response.data.id}" style="margin-bottom:10px; display:none;">
               <div class="row">
                 <div class="col-md-1 align-self-center">

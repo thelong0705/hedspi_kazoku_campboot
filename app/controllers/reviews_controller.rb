@@ -53,7 +53,7 @@ class ReviewsController < ApplicationController
         @company.update_attribute(:average_review, @company.reviews.average(:rating))
         response = { average: @company.reviews.average(:rating).round(1), data: @review, review: { "5": @company.reviews.star(5).count,
                                                                                                    "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count },
-                     count: @company.reviews.count }
+                     count: @company.reviews.count, count_cmt: @review.comments.count }
         render json: response, status: :ok
       else
         response = { message: "Can't create review" }
@@ -64,7 +64,7 @@ class ReviewsController < ApplicationController
         @company.update_attribute(:average_review, @company.reviews.average(:rating))
         response = { average: @company.reviews.average(:rating).round(1), data: @review, review: { "5": @company.reviews.star(5).count,
                                                                                                    "4": @company.reviews.star(4).count, "3": @company.reviews.star(3).count, "2": @company.reviews.star(2).count, "1": @company.reviews.star(1).count },
-                     count: @company.reviews.count }
+                     count: @company.reviews.count, count_cmt: @review.comments.count }
         render json: response, status: :ok
       else
         response = { message: "Can't update review" }
