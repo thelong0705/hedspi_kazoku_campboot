@@ -239,7 +239,7 @@ ul {
     padding: 5px;
     padding-left: 10px ;
     padding-right: 10px ;
-    margin-left: 5px;
+    margin-left: -5px;
 }
 .delete-comment-btn{
   margin-right:16px;
@@ -266,9 +266,7 @@ ul {
 .row-message-sent{
   float: right;
 }
-.avartar-chat{
-  margin-left: 15px;
-}
+
 
 .new_message{
   margin-top: 20px;
