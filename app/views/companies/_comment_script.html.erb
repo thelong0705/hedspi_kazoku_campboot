@@ -75,7 +75,7 @@
                         <div class="col-md-6">
                         <textarea rows="2" cols="45" placeholder="Write your comment here" class="comment_box" id="comment_box_${review_id}"></textarea>
                         </br>
-                        <input type="submit"  value="Comment" class="submit-comment" id="${review_id}">
+                        <button type="input" class="submit-comment" id="${review_id}">Comment</button>
                         </div>
                     </div>
                 `).toggle();
@@ -147,6 +147,7 @@
             `);
         });
         $("body").delegate(".cancel-update-comment", "click", function (event) {
+            event.preventDefault();
             let comment_id = $(event.target).attr('id');
             $(`#form_update_comment_${comment_id}`).remove();
             $(`#comment_${comment_id}`).show();

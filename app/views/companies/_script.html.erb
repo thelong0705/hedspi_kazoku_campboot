@@ -2,6 +2,18 @@
   $(document).ready(function(){
     $("body").delegate("input", "click",function(event){
       event.preventDefault();
+      let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+      let content = $('.content').val().trim();
+      if (!content){
+        alert("Content cannot be empty");
+        return false;
+      }
+
+      if (!ratingValue){
+        alert("Rating cannot be empty");
+        return false;
+      }
+
       if($(event.target).val() == 'Submit'){
         $('#q-modal').modal('show');
         $(".modal-footer").html(`
@@ -119,7 +131,9 @@
                 });
         $(`.avg`).html(`${response.average}<i class="fa fa-star fa-fw"></i>`);
         $(`.avg-count`).text(`${response.count} reviews`)
+        $(`#my_review`).remove();
         $(`#form-update-review`).replaceWith(`
+          <div id="my_review">
           <div class="row" style="padding-top:10px;" id = ${response.data.id}>
             <div class="col-md-1 align-self-center">
               <% if current_user.picture.presence %>
@@ -164,7 +178,7 @@
               </div>
             </div>
           </div>
-          
+        </div>
         `);
       });
       }
@@ -230,7 +244,7 @@
           </li>
           <li>
           <input type="submit" name="commit" value="Update" class="submit-review" >
-          <input type="submit" name="commit" value="Cancel" class="submit-review" id ="cancel-update">
+          <button class="submit-review" id ="cancel-update">Cancel</button>
           </li>
         </div>
         </div>
@@ -290,30 +304,33 @@
   $(document).ready(function(){
       $("body").delegate("#submit-q", "click",function(event){
         let department = $("#department").val();
-        let year_begin = $("#year_begin").val();
-        let year_end = $("#year_end").val();
+        let year_begin = Number.parseInt($("#year_begin").val());
+        let year_end =  Number.parseInt($("#year_end").val());
         let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
         let content = $('.content').val().trim();
         let company_id = <%= @company.id %>;
         let user_id = <%= current_user.id %>
         let star = `<%= render "star" %>`
         let avatar = `<%= render "avatar" %>`;
-  
-        if (!content){
-          alert('Content can not be empty');
-          return false;
-        }
-  
-        if (!ratingValue){
-          alert('Rating can not be empty');
-          return false;
-        }
 
         if (!department){
           alert('Department can not be empty');
           return false;
         }
 
+        if (!year_begin){
+          alert('Year begin can not be empty');
+          return false;
+        }
+       
+        if (!year_end){
+          year_end = 2018
+        }
+
+        if (year_begin > year_end){
+          alert('Year begin can not greater than year end');
+          return false;
+        }
         
   
         var settings = {
@@ -414,7 +431,7 @@
                 <div class="col-md-6">
                   <textarea rows="2" cols="45" placeholder="Write your comment here" class="comment_box" id="comment_box_${response.data.id}"></textarea>
                   </br>
-                  <input type="submit" value="Comment" class="submit-comment" id="${response.data.id}">
+                  <button type="input" class="submit-comment" id="${response.data.id}">Comment</button>
                 </div>
               </div>
             </div>
@@ -428,6 +445,7 @@
 <script>
   $(document).ready(function(){
       $("body").delegate("#cancel-update", "click",function(event){
+        event.preventDefault();
         $(`#form-update-review`).hide();
         $(`#my_review`).show();
       });
