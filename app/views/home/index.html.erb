@@ -1,7 +1,7 @@
 <div class="container chat-container"> 
 <div class="row chat-row" >
   <div class="col-md-9">
-    <ul class ="card" id="conversations-list">
+    <ul id="conversations-list">
       <% @conversations.each do |conversation| %>
         <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
       <% end %>
