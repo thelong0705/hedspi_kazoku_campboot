@@ -1,13 +1,16 @@
 $(document).on 'submit', '.new_message', (e) ->
   e.preventDefault()
   values = $(this).serializeArray()
-  App.conversation.speak(values)
-  $(this).trigger('reset')
+  mess = values[2].value.trim()
+  if mess
+    App.conversation.speak(values)
+    $(this).trigger('reset')
+  return
 
 
 
-$(document).on 'keypress', '#text-chat-area', (e) ->
+$(document).on 'keypress', '.text-chat-area', (e) ->
   if e.which == 13
     e.preventDefault()
-    $('.btn-send').click()
+    $(e.target).next().click()
   return
