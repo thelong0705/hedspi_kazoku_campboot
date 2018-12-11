@@ -39,6 +39,11 @@
                         <i class='fa fa-star fa-fw'></i>
                       </li>
                     <% end %>
+                    <% (review.rating+1..5).each do |i| %>
+                      <li class='star'>
+                        <i class='fa fa-star fa-fw'></i>
+                      </li>
+                    <% end %>
                   </ul>
                 </div>
               </div>

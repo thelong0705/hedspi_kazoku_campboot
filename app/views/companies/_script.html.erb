@@ -104,7 +104,7 @@
       let starHTML = `
       <div>
         <div class="rating-stars">
-          <ul id="stars">`
+          <ul>`
       for (let i = 1; i <= current_rating; i++) {
           starHTML += `
             <li class="star selected" data-value="${i}">
@@ -335,6 +335,11 @@
           alert('Year begin can not greater than year end');
           return false;
         }
+
+        if (year_begin > 2018){
+          alert('Year begin can not greater than current year');
+          return false;
+        }
         
   
         var settings = {
@@ -367,14 +372,29 @@
                   });
           $(`.avg`).html(`${response.average}<i class="fa fa-star fa-fw"></i>`);
           $(`.avg-count`).text(`${response.count} reviews`);
-          let starHTML = "";
-          for (let i = 0; i < ratingValue; i++) {
+          let starHTML = `
+          <div>
+            <div class="rating-stars">
+              <ul>`
+          for (let i = 1; i <= ratingValue; i++) {
               starHTML += `
-                <li class='star selected'>
+                <li class="star selected" data-value="${i}">
                   <i class='fa fa-star fa-fw'></i>
                 </li>
-              `
+              `;
           }
+          for (let i = ratingValue + 1; i <= 5; i++) {
+              starHTML +=
+                `
+                <li class="star" data-value="${i}">
+                  <i class='fa fa-star fa-fw'></i>
+                </li>
+              `;
+          }
+          starHTML +=
+                `</ul>
+              </div>
+            </div>`
           $(`#form-review`).replaceWith(`
           <div id="my_review">
             <div class="row" style="padding-top:10px;" id = ${response.data.id}>
