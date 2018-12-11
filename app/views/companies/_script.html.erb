@@ -1,6 +1,6 @@
 <script>
   $(document).ready(function(){
-    $("body").delegate("input", "click",function(event){
+    $("body").delegate("input.submit-review", "click",function(event){
       event.preventDefault();
       let ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
       let content = $('.content').val().trim();
